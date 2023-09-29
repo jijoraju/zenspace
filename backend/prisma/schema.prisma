@@ -19,24 +19,13 @@ model User {
   last_name        String
   email            String        @unique
   password         String
-  mobile           String        @unique
+  mobile           String?        @unique
   profile_picture  String?
   join_date        DateTime      @default(now())
   user_type_id     Int
-  creditCards      CreditCard[]
   bookings         Booking[]
   userPromotions   UserPromotion[]
   userType         UserType      @relation(fields: [user_type_id], references: [type_id])
-}
-
-model CreditCard {
-  card_id          Int       @id @default(autoincrement())
-  card_number      String
-  expiration_date  DateTime
-  cardholder_name  String
-  user_id          Int
-  payments         Payment[]
-  user             User      @relation(fields: [user_id], references: [user_id])
 }
 
 model Workspace {
@@ -51,7 +40,7 @@ model Workspace {
   workspacePhotos    WorkspacePhoto[]
   reviews            Review[]
   bookings           Booking[]
-  workspaceAmenties  WorkspaceAmenties[]
+  workspaceAmenties  WorkspaceAmenities[]
 }
 
 model WorkspacePhoto {
@@ -76,7 +65,6 @@ model Payment {
   payment_date   DateTime  @default(now())
   payment_method PaymentMethod?
   card_id        Int
-  creditCard     CreditCard @relation(fields: [card_id], references: [card_id])
   bookings       Booking[]
 }
 
@@ -86,7 +74,7 @@ enum PaymentMethod {
 }
 
 model Booking {
-  booking_id    Int       @id
+  booking_id    Int       @id @default(autoincrement())
   start_date    DateTime
   end_date      DateTime
   booking_date  DateTime  @default(now())
@@ -103,7 +91,7 @@ model Booking {
 model Amenity {
   amenity_id        Int               @id @default(autoincrement())
   description       String?
-  workspaceAmenties WorkspaceAmenties[]
+  workspaceAmenties WorkspaceAmenities[]
 }
 
 model Notification {
@@ -131,7 +119,7 @@ model Promotion {
   userPromotions      UserPromotion[]
 }
 
-model WorkspaceAmenties {
+model WorkspaceAmenities {
   workspace_id Int
   amenity_id   Int
   workspace    Workspace @relation(fields: [workspace_id], references: [workspace_id])

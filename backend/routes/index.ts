@@ -1,20 +1,18 @@
-import express, { Router, Request, Response } from "express";
-import { PrismaClient } from '@prisma/client';
+import express, {Router} from "express";
+import {login, logout, register} from "../controllers/authController";
+import passport from "passport";
+import {checkUserRole} from "../middlewares/authorization";
 
 const router: Router = express.Router();
-const prisma: PrismaClient = new PrismaClient();
 
-/* GET home page. */
-router.get('/', async (req: Request, res: Response) => {
-  try {
-    const userTypes = await prisma.userType.findMany();
-    res.json(userTypes);
-  } catch (error) {
-    console.error("Error fetching user types:", error);
-    res.status(500).send("Error fetching user types");
-  } finally {
-    await prisma.$disconnect();
-  }
+
+router.post('/register', register);
+router.post('/login', login);
+router.get('/logout', logout);
+
+// Protected route example
+router.get('/admin', passport.authenticate('jwt', {session: false}), checkUserRole('admin'), (req, res) => {
+    res.json({message: 'Admin area!'});
 });
 
 export default router;

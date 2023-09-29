@@ -13,7 +13,7 @@ CREATE TABLE `User` (
     `last_name` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
-    `mobile` VARCHAR(191) NOT NULL,
+    `mobile` VARCHAR(191) NULL,
     `profile_picture` VARCHAR(191) NULL,
     `join_date` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `user_type_id` INTEGER NOT NULL,
@@ -21,17 +21,6 @@ CREATE TABLE `User` (
     UNIQUE INDEX `User_email_key`(`email`),
     UNIQUE INDEX `User_mobile_key`(`mobile`),
     PRIMARY KEY (`user_id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `CreditCard` (
-    `card_id` INTEGER NOT NULL AUTO_INCREMENT,
-    `card_number` VARCHAR(191) NOT NULL,
-    `expiration_date` DATETIME(3) NOT NULL,
-    `cardholder_name` VARCHAR(191) NOT NULL,
-    `user_id` INTEGER NOT NULL,
-
-    PRIMARY KEY (`card_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -81,7 +70,7 @@ CREATE TABLE `Payment` (
 
 -- CreateTable
 CREATE TABLE `Booking` (
-    `booking_id` INTEGER NOT NULL,
+    `booking_id` INTEGER NOT NULL AUTO_INCREMENT,
     `start_date` DATETIME(3) NOT NULL,
     `end_date` DATETIME(3) NOT NULL,
     `booking_date` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -127,7 +116,7 @@ CREATE TABLE `Promotion` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `WorkspaceAmenties` (
+CREATE TABLE `WorkspaceAmenities` (
     `workspace_id` INTEGER NOT NULL,
     `amenity_id` INTEGER NOT NULL,
 
@@ -148,16 +137,10 @@ CREATE TABLE `UserPromotion` (
 ALTER TABLE `User` ADD CONSTRAINT `User_user_type_id_fkey` FOREIGN KEY (`user_type_id`) REFERENCES `UserType`(`type_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `CreditCard` ADD CONSTRAINT `CreditCard_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE `WorkspacePhoto` ADD CONSTRAINT `WorkspacePhoto_workspace_id_fkey` FOREIGN KEY (`workspace_id`) REFERENCES `Workspace`(`workspace_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Review` ADD CONSTRAINT `Review_workspace_id_fkey` FOREIGN KEY (`workspace_id`) REFERENCES `Workspace`(`workspace_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `Payment` ADD CONSTRAINT `Payment_card_id_fkey` FOREIGN KEY (`card_id`) REFERENCES `CreditCard`(`card_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Booking` ADD CONSTRAINT `Booking_workspace_id_fkey` FOREIGN KEY (`workspace_id`) REFERENCES `Workspace`(`workspace_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -172,10 +155,10 @@ ALTER TABLE `Booking` ADD CONSTRAINT `Booking_payment_id_fkey` FOREIGN KEY (`pay
 ALTER TABLE `Notification` ADD CONSTRAINT `Notification_booking_id_fkey` FOREIGN KEY (`booking_id`) REFERENCES `Booking`(`booking_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `WorkspaceAmenties` ADD CONSTRAINT `WorkspaceAmenties_workspace_id_fkey` FOREIGN KEY (`workspace_id`) REFERENCES `Workspace`(`workspace_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `WorkspaceAmenities` ADD CONSTRAINT `WorkspaceAmenities_workspace_id_fkey` FOREIGN KEY (`workspace_id`) REFERENCES `Workspace`(`workspace_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `WorkspaceAmenties` ADD CONSTRAINT `WorkspaceAmenties_amenity_id_fkey` FOREIGN KEY (`amenity_id`) REFERENCES `Amenity`(`amenity_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `WorkspaceAmenities` ADD CONSTRAINT `WorkspaceAmenities_amenity_id_fkey` FOREIGN KEY (`amenity_id`) REFERENCES `Amenity`(`amenity_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `UserPromotion` ADD CONSTRAINT `UserPromotion_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
