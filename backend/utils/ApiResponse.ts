@@ -1,7 +1,7 @@
 import {Response} from "express";
 
 export class ApiResponse {
-    static ok<T>(res: Response, data: T) {
+    static ok<T>(res: Response, data?: T) {
         res.status(200).json({
             success: true,
             data: data

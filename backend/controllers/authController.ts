@@ -35,7 +35,7 @@ export const register = async (req: Request<unknown, unknown, RegisterRequest>, 
         }
 
         // Create the user
-        const user: User = await prisma.user.create({
+        await prisma.user.create({
             data: {
                 first_name: first_name,
                 last_name: last_name,
@@ -45,7 +45,7 @@ export const register = async (req: Request<unknown, unknown, RegisterRequest>, 
             }
         });
 
-        return ApiResponse.successWithStatus(res, 201,user);
+        return ApiResponse.ok(res);
     } catch (error) {
         return ApiResponse.errorWithStatus(res,500, 'Server error');
     }
