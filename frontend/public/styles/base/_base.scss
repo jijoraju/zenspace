@@ -1,0 +1,31 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    font-family: DM Sans;
+}
+
+html {
+    // This defines what 1rem is
+    // 1 rem = 10px; 10px/16px = 62.5%
+    font-size: 62.5%; 
+}
+
+body {
+    box-sizing: border-box;
+}
+
+#root{
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+
+    // display: grid;
+    // grid-auto-rows: auto;
+    // grid-template-rows: min-content 80vh repeat(2, min-content);
+    // grid-template-columns: repeat(1, minmax(200px, 1fr));
+    // grid-template-columns: repeat(auto-fill, minmax(min-content, max-content));
+}

@@ -1,0 +1,46 @@
+import React,{Suspense,lazy} from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+import '@Public/styles/main.scss'
+import RootLayout from "@components/RootLayout";
+import LoadingSpinner from "@components/LoadingSpinner";
+const Home = lazy(() => import('./Home'));
+const ErrorPage = lazy(() => import('./ErrorPage'));
+const Contact = lazy(() => import('./Contact'));
+
+function Root() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RootLayout />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          path: "/",
+          element: <Home />,
+          // loader: postsLoader,
+          // children: [
+          //   { path: '/:postId', element: <PostDetails />, loader: postDetailsLoader }
+          // ],
+        },
+        {
+          path: "/contact",
+          element: <Contact />,
+          // loader: postsLoader,
+          // children: [
+          //   { path: '/:postId', element: <PostDetails />, loader: postDetailsLoader }
+          // ],
+        },
+      ],
+    },
+  ]);
+
+  return (
+     <Suspense fallback={<LoadingSpinner />}>
+        <RouterProvider router={router} />;
+     </Suspense>
+  )
+}
+
+export default Root;

@@ -1,0 +1,147 @@
+.contact-area{
+  margin: 0 auto;
+  max-width:$maxWight;
+  z-index: -1;
+
+  &-banner{
+    background-image: url("../../images/ContactPage/ContactBg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 70vh;
+    max-height: 70vh;
+    position: relative;
+
+    @include respond($bp-medium){
+      height: 50rem;
+      padding:1.5rem;
+    }
+
+    @include respond($bp-small){
+      height: 40rem;
+      padding:1.5rem;
+    }
+
+    &-info{
+      background-color: rgba(0,0,0,.5);
+      width:61.9rem;
+      height:44.2rem;
+      position: absolute;
+      top:10rem;
+      left: 7rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-start;
+      padding: 10rem;
+      color:$color-white;
+
+      @include respond($bp-medium){
+        @include absCenter();
+        width: 50rem;
+        height: 30rem;
+        padding:2rem;
+      }
+
+      @include respond($bp-small){
+        @include absCenter();
+        width: 32rem;
+        height: 25rem;
+        padding:1.5rem;
+      }
+
+      & h1{
+        font-size: 4.8rem;
+
+        @include respond($bp-medium){
+          font-size: 2.8rem;
+        }
+        @include respond($bp-small){
+          font-size: 2.2rem;
+        }
+      }
+
+      & h2{
+        font-size: 3.2rem;
+        @include respond($bp-medium){
+          font-size: 2.2rem;
+        }
+        @include respond($bp-small){
+          font-size: 1.8rem;
+        }
+      }
+
+      & p{
+        font-size: 1.8rem;
+        color:$color-gray-light;
+        @include respond($bp-medium){
+          font-size: 1.8rem;
+        }
+        @include respond($bp-small){
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+
+
+  &-map{
+
+    position: relative;
+    height:70vh;
+
+    &-contactMap{
+      width:100%;
+      height: 70vh;
+    }
+    
+    &-info{
+      position: absolute;
+      top: 65%;
+      left: 10rem;
+
+      background-color: $color-white;
+      width: 50rem;
+      height: 24rem;
+
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      justify-content: space-around;
+      padding: 5rem 7rem;
+
+      box-shadow: 0px 4px 4px 3px rgba(0, 0, 0, 0.25);
+
+      @include respond($bp-medium){
+        top: 70%;
+        left: 3rem;
+        width: 35rem;
+        height: 20rem;
+        padding: 2rem 5rem;
+      }
+      @include respond($bp-small){
+        top: 70%;
+        left: 2rem;
+        width: 25rem;
+        height: 15rem;
+        padding: 1rem 3rem;
+      }
+
+      &-item{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
+        & p{
+          font-size: 1.8rem;
+          margin-left: 2rem;
+
+          @include respond($bp-small){
+            font-size: 1.4rem;
+          }
+        }
+      }
+    }
+  }
+}

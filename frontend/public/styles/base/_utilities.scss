@@ -1,0 +1,30 @@
+.custom-marker {
+  position: relative;
+  width: 50px; /* 调整标记的宽度 */
+  height: 50px; /* 调整标记的高度 */
+}
+
+.marker-anchor {
+  position: absolute;
+  width: 10px; /* 调整锚点的宽度 */
+  height: 10px; /* 调整锚点的高度 */
+  background-color: red; /* 调整锚点的颜色 */
+  border-radius: 50%; /* 使锚点呈圆形 */
+  top: 50%; /* 将锚点垂直居中 */
+  left: 50%; /* 将锚点水平居中 */
+  transform: translate(-50%, -50%); /* 将锚点定位在标记的中心 */
+}
+
+.marker-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #007bff; /* 调整标记内容的背景颜色 */
+  color: white; /* 调整标记内容的文字颜色 */
+  border-radius: 50%; /* 使标记内容呈圆形 */
+}

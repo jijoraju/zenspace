@@ -1,0 +1,74 @@
+.footer {
+  margin-bottom: -1.3rem;
+
+  padding: 2rem 5rem;
+  background-color: $color-primary;
+  height: 28.5rem;
+
+  display: grid;
+  grid-template-rows: 1fr min-content ;
+  grid-template-columns: repeat(12,1fr);
+  justify-content: space-around;
+
+  &-icon{
+    grid-column: 1 /  4;
+
+    @include flexCenter();
+    @include respond($bp-medium){
+      grid-column: 1 /  -1;
+    }
+  }
+
+  &-nav{
+    grid-column: 4 /  10;
+
+    @include flexCenter();
+    @include respond($bp-medium){
+      grid-column: 1 /  -1;
+    }
+
+    &-item{
+      color:$color-white;
+      text-decoration: none;
+      font-size: 1.8rem;
+      margin: 0 20px;
+
+      &:hover{
+        font-weight: bold;
+        color:$color-tertiary;
+      }
+
+      @include respond($bp-medium){
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  &-SM{
+    grid-column: 10 /  -1;
+
+    @include flexCenter();
+    @include respond($bp-medium){
+      grid-column: 1 /  -1;
+      margin: 2.5rem auto;
+    }
+
+    &-item{
+      margin: 0 1rem;
+    }
+  }
+
+  &-copyRightArea{
+    color:$color-white;
+    grid-column: 1 / -1;
+    font-size:  1.8rem;
+
+    text-align: center;
+    border-top: 0.1rem solid $color-white;
+    padding: 2.5rem 0 1rem 0;
+
+    @include respond($bp-medium){
+      font-size: 1rem;
+    }
+  }
+}
