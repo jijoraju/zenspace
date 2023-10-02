@@ -13,7 +13,9 @@ function RootLayout() {
   return (
     <>
       <MainHeader />
-      <Outlet />
+      <main className="mainContainer">
+        <Outlet />
+      </main>
       {!invisibleContact ?<Contact /> :''}
       <Footer />
     </>

@@ -1,13 +1,15 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 import { Button } from "@mui/material";
-import { NavLink, useNavigate} from "react-router-dom";
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import CloseIcon from '@mui/icons-material/Close';
+import { NavLink, useNavigate,useNavigation } from "react-router-dom";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import CloseIcon from "@mui/icons-material/Close";
 
 import Image from "@components/Images";
-import { navList ,navMobileList} from "@Data/navList";
+import { navList, navMobileList } from "@Data/navList";
 
 function MainHeader() {
+  const navigation = useNavigation()
+  console.log('navigation',navigation)
   // desktop nav
   const renderDesktopNav = navList.map((item, index) => {
     return item.name == "Logo" ? (
@@ -21,15 +23,20 @@ function MainHeader() {
         />
       </NavLink>
     ) : (
-      <NavLink to={item.path} className={item.class} key={index}>
+      <NavLink 
+          to={item.path} 
+          className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? `${item.class} ${item.class}-active` : `${item.class}`} 
+          key={index} 
+      >
         {item.name}
       </NavLink>
     );
   });
 
   // mobile logo
-  const renderMobileLogo = navMobileList.map((item,index)=>{
-    if(index!=0) return
+  const renderMobileLogo = navMobileList.map((item, index) => {
+    if (index != 0) return;
     return (
       <NavLink to={item.path} key={index}>
         <Image
@@ -39,34 +46,40 @@ function MainHeader() {
           img2={item.img2}
           img3={item.img3}
         />
-    </NavLink>
-    )
-  })
+      </NavLink>
+    );
+  });
 
   // mobile menu
-  const renderMobileMenu = navMobileList.map((item,index)=>{
-    if(index==0) return
+  const renderMobileMenu = navMobileList.map((item, index) => {
+    if (index == 0) return;
 
     // if(['LOGIN','REGISTER'].includes(item.name)) return
     // if(['LOGOUT'].includes(item.name)) return
     return (
-      <p onClick={()=>goToPage(item.path)} className={item.class} key={index}>
+      <NavLink 
+          to={item.path} 
+          className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? `${item.class} ${item.class}-active` : `${item.class}`} 
+          key={index} 
+          onClick={() => goToPage(item.path)}
+      >
         {item.name}
-      </p>
-    )
-  })
+      </NavLink>
+    );
+  });
 
-  const [toggleNav, setToggleNav] = useState(false)
+  const [toggleNav, setToggleNav] = useState(false);
 
-  const toggleMobileNav = (e)=>{
-    setToggleNav(()=>!toggleNav)
-  }
+  const toggleMobileNav = (e) => {
+    setToggleNav(() => !toggleNav);
+  };
 
-  const navigate = useNavigate()
-  const goToPage = (path)=>{
-    setToggleNav(()=>!toggleNav)
-    navigate(`${path}`)
-  }
+  const navigate = useNavigate();
+  const goToPage = (path) => {
+    setToggleNav(() => !toggleNav);
+    // navigate(`${path}`);
+  };
   return (
     <nav className="nav">
       <div className="nav-desktop">
@@ -75,23 +88,32 @@ function MainHeader() {
       </div>
 
       <div className="nav-mobile">
-        { renderMobileLogo}
+        {renderMobileLogo}
         {/* menu btn */}
-        <button className='nav-mobile-menu-btn' onClick={toggleMobileNav}>
-          {!toggleNav?<MenuOutlinedIcon sx={{ fontSize: 40 }}/>:<CloseIcon sx={{ fontSize: 40 }}/>}
+        <button className="nav-mobile-menu-btn" onClick={toggleMobileNav}>
+          {!toggleNav ? (
+            <MenuOutlinedIcon sx={{ fontSize: 40 }} />
+          ) : (
+            <CloseIcon sx={{ fontSize: 40 }} />
+          )}
         </button>
 
-        { // toggle menu of nav
-          toggleNav ?(
-            <div className={`nav-mobile-menu ${toggleNav?'nav-mobile-menu-visible':''}`}>
-
-            <div className={`nav-mobile-menu-container `}>
-              {renderMobileMenu}
+        {
+          // toggle menu of nav
+          toggleNav ? (
+            <div
+              className={`nav-mobile-menu ${
+                toggleNav ? "nav-mobile-menu-visible" : ""
+              }`}
+            >
+              <div className={`nav-mobile-menu-container `}>
+                {renderMobileMenu}
+              </div>
             </div>
-          </div>
-          ):<></>
+          ) : (
+            <></>
+          )
         }
-
       </div>
     </nav>
   );
