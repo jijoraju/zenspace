@@ -7,6 +7,7 @@ import LoadingSpinner from "@components/LoadingSpinner";
 const Home = lazy(() => import('./Home'));
 const ErrorPage = lazy(() => import('./ErrorPage'));
 const Contact = lazy(() => import('./Contact'));
+const Sign = lazy(() => import('./Sign'));
 
 function Root() {
   const router = createBrowserRouter([
@@ -31,6 +32,14 @@ function Root() {
           // children: [
           //   { path: '/:postId', element: <PostDetails />, loader: postDetailsLoader }
           // ],
+        },
+        {
+          path: "/login",
+          element: <Sign />,
+        },
+        {
+          path: "/register",
+          element: <Sign />,
         },
       ],
     },

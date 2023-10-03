@@ -7,9 +7,10 @@ const containerStyle = {
 };
 
 const CustomMap = ({ center, zoom, markers, style }) => {
+
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyClc1wLHC_CkGHCDy0OfsU0K2Eb-riKm0E",
+    googleMapsApiKey: MAP_API_KEY,
   })
 
   const [map, setMap] = React.useState(null)

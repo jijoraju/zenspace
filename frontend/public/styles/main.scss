@@ -9,12 +9,13 @@
 @import "base/animations";
 @import "base/utilities";
 
-@import "components/LoadingSpinner.scss";
+@import "components/loadingSpinner";
 
 @import "layout/nav";
 @import "layout/layoutContact";
 @import "layout/footer";
 
-@import "pages/ErrorPage.scss";
-@import "pages/contact.scss";
+@import "pages/errorPage";
+@import "pages/contact";
 
+@import "pages/sign"

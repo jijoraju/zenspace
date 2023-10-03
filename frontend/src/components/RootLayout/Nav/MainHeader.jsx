@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
-import { NavLink, useNavigate,useNavigation } from "react-router-dom";
+import { NavLink, useNavigate, useNavigation } from "react-router-dom";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import LoginIcon from '@mui/icons-material/Login';
+
 import CloseIcon from "@mui/icons-material/Close";
 
 import Image from "@components/Images";
 import { navList, navMobileList } from "@Data/navList";
 
 function MainHeader() {
-  const navigation = useNavigation()
-  console.log('navigation',navigation)
+
   // desktop nav
   const renderDesktopNav = navList.map((item, index) => {
     return item.name == "Logo" ? (
@@ -23,11 +24,16 @@ function MainHeader() {
         />
       </NavLink>
     ) : (
-      <NavLink 
-          to={item.path} 
-          className={({ isActive, isPending }) =>
-          isPending ? "pending" : isActive ? `${item.class} ${item.class}-active` : `${item.class}`} 
-          key={index} 
+      <NavLink
+        to={item.path}
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "pending"
+            : isActive
+            ? `${item.class} ${item.class}-active`
+            : `${item.class}`
+        }
+        key={index}
       >
         {item.name}
       </NavLink>
@@ -57,12 +63,17 @@ function MainHeader() {
     // if(['LOGIN','REGISTER'].includes(item.name)) return
     // if(['LOGOUT'].includes(item.name)) return
     return (
-      <NavLink 
-          to={item.path} 
-          className={({ isActive, isPending }) =>
-          isPending ? "pending" : isActive ? `${item.class} ${item.class}-active` : `${item.class}`} 
-          key={index} 
-          onClick={() => goToPage(item.path)}
+      <NavLink
+        to={item.path}
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "pending"
+            : isActive
+            ? `${item.class} ${item.class}-active`
+            : `${item.class}`
+        }
+        key={index}
+        onClick={() => toggleMobileNav()}
       >
         {item.name}
       </NavLink>
@@ -78,15 +89,24 @@ function MainHeader() {
   const navigate = useNavigate();
   const goToPage = (path) => {
     setToggleNav(() => !toggleNav);
-    // navigate(`${path}`);
+    navigate(`${path}`);
   };
   return (
     <nav className="nav">
+      {/* desktop */}
       <div className="nav-desktop">
         <div className="nav-desktop-item-wrap">{renderDesktopNav}</div>
-        <Button variant="contained">Log in</Button>
+        <Button 
+          variant="contained" 
+          onClick={()=>navigate(`/login`)}
+          size="large"
+          startIcon={<LoginIcon />}
+          >
+          LOG IN
+        </Button>
       </div>
-
+      
+      {/* mobile */}
       <div className="nav-mobile">
         {renderMobileLogo}
         {/* menu btn */}

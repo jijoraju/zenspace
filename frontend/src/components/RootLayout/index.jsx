@@ -8,14 +8,14 @@ import Footer from "./Footer";
 
 function RootLayout() {
   const location = useLocation();
-  const invisibleContact = ['/contact'].includes(location.pathname)
+  const invisibleContact = ['/contact',`/login`,`/register`].includes(location.pathname)
 
   return (
     <>
       <MainHeader />
-      <main className="mainContainer">
+      {/* <main className="mainContainer"> */}
         <Outlet />
-      </main>
+      {/* </main> */}
       {!invisibleContact ?<Contact /> :''}
       <Footer />
     </>

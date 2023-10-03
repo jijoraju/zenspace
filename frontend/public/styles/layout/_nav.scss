@@ -16,7 +16,7 @@
   &-desktop {
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: 1fr min-content;
+    grid-template-columns: 1fr 120px;
 
     &-item-wrap {
       display: flex;
@@ -37,6 +37,10 @@
 
     @include respond($bp-medium) {
       display: none;
+    }
+
+    &-loginBtn{
+      font-size: 1.8rem;
     }
   }
 
