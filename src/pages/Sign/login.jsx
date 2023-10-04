@@ -1,40 +1,136 @@
-import React from 'react'
+import React,{ useState, useRef, useEffect,useCallback }  from 'react'
+import { useNavigate,Link } from 'react-router-dom';
+
+import Input from "@components/Input";
+import Button from "@components/Button";
+import useInput from '@hook/use-input';
+import useHttp from '@hook/use-http';
+
+import { useSelector, useDispatch } from 'react-redux';
+import {postSignInHandler,LoginHandler} from '@Reducer/user/user-action'
 
 function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
+  const user = useSelector((state)=>state.user)
+
+  
+  const {
+    value: enteredEmail,
+    isValid: enteredEmailIsValid,
+    hasError: emailInputHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    reset: resetEmailInput,
+  } = useInput((value) => value.includes('@'));
+
+    const {
+    value: enteredPassword,
+    isValid: enteredPasswordIsValid,
+    hasError: passwordInputHasError,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    reset: resetPasswordInput,
+  } = useInput((value) => value.trim() !== '');
+
+  const { sendRequest, status, data: signInRequestData, } = useHttp(postSignInHandler);
+
+  const [formIsValid,setFormIsValid] = useState(false)
+
+  useEffect(()=>{
+    const checkUserStatus = ()=>{
+      if(user.isLogin){
+        navigate('/',{replace:true})
+      }
+    }
+    checkUserStatus()
+  },[user.isLogin])
+  
+  // check out sign in status 
+  useEffect(()=>{
+    if(signInRequestData?.isSuccess){
+      dispatch(LoginHandler(signInRequestData))
+    }
+  },[signInRequestData])
+
+  // check form isValid
+  useEffect(()=>{    
+    const identifier = setTimeout(() => {
+      console.log('Checking form validity!');
+      setFormIsValid(enteredEmailIsValid && enteredPasswordIsValid);
+    }, 500);
+
+    return () => {
+      console.log('CLEANUP');
+      clearTimeout(identifier);
+    };
+
+  },[enteredEmailIsValid,enteredPasswordIsValid])
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    if (formIsValid) {
+      const data = {
+        "email": enteredEmail,
+        "password": enteredPassword,
+      }
+
+      signInHandler(data)
+    } else if (!enteredEmailIsValid) {
+      emailInputRef.current.focus();
+    } else {
+      passwordInputRef.current.focus();
+    }
+  };
+
+  const signInHandler = useCallback((data) => {
+      sendRequest(data)
+    }, [sendRequest],
+  )
+
+  const inputs = [
+    {
+      ref:emailInputRef,
+      id:`email`,
+      label: `E-Mail`,
+      type:`email`,
+      isValid: enteredEmailIsValid,
+      value:enteredEmail,
+      onChange:emailChangeHandler,
+      onBlur:emailBlurHandler,
+      hasError: emailInputHasError,
+    },
+    {
+      ref:passwordInputRef,
+      id:`password`,
+      label: `Password`,
+      type:`password`,
+      isValid: enteredPasswordIsValid,
+      value:enteredPassword,
+      onChange:passwordChangeHandler,
+      onBlur:passwordBlurHandler,
+      hasError: passwordInputHasError,
+    },
+  ]
   return (
-    <></>
-    // <section className={classes.auth}>
-    //   {/* <h1>{isLogin ? 'Login' : 'Sign Up'}</h1> */}
-    //   <form onSubmit={submitHandler}>
-    //     <div className={``}>
-    //       <label htmlFor='email'>Your Email</label>
-    //       <input type='email' id='email' required ref={emailInputRef} />
-    //     </div>
-    //     <div className={``}>
-    //       <label htmlFor='password'>Your Password</label>
-    //       <input
-    //         type='password'
-    //         required
-    //         // ref={passwordInputRef}
-    //       />
-    //     </div>
-    //     <div className={``}>
+    < >
+      <h1>Log in</h1>
 
-    //       {/* {!isLoading && (
-    //         <button>{isLogin ? 'Login' : 'Create Account'}</button>
-    //       )} */}
+      <form onSubmit={submitHandler} className='sign-container-area-form'>
+        {inputs.map((item,index)=>(
+          <Input key={index} {...item} styleName={`sign-container-area-form-inputBox`} />
+        ))}
 
-          
-    //       <button
-    //         type='button'
-    //         className={classes.toggle}
-    //         onClick={switchAuthModeHandler}
-    //       >
+        <Button disabled={!formIsValid || status == 'pending'} styleName={`sign-container-area-submitBtn`} >
+          {status == 'pending' ?`Loading...`:`Log in`}
+        </Button>
 
-    //       </button>
-    //     </div>
-    //   </form>
-    // </section>
+        <p className='sign-container-area-hint'>Don't have an account? <Link to="/register">Sign up</Link></p>
+      </form>
+    </>
   )
 }
 

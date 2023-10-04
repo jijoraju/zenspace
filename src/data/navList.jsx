@@ -59,9 +59,4 @@ export const navList = [
       name: "REGISTER",
       class: "nav-mobile-menu-container-item",
     },
-    {
-      path: "/logout",
-      name: "LOGOUT",
-      class: "nav-mobile-menu-container-item",
-    },
   ];

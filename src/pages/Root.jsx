@@ -1,5 +1,7 @@
 import React,{Suspense,lazy} from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { ToastContainer, } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import '@Public/styles/main.scss'
 import RootLayout from "@components/RootLayout";
@@ -47,6 +49,7 @@ function Root() {
 
   return (
      <Suspense fallback={<LoadingSpinner />}>
+        <ToastContainer />
         <RouterProvider router={router} />;
      </Suspense>
   )

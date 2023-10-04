@@ -4,12 +4,14 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import RoomOutlinedIcon from "@mui/icons-material/RoomOutlined";
 
-const center = { lat: 43.47948476630009, lng: -80.5184849866083 };
-const zoom = 15;
-const markers = [
-  { position: { lat: 43.47948476630009, lng: -80.5184849866083 } },
-  // { position: { lat: 43.4786719109045, lng: -80.51751838861679 } },
-];
+const mapData = {
+  center: { lat: 43.47948476630009, lng: -80.5184849866083 },
+  zoom :15,
+  markers:[
+    { position: { lat: 43.47948476630009, lng: -80.5184849866083 } },
+    // { position: { lat: 43.4786719109045, lng: -80.51751838861679 } },
+  ],
+}
 
 const ContactList = [
   {
@@ -42,9 +44,7 @@ function Contact() {
 
       <div className="contact-area-map">
         <CustomMap
-          center={center}
-          zoom={zoom}
-          markers={markers}
+          {...mapData}
           style={`contact-area-map-contactMap`}
         />
 

@@ -1,14 +1,17 @@
-window.domain = 'https://zenspace-backend.onrender.com/'
+const domain = API_DOMAIN
+// const domain = 'http://localhost:5173'
+// const domain = 'http://127.0.0.1:5173'
 
 window.fetchRequest = fetchRequestHandler
 
 export default function fetchRequestHandler (url, method, param){
   let header;
+  const user = JSON.parse(localStorage.getItem('userInfo'))
 
-  if (user.UserLogin == true) {
+  if (user) {
     header = {
       "Content-Type": "application/json; charset=utf-8",
-      Authorization: user.Token,
+      "Authorization": `Bearer ${user.token}`,
     };
   } else {
     header = {
@@ -24,16 +27,42 @@ export default function fetchRequestHandler (url, method, param){
   if (param) {
     fetchParams.body = JSON.stringify(param);
   }
-  fetchHandler(url, fetchParams);
+  const requestData = fetchHandler(url, fetchParams);
+  return requestData
 }
 
 export async function fetchHandler(url, fetchParams) {
-  const response = await fetch(domain + url, fetchParams);
-  const data = await response.json();
+  
+  return new Promise(async(resolve,reject)=>{
 
-  if (!response.ok) {
-    throw new Error(data.message || "Could not fetch quotes.");
-  }
+    try{
+      const response = await fetch(domain + url, fetchParams);
+      console.log('response',response)
+      const respondData = await response.json();
+      console.log('respondData',respondData)
 
-  return data;
+      if (!response?.ok && respondData) {
+        const error = errorHandler(response?.status,respondData)
+        reject(error)
+      }
+
+      resolve(respondData)
+    }catch(err){
+      console.log('err',err)
+        const error = errorHandler(500,err)
+        reject(error)
+    }
+
+  })
+
+}
+
+const errorHandler = (status, err)=>{
+  const error = {
+    status: err?.status || 500,
+    errorCode: 'RESOURCE_NOT_FOUND',
+    message: err?.message || "Something went wrong!",
+  };
+
+  return error
 }
