@@ -36,7 +36,7 @@ export async function fetchHandler(url, fetchParams) {
   return new Promise(async(resolve,reject)=>{
 
     try{
-      const response = await fetch(domain + url, fetchParams);
+      const response = await timeout_fetch(fetch(domain + url, fetchParams),5000);
       console.log('response',response)
       const respondData = await response.json();
       console.log('respondData',respondData)
@@ -65,4 +65,25 @@ const errorHandler = (status, err)=>{
   };
 
   return error
+}
+
+function timeout_fetch(fetch_promise, timeout = 10000) {
+    let timeout_fn = null;
+    
+    let timeout_promise = new Promise(function (resolve, reject) {
+        timeout_fn = function () {
+            reject('over time!!!');
+        };
+    });
+
+    let abortable_promise = Promise.race([
+        fetch_promise,
+        timeout_promise
+    ]);
+
+    setTimeout(function () {
+        timeout_fn();
+    }, timeout);
+
+    return abortable_promise;
 }

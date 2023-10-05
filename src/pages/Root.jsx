@@ -49,8 +49,8 @@ function Root() {
 
   return (
      <Suspense fallback={<LoadingSpinner />}>
+        <RouterProvider router={router} />
         <ToastContainer />
-        <RouterProvider router={router} />;
      </Suspense>
   )
 }

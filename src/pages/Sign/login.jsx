@@ -5,6 +5,7 @@ import Input from "@components/Input";
 import Button from "@components/Button";
 import useInput from "@hook/use-input";
 import useHttp from "@hook/use-http";
+import {emailReg,passwordReg} from '$LIB/validation';
 
 import { useSelector, useDispatch } from "react-redux";
 import { postSignInHandler, LoginHandler } from "@Reducer/user/user-action";
@@ -23,7 +24,7 @@ function Login() {
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
     reset: resetEmailInput,
-  } = useInput((value) => value.includes("@"));
+  } = useInput((value) => emailReg.test(value));
 
   const {
     value: enteredPassword,
@@ -32,7 +33,7 @@ function Login() {
     valueChangeHandler: passwordChangeHandler,
     inputBlurHandler: passwordBlurHandler,
     reset: resetPasswordInput,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => passwordReg.test(value));
 
   const {
     sendRequest,

@@ -49,7 +49,7 @@ function useHttp(requestFunction, startWithPending = false) {
            responseData,
         });
 
-        // closeToast();
+        closeToast();
         // showToast("Successful", "success");
       } catch (error) {
         error.isSuccess = false

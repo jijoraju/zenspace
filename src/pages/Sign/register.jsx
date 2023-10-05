@@ -6,6 +6,7 @@ import Input from "@components/Input";
 import Button from "@components/Button";
 import useInput from "@hook/use-input";
 import useHttp from "@hook/use-http";
+import {emailReg,nameReg,passwordReg} from '$LIB/validation';
 
 import {
   postSignUpHandler,
@@ -29,7 +30,7 @@ function Register() {
     valueChangeHandler: FirstNameChangeHandler,
     inputBlurHandler: FirstNameBlurHandler,
     reset: resetFirstNameInput,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => nameReg.test(value));
 
   const {
     value: enteredLastName,
@@ -38,7 +39,7 @@ function Register() {
     valueChangeHandler: LastNameChangeHandler,
     inputBlurHandler: LastNameBlurHandler,
     reset: resetLastNameInput,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => nameReg.test(value));
 
   const {
     value: enteredEmail,
@@ -47,7 +48,7 @@ function Register() {
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
     reset: resetEmailInput,
-  } = useInput((value) => value.includes("@"));
+  } = useInput((value) => emailReg.test(value));
 
   const {
     value: enteredPassword,
@@ -56,7 +57,7 @@ function Register() {
     valueChangeHandler: passwordChangeHandler,
     inputBlurHandler: passwordBlurHandler,
     reset: resetPasswordInput,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => passwordReg.test(value));
 
   const {
     sendRequest,

@@ -9,7 +9,6 @@ const mapData = {
   zoom :15,
   markers:[
     { position: { lat: 43.47948476630009, lng: -80.5184849866083 } },
-    // { position: { lat: 43.4786719109045, lng: -80.51751838861679 } },
   ],
 }
 
