@@ -1,5 +1,6 @@
 import { toastPromise, closeToast } from "@components/Toast";
 const domain = API_DOMAIN;
+const second = 30000;
 // const domain = 'http://localhost:5173'
 // const domain = 'http://127.0.0.1:5173'
 
@@ -37,7 +38,7 @@ export async function fetchHandler(url, fetchParams) {
     try {
       const response = await timeout_fetch(
         fetch(domain + url, fetchParams),
-        30000
+        second
       );
       console.log("response", response);
       const respondData = await response.json();
@@ -73,7 +74,7 @@ const errorHandler = (status, err) => {
   return error;
 };
 
-function timeout_fetch(fetch_promise, timeout = 30000) {
+function timeout_fetch(fetch_promise, timeout = second) {
   let timeout_fn = null;
 
   let timeout_promise = new Promise(function (resolve, reject) {

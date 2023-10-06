@@ -33,6 +33,7 @@ body {
 
 .Toastify__toast-container--top-right,.Toastify__toast-container--top-center {
     @include absCenter();
+    position: fixed;
     top: 12%;
     font-size: 1.6rem;
 

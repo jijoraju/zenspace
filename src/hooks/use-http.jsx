@@ -1,7 +1,7 @@
 import { useReducer, useCallback } from "react";
 import { showToast, closeToast, toastPromise } from "@components/Toast";
 import CircularProgress from '@mui/material/CircularProgress';
-import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
+const second = 30000;
 
 function httpReducer(state, action) {
   if (action.type === "SEND") {
@@ -41,7 +41,7 @@ function useHttp(requestFunction, startWithPending = false) {
   const sendRequest = useCallback(
     async function (requestData) {
       dispatch({ type: "SEND" });
-      showToast("Loading...",'info',30000,{
+      showToast("Loading...",'info',second,{
         icon: <div className="toast-Icon-Wrap"> <CircularProgress color="inherit" size={20} /> </div>});
 
       try {

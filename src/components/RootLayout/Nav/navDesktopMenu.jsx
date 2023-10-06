@@ -13,7 +13,7 @@ function NavDesktopMenu(props) {
     <div className="nav-desktop-menu">
 
       <div className="nav-desktop-menu-profileBox">
-        <AccountCircleOutlined sx={{ fontSize: '3rem' }} className={`nav-desktop-menu-profileBox-icon`} />
+        <AccountCircleOutlined sx={{ fontSize: '4rem' }} className={`nav-desktop-menu-profileBox-icon`} />
         <div className="nav-desktop-menu-profileBox-profileNameWrap">
           <p>{user.userInfo.email}</p>
         </div>
@@ -25,7 +25,7 @@ function NavDesktopMenu(props) {
         styleName={`nav-desktop-menu-logoutBtn`}
         disabled={false}
       >
-        <AssignmentIndOutlined sx={{ fontSize: '2rem' }} className={`nav-desktop-menu-logoutBtn-icon`} />
+        <AssignmentIndOutlined  className={`nav-desktop-menu-logoutBtn-icon`} />
         <span>My Zenspace</span>
       </CustomButton>
 
@@ -36,7 +36,7 @@ function NavDesktopMenu(props) {
         disabled={false}
       >
         <PowerSettingsNew 
-        sx={{ fontSize: '2rem' }} className={`nav-desktop-menu-logoutBtn-icon`} />
+         className={`nav-desktop-menu-logoutBtn-icon`} />
         <span>LOG OUT</span>
       </CustomButton>
     </div>
