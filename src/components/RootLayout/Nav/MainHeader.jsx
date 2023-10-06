@@ -8,6 +8,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import CloseIcon from "@mui/icons-material/Close";
 
 import Image from "@components/Images";
+import CustomButton from "@components/Button";
 import { navList, navMobileList } from "@Data/navList";
 import {logOutHandler} from '@Reducer/user/user-action'
 

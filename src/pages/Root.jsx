@@ -48,10 +48,21 @@ function Root() {
   ]);
 
   return (
-     <Suspense fallback={<LoadingSpinner />}>
-        <RouterProvider router={router} />
-        <ToastContainer />
-     </Suspense>
+    <Suspense fallback={<LoadingSpinner />}>
+      <RouterProvider router={router} />
+      <ToastContainer 
+        position="top-center"
+        // autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light" 
+      />
+    </Suspense>
   )
 }
 

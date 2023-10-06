@@ -1,17 +1,18 @@
-const domain = API_DOMAIN
+import { toastPromise, closeToast } from "@components/Toast";
+const domain = API_DOMAIN;
 // const domain = 'http://localhost:5173'
 // const domain = 'http://127.0.0.1:5173'
 
-window.fetchRequest = fetchRequestHandler
+window.fetchRequest = fetchRequestHandler;
 
-export default function fetchRequestHandler (url, method, param){
+export default function fetchRequestHandler(url, method, param) {
   let header;
-  const user = JSON.parse(localStorage.getItem('userInfo'))
+  const user = JSON.parse(localStorage.getItem("userInfo"));
 
   if (user) {
     header = {
       "Content-Type": "application/json; charset=utf-8",
-      "Authorization": `Bearer ${user.token}`,
+      Authorization: `Bearer ${user.token}`,
     };
   } else {
     header = {
@@ -28,62 +29,64 @@ export default function fetchRequestHandler (url, method, param){
     fetchParams.body = JSON.stringify(param);
   }
   const requestData = fetchHandler(url, fetchParams);
-  return requestData
+  return requestData;
 }
 
 export async function fetchHandler(url, fetchParams) {
-  
-  return new Promise(async(resolve,reject)=>{
-
-    try{
-      const response = await timeout_fetch(fetch(domain + url, fetchParams),5000);
-      console.log('response',response)
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await timeout_fetch(
+        fetch(domain + url, fetchParams),
+        30000
+      );
+      console.log("response", response);
       const respondData = await response.json();
-      console.log('respondData',respondData)
+      console.log("respondData", respondData);
 
       if (!response?.ok && respondData) {
-        const error = errorHandler(response?.status,respondData)
-        reject(error)
+        const error = errorHandler(response?.status, respondData);
+        reject(error);
+        return;
       }
 
-      resolve(respondData)
-    }catch(err){
-      console.log('err',err)
-        const error = errorHandler(500,err)
-        reject(error)
+      resolve(respondData);
+    } catch (err) {
+      const error = errorHandler(500, err);
+      reject(error);
     }
-
-  })
-
+  });
 }
 
-const errorHandler = (status, err)=>{
+const errorHandler = (status, err) => {
+  console.log("request err", err);
   const error = {
-    status: err?.status || 500,
-    errorCode: 'RESOURCE_NOT_FOUND',
+    status: status || 500,
+    errorCode: "RESOURCE_NOT_FOUND",
     message: err?.message || "Something went wrong!",
   };
 
-  return error
-}
+  closeToast();
+  toastPromise(Promise.reject(error), {
+    error: `${error.message} 🤯`,
+    autoClose: 1000,
+  });
+  return error;
+};
 
-function timeout_fetch(fetch_promise, timeout = 10000) {
-    let timeout_fn = null;
-    
-    let timeout_promise = new Promise(function (resolve, reject) {
-        timeout_fn = function () {
-            reject('over time!!!');
-        };
-    });
+function timeout_fetch(fetch_promise, timeout = 30000) {
+  let timeout_fn = null;
 
-    let abortable_promise = Promise.race([
-        fetch_promise,
-        timeout_promise
-    ]);
+  let timeout_promise = new Promise(function (resolve, reject) {
+    timeout_fn = function () {
+      reject("over time!!!");
+    };
+  });
 
-    setTimeout(function () {
-        timeout_fn();
-    }, timeout);
+  let abortable_promise = Promise.race([fetch_promise, timeout_promise]);
 
-    return abortable_promise;
+  setTimeout(function () {
+    timeout_fn();
+  }, timeout);
+
+  return abortable_promise;
 }

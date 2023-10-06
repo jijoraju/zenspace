@@ -96,7 +96,7 @@ function Register() {
       };
       loginRequest(data);
     }
-  }, [signUpRequestData]);
+  }, [signUpRequestData,loginRequest]);
 
   // check form isValid
   useEffect(() => {
