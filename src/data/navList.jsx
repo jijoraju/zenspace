@@ -59,4 +59,9 @@ export const navList = [
       name: "REGISTER",
       class: "nav-mobile-menu-container-item",
     },
+    {
+      path: "/profile",
+      name: "My ZenSpace",
+      class: "nav-mobile-menu-container-item",
+    },
   ];

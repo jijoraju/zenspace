@@ -28,7 +28,7 @@
         text-decoration: none;
         color: $color-black;
 
-        &-active{
+        &-active {
           color: $color-primary-light;
           font-weight: bold;
         }
@@ -39,41 +39,40 @@
       display: none;
     }
 
-    &-loginBtn{
+    &-loginBtn {
       font-size: 1.8rem;
     }
 
-    &-profileBtnWrap{
+    &-profileBtnWrap {
       border-radius: 2rem;
-      padding: .3rem 0;
+      padding: 0.3rem 0;
       background-color: transparent;
-      @include border-style(2px, solid, $color-primary);
       margin: 0.2rem 0;
+      transition: 0.3s;
       cursor: pointer;
+      @include border-style(2px, solid, $color-primary);
       @include flexCenter();
-      transition: .3s;
-            
-      &-icon{
-        color:$color-primary;
+
+      &-icon {
+        color: $color-primary;
       }
 
-      &:hover{
+      &:hover {
         background-color: $color-primary-light;
         @include border-style(2px, solid, $color-white);
 
-        .nav-desktop-profileBtnWrap-icon{
-          color:$color-white;
+        .nav-desktop-profileBtnWrap-icon {
+          color: $color-white;
         }
       }
-
     }
 
-    &-menu{
+    &-menu {
       position: absolute;
-      right:0%;
-      top:110%;
+      right: 0%;
+      top: 110%;
       background-color: $color-white;
-      @include whSize(24rem,18rem);
+      @include whSize(24rem, 18rem);
       padding: 1.5rem 3rem;
       @include boxShadow(0px, 2px, 4px, 4px, rgba(0, 0, 0, 0.2));
       z-index: 9;
@@ -82,58 +81,62 @@
       flex-direction: column;
       justify-content: space-evenly;
       align-items: center;
-      
+
       @include respond($bp-medium) {
         display: none;
       }
 
-      &-profileBox{
+      &-profileBox {
         @include flexCenter();
-        @include whSize(100%,'auto');
+        @include whSize(100%, "auto");
         padding-bottom: 1.5rem;
         border-bottom: 1px solid $color-gray;
 
-        & svg{
-          @include whSize(30%,'auto');
-          color:$color-primary;
+        & svg {
+          @include whSize(30%, "auto");
+          color: $color-primary;
         }
 
-        &-profileNameWrap{
-          @include whSize(100%,'auto');
+        &-profileNameWrap {
+          @include whSize(100%, "auto");
 
-          & p{
+          & p {
             font-size: 1.6rem;
+            &:first-child{
+              font-weight: bold;
+            }
+            &:last-child{
+              color: $color-gray;
+            }
           }
         }
       }
 
-      &-logoutBtn{
+      &-logoutBtn {
         border-width: 0;
         background-color: transparent;
         cursor: pointer;
-        @include whSize(100%,3rem);
+        @include whSize(100%, 3rem);
         display: grid;
         grid-template-columns: 30% 1fr;
         align-items: center;
         justify-items: center;
         transition: 0.3s;
 
-        &:hover{
+        &:hover {
           background-color: $color-gray-light;
         }
 
-        & svg{
-          color:$color-primary;
+        & svg {
+          color: $color-primary;
           font-size: 2.5rem;
         }
 
-        & span{
+        & span {
           justify-self: flex-start;
           font-size: 1.6rem;
         }
-        
       }
-
     }
   }
 
@@ -150,56 +153,136 @@
     }
 
     &-menu-btn {
-      background-color: transparent;
       border-width: 0;
       z-index: 99999;
       background-color: $color-white;
       border-radius: 50%;
       padding-top: 0.3rem;
       width: 4.5rem;
+
+      &-close{
+          position: fixed;
+          right: 2.5%;
+          top: 1.5rem;
+        }
     }
+
+
 
     &-menu {
       display: none;
-
-      background-image: radial-gradient($color-primary-light, $color-primary);
+      background-image: radial-gradient($color-secondary, $color-primary);
+      // background-color: $color-white;
       position: fixed;
       top: 0;
       left: 0;
       height: 0%;
       width: 0%;
       transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+      padding: 10rem 4rem;
 
       &-visible {
         display: block;
         opacity: 1;
-        @include whSize(100%,100%);
+        @include whSize(100%, 100%);
         z-index: 9;
       }
 
-      &-container {
-        @include whSize(100%,30%);
-        @include absCenter();
+      &-profileBox {
+        @include whSize(100%, auto);
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(255,255,255,.8);
 
+        display: grid;
+        grid-template-columns: 45% 1fr;
+        align-items: center;
+        justify-items: flex-end;
+
+        @include respond($bp-small) {
+          grid-template-columns: 40% 1fr;
+        }
+
+        & svg {
+          color: $color-white;
+          margin-right: 2rem;
+          font-size:  5rem;
+          @include respond($bp-small) {
+            font-size:  4rem;
+          }
+        }
+
+        &-profileNameWrap {
+          justify-self: flex-start;
+          & p {
+            font-size: 2rem;
+            color: $color-white;
+
+            &:first-child{
+              font-weight: bold;
+            }
+            &:last-child{
+              color: $color-gray-light;
+            }
+            @include respond($bp-small) {
+              font-size:  1.6rem;
+            }
+          }
+        }
+      }
+
+      &-container {
+        @include whSize(100%, 100%);
+        padding: 3rem 0;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: flex-start;
         align-items: center;
+        position: relative;
 
         &-item {
+          margin: 2rem auto;
           text-decoration: none;
           color: $color-white;
           font-size: 1.8rem;
 
-          &-active{
+          &-active {
             color: $color-tertiary;
           }
         }
 
+        &-logoutBox {
+          border-top: 1px solid rgba(255,255,255,.8);
+          padding-top: 2rem;
+          @include whSize(100%, auto);
+          margin: 0 auto;
+          position: absolute;
+          bottom: 20%;
+          @include flexCenter();
+
+          &-logoutBtn {
+            width: 20rem;
+            padding: 1.5rem 0;
+            border-radius: 1rem;
+            background-color: transparent;
+            border: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & svg{
+              margin-right: 2rem;
+              font-size: 3rem;
+              color:$color-white;
+            }
+
+            & span{
+              font-size: 2rem;
+              color:$color-white;
+            }
+          }
+        }
       }
-
     }
-
   }
-
 }
