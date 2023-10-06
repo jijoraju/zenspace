@@ -1,17 +1,15 @@
 .spinner {
   display: inline-block;
-  width: 80px;
-  height: 80px;
+  @include whSize(80px,80px);
   @include absCenter();
 }
 .spinner:after {
   content: ' ';
   display: block;
-  width: 64px;
-  height: 64px;
+  @include whSize(64px,64px);
   margin: 8px;
   border-radius: 50%;
-  border: 6px solid $color-primary;
+  @include border-style(6px, solid, $color-primary);
   border-color: $color-primary transparent $color-primary transparent;
   animation: spinner 1.2s linear infinite;
 }

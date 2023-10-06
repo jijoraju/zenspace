@@ -24,8 +24,7 @@
 
     &-info{
       background-color: rgba(0,0,0,.5);
-      width:61.9rem;
-      height:44.2rem;
+      @include whSize(61.9rem,44.2rem);
       position: absolute;
       top:10rem;
       left: 7rem;
@@ -38,15 +37,13 @@
 
       @include respond($bp-medium){
         @include absCenter();
-        width: 50rem;
-        height: 30rem;
+        @include whSize(50rem,30rem);
         padding:2rem;
       }
 
       @include respond($bp-small){
         @include absCenter();
-        width: 32rem;
-        height: 25rem;
+        @include whSize(32rem,25rem);
         padding:1.5rem;
       }
 
@@ -91,8 +88,7 @@
     height:70vh;
 
     &-contactMap{
-      width:100%;
-      height: 70vh;
+      @include whSize(100%,70vh);
     }
     
     &-info{
@@ -101,8 +97,7 @@
       left: 10rem;
 
       background-color: $color-white;
-      width: 50rem;
-      height: 24rem;
+      @include whSize(50rem,24rem);
 
       display: flex;
       flex-direction: column;
@@ -110,20 +105,17 @@
       justify-content: space-around;
       padding: 5rem 7rem;
 
-      box-shadow: 0px 4px 4px 3px rgba(0, 0, 0, 0.25);
-
+      @include boxShadow(0px, 4px, 4px, 3px, rgba(0, 0, 0, 0.25));
       @include respond($bp-medium){
         top: 70%;
         left: 3rem;
-        width: 35rem;
-        height: 20rem;
+        @include whSize(35rem,20rem);
         padding: 2rem 5rem;
       }
       @include respond($bp-small){
         top: 70%;
         left: 2rem;
-        width: 25rem;
-        height: 15rem;
+        @include whSize(25rem,15rem);
         padding: 1rem 3rem;
       }
 
