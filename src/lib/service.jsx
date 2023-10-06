@@ -68,7 +68,7 @@ const errorHandler = (status, err) => {
 
   closeToast();
   toastPromise(Promise.reject(error), {
-    error: `${error.message} 🤯`,
+    error: `${error?.message} 🤯`,
     autoClose: 1000,
   });
   return error;

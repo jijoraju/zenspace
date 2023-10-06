@@ -72,7 +72,7 @@
           @include respond($bp-small){
             padding: 0.8rem;
             font-size: 1.4rem;
-            @include border-style(1rem, solid, $color-primary);
+            @include border-style(1px, solid, $color-primary);
           }
         }
 
