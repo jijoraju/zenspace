@@ -1,16 +1,14 @@
 import React, { useState ,useCallback,useEffect} from "react";
 import { useSelector, useDispatch} from "react-redux";
-import { Button } from "@mui/material";
+import { Button,Menu,MenuItem } from "@mui/material";
 import { NavLink, useNavigate, } from "react-router-dom";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
-import CloseIcon from "@mui/icons-material/Close";
+import {MenuOutlined, Login,Logout, Close,AccountCircleOutlined,MoreVertOutlined,PowerSettingsNew, AssignmentIndOutlined} from "@mui/icons-material";
 
 import Image from "@components/Images";
 import CustomButton from "@components/Button";
 import { navList, navMobileList } from "@Data/navList";
 import {logOutHandler} from '@Reducer/user/user-action'
+import NavDesktopMenu from './navDesktopMenu'
 
 function MainHeader() {
   const dispatch = useDispatch()
@@ -88,7 +86,8 @@ function MainHeader() {
 
   // switch mobile or desktop
   const [toggleNav, setToggleNav] = useState(false);
-
+  const [toggleDeskMenu, setToggleDeskMenu] = useState(false)
+  
   const toggleMobileNav = (e) => {
     setToggleNav(() => !toggleNav);
   };
@@ -96,6 +95,7 @@ function MainHeader() {
   // log out
   const fetchLogout = useCallback(()=>{
     setToggleNav(false)
+    setToggleDeskMenu(false)
     dispatch(logOutHandler())
   },[])
 
@@ -110,35 +110,40 @@ function MainHeader() {
               variant="contained" 
               onClick={()=>navigate(`/login`)}
               size="large"
-              startIcon={<LoginIcon />}
+              startIcon={<Login />}
               >
               LOG IN
             </Button>
           ):(
-            <Button 
-              variant="contained" 
-              onClick={fetchLogout}
-              size="large"
-              startIcon={<LogoutIcon />}
-              >
-              LOG OUT
-            </Button>
+            <CustomButton 
+              onClick={()=>setToggleDeskMenu(!toggleDeskMenu)}
+              // onClick={fetchLogout}
+              styleName={`nav-desktop-profileBtnWrap`}
+              disabled={false}
+            >
+              <AccountCircleOutlined 
+              sx={{ fontSize: '3rem' }}className={`nav-desktop-profileBtnWrap-icon`} />
+              <MoreVertOutlined fontSize={`large`} className={`nav-desktop-profileBtnWrap-icon`} />
+            </CustomButton>
           )
         }
 
+        {toggleDeskMenu && <NavDesktopMenu fetchLogout={fetchLogout} />}
+        
       </div>
       
+
       {/* mobile */}
       <div className="nav-mobile">
         {renderMobileLogo}
         {/* menu btn */}
-        <button className="nav-mobile-menu-btn" onClick={toggleMobileNav}>
+        <CustomButton styleName="nav-mobile-menu-btn" onClick={toggleMobileNav} disabled={false}>
           {!toggleNav ? (
-            <MenuOutlinedIcon sx={{ fontSize: 40 }} />
+            <MenuOutlined sx={{ fontSize: 40 }} />
           ) : (
-            <CloseIcon sx={{ fontSize: 40 }} />
+            <Close sx={{ fontSize: 40 }} />
           )}
-        </button>
+        </CustomButton>
 
         {
           // toggle menu of nav
@@ -157,7 +162,7 @@ function MainHeader() {
                       variant="contained" 
                       onClick={fetchLogout}
                       size="large"
-                      startIcon={<LogoutIcon />}
+                      startIcon={<Logout />}
                       >
                       LOG OUT
                     </Button>

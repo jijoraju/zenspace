@@ -1,9 +1,10 @@
 import React from 'react'
 
 function Button(props) {
-  const {styleName,children,disabled } = props
+  const {styleName,children,disabled, onClick } = props
   return (
-    <button className={styleName} disabled={disabled}>
+    <button 
+    className={styleName} disabled={disabled} onClick={onClick} >
       {children}
     </button>
   )

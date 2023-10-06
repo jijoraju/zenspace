@@ -41,7 +41,7 @@ function useHttp(requestFunction, startWithPending = false) {
   const sendRequest = useCallback(
     async function (requestData) {
       dispatch({ type: "SEND" });
-      showToast("Loading...",'info',3000,{
+      showToast("Loading...",'info',30000,{
         icon: <div className="toast-Icon-Wrap"> <CircularProgress color="inherit" size={20} /> </div>});
 
       try {

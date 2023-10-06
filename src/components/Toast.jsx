@@ -16,6 +16,7 @@ export const showToast = (message, type = 'info', s= 3000,icon) => {
         position: toast.POSITION.TOP_CENTER,
         className:'toast-promise',
         autoClose: s,
+        ...icon,
       });
       break;
     case 'error':
@@ -61,7 +62,7 @@ export const toastPromise = (requestApi,option)=>{
     {
       className: 'toast-promise',
       pending: 'Promise is pending',
-      // autoClose: 1500,
+      autoClose: 1500,
       position: toast.POSITION.TOP_CENTER,
       ...option,
     },
