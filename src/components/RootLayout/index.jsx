@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -20,14 +20,12 @@ function RootLayout() {
     if (getUser) {
       dispatch(LoginHandler({data:getUser?.userInfo}));
     }
-  }, [getUserInfo]);
+  }, [getUserInfo,LoginHandler]);
 
   return (
     <>
       <MainHeader />
-      {/* <main className="mainContainer"> */}
       <Outlet />
-      {/* </main> */}
       {!invisibleContact ? <Contact /> : ""}
       <Footer />
     </>

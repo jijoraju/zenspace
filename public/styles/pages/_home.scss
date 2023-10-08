@@ -1,0 +1,452 @@
+.home_container {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, min-content);
+  grid-template-columns:
+    [full-start] minmax(10rem, 1fr) [center-start] repeat(
+      10,
+      [col-start] minmax(min-content, 14rem) [col-end]
+    )
+    [center-end] minmax(10rem, 1fr) [full-end];
+
+  @include respond($bp-large) {
+    // grid-template-rows: 50vh min-content 40vw repeat(3, min-content);
+    grid-template-columns:
+      [full-start] minmax(8rem, 1fr) [center-start] repeat(
+        8,
+        [col-start] minmax(min-content, 14rem) [col-end]
+      )
+      [center-end] minmax(8rem, 1fr) [full-end];
+  }
+
+  @include respond($bp-medium) {
+    grid-template-rows: calc(54em - 6rem);
+    grid-template-columns:
+      [full-start] minmax(5rem, 1fr) [center-start] repeat(
+        8,
+        [col-start] minmax(min-content, 14rem) [col-end]
+      )
+      [center-end] minmax(5rem, 1fr) [full-end];
+  }
+
+  @include respond($bp-small) {
+    grid-template-rows: calc(90vw - 7rem);
+    grid-template-columns:
+      [full-start] minmax(2rem, 1fr) [center-start] repeat(
+        8,
+        [col-start] minmax(min-content, 14rem) [col-end]
+      )
+      [center-end] minmax(2rem, 1fr) [full-end];
+  }
+
+  // header
+  & .home-header {
+    grid-column: center-start / full-end;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(min-content, 1fr));
+
+    @include respond($bp-medium) {
+      grid-column: full-start / full-end;
+    }
+
+    &-searchBox {
+      z-index: 1;
+      grid-column: 1 / span 5;
+      grid-row: 1 / 2;
+      padding: 8em;
+      position: absolute;
+      top: 25%;
+      transform: translateY(-17%);
+      background-color: $color-white;
+      max-height: 70%;
+      @include boxShadow(0px, 0px, 4px, 4px, rgba(0, 0, 0, 0.25));
+
+      @include respond($bp-largest) {
+        grid-column: 1 / span 6;
+        padding: 6em;
+      }
+
+      @include respond($bp-large) {
+        grid-column: 1 / span 6;
+        padding: 3em;
+      }
+
+      @include respond($bp-medium) {
+        grid-column: 3 / span 8;
+        padding: 2em;
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      @include respond($bp-small) {
+        grid-column: 2 / 12;
+        padding: 2rem;
+        max-height: 100%;
+        top: 22%;
+      }
+
+      &-title {
+        font-size: 3.6rem;
+        line-height: 3.4rem;
+        color: $color-primary;
+        margin-bottom: 3rem;
+
+        @include respond($bp-large) {
+          font-size: 2.8rem;
+          line-height: 2.4rem;
+          margin-bottom: 2rem;
+        }
+
+        @include respond($bp-medium) {
+          font-size: 3.6rem;
+          line-height: 3rem;
+          text-align: center;
+        }
+
+        @include respond($bp-small) {
+          font-size: 2rem;
+          line-height: 2rem;
+          margin-bottom: 1rem;
+        }
+      }
+
+      &-content {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+
+        @include respond($bp-large) {
+          font-size: 1.6rem;
+          line-height: 2rem;
+        }
+
+        @include respond($bp-medium) {
+          font-size: 1.8rem;
+          line-height: 2rem;
+        }
+
+        @include respond($bp-small) {
+          font-size: 1.2rem;
+          line-height: 1.4rem;
+        }
+      }
+
+      &-container {
+        position: relative;
+
+        &-inputBox {
+          margin: 3rem auto;
+          width: 100%;
+
+          @include respond($bp-small) {
+            margin: 1rem auto;
+          }
+
+          & input {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 2rem;
+            padding-left: 4.8rem;
+            @include border-style(2px, solid, $color-primary);
+            &:focus {
+              outline-color: $color-secondary;
+            }
+
+            @include respond($bp-medium) {
+              font-size: 2rem;
+              border-radius: 0.5rem;
+            }
+
+            @include respond($bp-small) {
+              padding: 1rem;
+              padding-left: 3.8rem;
+              font-size: 1.4rem;
+            }
+          }
+        }
+
+        &-icon {
+          position: absolute;
+          top: 0.8rem;
+          left: 1rem;
+          color: $color-primary;
+          font-size: 4rem;
+
+          @include respond($bp-small) {
+            font-size: 3rem;
+          }
+        }
+      }
+
+      &-submitBtn {
+        width: 100%;
+        padding: 1.5rem;
+        background-color: $color-primary;
+        color: $color-white;
+        border: 0;
+        border-radius: 0.5rem;
+        cursor: pointer;
+
+        @include respond($bp-small) {
+          padding: 0.5rem;
+        }
+      }
+    }
+
+    &-banner {
+      grid-column: 3 / -1;
+      grid-row: 1 / 2;
+      font-size: 4rem;
+      @include respond($bp-medium) {
+        grid-column: 1 / -1;
+      }
+
+      &-image {
+        width: 100%;
+
+        @include respond($bp-small) {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  & .solutions-container {
+    grid-column: 1 / -1;
+
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    padding: 1rem 10rem;
+
+    @include respond($bp-medium) {
+      padding: 3rem 6rem;
+    }
+
+    @include respond($bp-small) {
+      padding: 2rem 3rem;
+    }
+
+    &-description {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: $color-primary;
+      text-align: center;
+      padding: 3rem 0;
+
+      @include respond($bp-medium) {
+        padding: 2rem 0;
+      }
+      @include respond($bp-small) {
+        padding: 0;
+      }
+
+      & h1 {
+        font-size: 3.4rem;
+        line-height: 3.4rem;
+
+        @include respond($bp-small) {
+          font-size: 2rem;
+          line-height: 2.5rem;
+        }
+      }
+
+      & p {
+        font-size: 2rem;
+        line-height: 3.4rem;
+
+        @include respond($bp-small) {
+          font-size: 1.4rem;
+          line-height: 2rem;
+          margin: 1.5rem auto;
+        }
+      }
+    }
+  }
+
+  // solution cards
+  & .solutionsCard-container {
+    grid-column: col-start 2 / col-end 9;
+    @include flexCenter();
+    flex-wrap: wrap;
+
+    @include respond($bp-large) {
+      grid-column: full-start / full-end;
+    }
+
+    @include respond($bp-medium) {
+      grid-column: full-start / full-end;
+    }
+
+    &-card {
+      flex-basis: 45%;
+      margin: 2rem;
+      height: 30rem;
+      position: relative;
+      perspective: 1000px; /* 设置透视效果 */
+      border-radius: 0.5rem;
+
+      &:hover .solutionsCard-container-card-front {
+        transform: rotateY(180deg);
+      }
+
+      &:hover .solutionsCard-container-card-back {
+        transform: rotateY(0);
+      }
+
+      @include respond($bp-largest) {
+        flex-basis: 43%;
+      }
+
+      @include respond($bp-large) {
+        flex-basis: 40%;
+      }
+
+      @include respond($bp-small) {
+        flex-basis: 80%;
+      }
+
+      &-front,
+      &-back {
+        @include whSize(100%, 100%);
+        position: absolute;
+        transition: transform 0.5s; /* 添加翻转效果的过渡动画 */
+        backface-visibility: hidden; /* 隐藏背面内容 */
+        @include boxShadow(0px, 3px, 5px, 0px, rgba(0, 0, 0, 0.5));
+        overflow: hidden;
+      }
+
+      &-front {
+        background-color: #f0f0f0;
+        // @include whSize(100%, 100%);
+        &-image {
+          // @include whSize(100%, 100%);
+
+          @include respond($bp-medium) {
+            @include whSize(50%, 50%);
+          }
+
+          @include respond($bp-medium) {
+            @include whSize(100%, 100%);
+          }
+        }
+      }
+
+      &-back {
+        padding: 2rem 5rem;
+        transform: rotateY(180deg);
+        @include flexCenter();
+        flex-direction: column;
+        background-color: $color-tertiary-light-1;
+        color: $color-primary;
+
+        @include respond($bp-small) {
+          padding: 1rem;
+        }
+
+        & h2 {
+          font-size: 2.8rem;
+        }
+
+        & p {
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+
+  & .know-wrap {
+    margin: 7rem auto;
+
+    @include respond($bp-large) {
+      margin: 3rem auto 4rem;
+    }
+
+    @include respond($bp-medium) {
+      margin: 2rem auto 3rem;
+    }
+
+  }
+
+  // create an account
+  & .createAccount-container {
+    grid-column: full-start / full-end;
+    background-color: $color-primary;
+    color: $color-white;
+    position: relative;
+    @include flexCenter();
+    
+    &-itemBox {
+      padding: 10rem 15rem;
+      position: relative;
+      flex-direction: column;
+      flex-basis: 50%;
+
+      @include respond($bp-large) {
+        padding: 7rem;
+      }
+
+      &:first-child{
+        @include respond($bp-medium) {
+          flex-basis: 100%;
+          padding: 7rem 12rem;
+          @include flexCenter();
+        }
+
+        @include respond($bp-small) {
+          padding: 2rem;
+        }
+      }
+
+      &:last-child{
+        @include respond($bp-medium) {
+          display: none;
+        }
+      }
+
+      & h2 {
+        font-size: 3.2rem;
+        font-weight: 400;
+        line-height: 3.6rem;
+
+        @include respond($bp-medium) {
+          text-align: center;
+        }
+
+        @include respond($bp-small) {
+          font-size: 2rem;
+          line-height: 2rem;
+        }
+      }
+
+      &-Btn {
+        @include button-style($color-primary, $color-tertiary);
+        text-align: center;
+        padding: 1rem 3rem;
+        margin: 1.5rem auto;
+        font-size: 2.8rem;
+        text-decoration: none;
+        display: inline-block;
+
+        @include respond($bp-medium) {
+          font-size: 2rem;
+          line-height: 2rem;
+        }
+
+        @include respond($bp-small) {
+          font-size: 1.6rem;
+          line-height: 2rem;
+        }
+      }
+
+      &-img{
+        position: absolute;
+        @include absCenter();
+        top: 25%;
+        @include border-style(1.5rem, solid, $color-tertiary);
+        @include whSize(60%, auto-fit);
+      }
+    }
+  }
+}

@@ -14,7 +14,7 @@ function Contact() {
         <div className="layoutContact-Box-right">
 
           <Link className="layoutContact-Box-right-button" to="/contact">
-            TALK TO US
+            Talk to us
           </Link>
         </div>
       </div>

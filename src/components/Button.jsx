@@ -4,7 +4,11 @@ function Button(props) {
   const {styleName,children,disabled, onClick } = props
   return (
     <button 
-    className={styleName} disabled={disabled} onClick={onClick} >
+      // className={styleName} 
+      // disabled={disabled} 
+      // onClick={onClick} 
+      {...props}
+      >
       {children}
     </button>
   )

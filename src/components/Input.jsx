@@ -14,7 +14,7 @@ const Input = React.forwardRef((props, ref) => {
   });
 
   return (
-    <div className={props.styleName}>
+    <div className={props.className}>
       <label htmlFor={props.id}>{props.label}</label>
       <input
         ref={inputRef}
@@ -23,6 +23,8 @@ const Input = React.forwardRef((props, ref) => {
         value={props.value}
         onChange={props.onChange}
         onBlur={props.onBlur}
+        placeholder={props?.placeholder}
+        // {...props}
       />
       {
         <p className='error-text'>{props.hasError ?`Please enter a valid ${props.label}.`:''}</p>

@@ -61,6 +61,7 @@ ORDER: Base + typography > general layout + grid > page layout > components
   background-color: $bg-color;
   padding: 10px 20px;
   border: 1px solid $bg-color;
+  border-radius: 0.5rem;
   &:hover {
     background-color: darken($bg-color, 10%);
   }

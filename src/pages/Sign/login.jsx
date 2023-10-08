@@ -127,15 +127,14 @@ function Login() {
       <form onSubmit={submitHandler} className="sign-container-area-form">
         {inputs.map((item, index) => (
           <Input
-            key={index}
-            {...item}
-            styleName={`sign-container-area-form-inputBox`}
+            key={index} {...item}
+            className={`sign-container-area-form-inputBox`}
           />
         ))}
 
         <Button
           disabled={!formIsValid || status == "pending"}
-          styleName={`sign-container-area-submitBtn`}
+          className={`sign-container-area-submitBtn`}
         >
           {status == "pending" ? `Loading...` : `Log in`}
         </Button>

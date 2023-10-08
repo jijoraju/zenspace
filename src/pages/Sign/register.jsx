@@ -205,13 +205,13 @@ function Register() {
           <Input
             key={index}
             {...item}
-            styleName={`sign-container-area-form-inputBox`}
+            className={`sign-container-area-form-inputBox`}
           />
         ))}
 
         <Button
           disabled={!formIsValid || status == "pending"}
-          styleName={`sign-container-area-submitBtn`}
+          className={`sign-container-area-submitBtn`}
         >
           {status == "pending" ? `Loading...` : `Sign up`}
         </Button>

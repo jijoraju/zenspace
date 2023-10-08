@@ -43,7 +43,7 @@ body {
     }
     @include respond($bp-small){
         top: 15%;
-        width: 35vh !important;
+        width: 80vw !important;
         font-size: 1.6rem;
     }
 }

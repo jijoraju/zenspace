@@ -254,7 +254,7 @@
           border-top: 1px solid rgba(255,255,255,.8);
           padding-top: 2rem;
           @include whSize(100%, auto);
-          margin: 0 auto;
+          margin: 2rem auto 0 ;
           position: absolute;
           bottom: 20%;
           @include flexCenter();
@@ -272,12 +272,12 @@
 
             & svg{
               margin-right: 2rem;
-              font-size: 3rem;
+              font-size: 2.5rem;
               color:$color-white;
             }
 
             & span{
-              font-size: 2rem;
+              font-size: 1.6rem;
               color:$color-white;
             }
           }

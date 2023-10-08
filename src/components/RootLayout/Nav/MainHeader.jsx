@@ -127,7 +127,7 @@ function MainHeader() {
           <CustomButton
             onClick={() => setToggleDeskMenu(!toggleDeskMenu)}
             // onClick={fetchLogout}
-            styleName={`nav-desktop-profileBtnWrap`}
+            className={`nav-desktop-profileBtnWrap`}
             disabled={false}
           >
             <AccountCircleOutlined
@@ -149,7 +149,7 @@ function MainHeader() {
         {renderMobileLogo}
         {/* menu btn */}
         <CustomButton
-          styleName={`nav-mobile-menu-btn ${toggleNav?`nav-mobile-menu-btn-close`:null}`}
+          className={`nav-mobile-menu-btn ${toggleNav?`nav-mobile-menu-btn-close`:null}`}
           onClick={toggleMobileNav}
           disabled={false}
         >
@@ -190,7 +190,7 @@ function MainHeader() {
                   <div className="nav-mobile-menu-container-logoutBox">
                     <CustomButton 
                       onClick={fetchLogout}
-                      styleName={`nav-mobile-menu-container-logoutBox-logoutBtn`}
+                      className={`nav-mobile-menu-container-logoutBox-logoutBtn`}
                       disabled={false}
                     >
                       <PowerSettingsNew 

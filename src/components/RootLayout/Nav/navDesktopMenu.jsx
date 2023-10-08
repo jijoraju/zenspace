@@ -23,7 +23,7 @@ function NavDesktopMenu(props) {
       {/* profile */}
       <CustomButton 
         onClick={()=>{}}
-        styleName={`nav-desktop-menu-logoutBtn`}
+        className={`nav-desktop-menu-logoutBtn`}
         disabled={false}
       >
         <AssignmentIndOutlined  className={`nav-desktop-menu-logoutBtn-icon`} />
@@ -33,7 +33,7 @@ function NavDesktopMenu(props) {
       {/* log out */}
       <CustomButton 
         onClick={fetchLogout}
-        styleName={`nav-desktop-menu-logoutBtn`}
+        className={`nav-desktop-menu-logoutBtn`}
         disabled={false}
       >
         <PowerSettingsNew 
