@@ -59,7 +59,7 @@
       transform: translateY(-17%);
       background-color: $color-white;
       max-height: 70%;
-      @include boxShadow(0px, 0px, 4px, 4px, rgba(0, 0, 0, 0.25));
+      @include boxShadow(0px, 2px, 20px, 0px, rgba(0, 0, 0, 0.1));
 
       @include respond($bp-largest) {
         grid-column: 1 / span 6;
@@ -185,10 +185,30 @@
         border-radius: 0.5rem;
         cursor: pointer;
 
+        &:disabled {
+          background-color: $color-gray;
+        }
+
         @include respond($bp-small) {
           padding: 0.5rem;
         }
       }
+
+      & .searchLocationContainer{
+        background-color: $color-white;
+        height: 25rem;
+        overflow: scroll;
+        @include boxShadow(0px, 0px, 5px, 0px, rgba(0, 0, 0, 0.5));
+        margin-top: 3%;
+          & span{
+            font-size: 2rem;
+
+            @include respond($bp-small) {
+              font-size: 1.4rem;
+            }
+          }
+      }
+
     }
 
     &-banner {
@@ -313,7 +333,7 @@
         position: absolute;
         transition: transform 0.5s; /* 添加翻转效果的过渡动画 */
         backface-visibility: hidden; /* 隐藏背面内容 */
-        @include boxShadow(0px, 3px, 5px, 0px, rgba(0, 0, 0, 0.5));
+        @include boxShadow(0px, 2px, 20px, 0px, rgba(0, 0, 0, 0.1));
         overflow: hidden;
       }
 

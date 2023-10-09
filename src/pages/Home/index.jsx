@@ -1,16 +1,41 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import { List, ListItemButton, ListItemText } from "@mui/material";
 
 import Button from "@components/Button";
 import Image from "@components/Images";
 import Input from "@components/Input";
 import useInput from "@hook/use-input";
+import useHttp from "@hook/use-http";
 
+import {
+  getLocationHandler,
+  storeLocation,
+} from "@Reducer/workspace/wk-action";
 import { solutions } from "@Data/home";
 
-export default function Home() {
+export default React.memo(function Home() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const searchInputRef = useRef();
+  const locationArr = useSelector((state) => state.workSpace.location);
+  const [filterLocation, setFilterLocation] = useState([]);
+
+  const {
+    sendRequest: fetchLocationApi,
+    status,
+    data: locationData,
+  } = useHttp(getLocationHandler);
+
+  useEffect(() => {
+    fetchLocationApi();
+  }, []);
+
+  useEffect(() => {
+    dispatch(storeLocation(locationData));
+  }, [locationData, storeLocation, dispatch]);
 
   const {
     value: enteredSearch,
@@ -19,8 +44,27 @@ export default function Home() {
     valueChangeHandler: searchChangeHandler,
     inputBlurHandler: searchBlurHandler,
     reset: resetSearchInput,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput();
 
+  useEffect(() => {
+    const typing = setTimeout(() => {
+      const search_val = enteredSearch || "";
+      const pattern = new RegExp(search_val, "gi");
+      const result = locationArr.filter((item) => item.name.match(pattern));
+      setFilterLocation(result || locationData);
+    }, 500);
+    return () => clearTimeout(typing);
+  }, [enteredSearch, locationArr]);
+
+  // click event
+  const clickLocation = (e, item) => {
+    searchChangeHandler(item);
+    setTimeout(() => {
+      setFilterLocation([]);
+    }, 600);
+  };
+
+  // search input variable
   const searchInputProps = {
     ref: searchInputRef,
     id: `search`,
@@ -54,8 +98,27 @@ export default function Home() {
     </div>
   ));
 
+  // render location List
+  const renderLocationList = (List) => {
+    return List.map((item, index) => (
+      <ListItemButton
+        key={index}
+        selected={enteredSearch.toLowerCase() === item.name.toLowerCase()}
+        onClick={(e) => clickLocation(e, item)}
+      >
+        <ListItemText>{item.name}</ListItemText>
+      </ListItemButton>
+    ));
+  };
+
+  // submit search then redirect to search page
+  const submitSearch = () => {
+    navigate(`/search?location=${enteredSearch}`);
+  };
+
   return (
     <div className="home_container">
+      {/* header */}
       <div className="home-header">
         <div className="home-header-searchBox">
           <h1 className="home-header-searchBox-title">
@@ -68,15 +131,28 @@ export default function Home() {
 
           <div className="home-header-searchBox-container">
             <Input {...searchInputProps} />
-            <SearchOutlinedIcon className="home-header-searchBox-container-icon" />
+          <SearchOutlinedIcon className="home-header-searchBox-container-icon" />
           </div>
 
           <Button
-            disabled={false}
+            disabled={status == "pending" || !enteredSearch}
+            onClick={submitSearch}
             className={`home-header-searchBox-submitBtn`}
           >
-            Submit
+            {status == "pending" ? `Loading` : `Submit`}
           </Button>
+
+          {enteredSearch?.length &&
+          Array.isArray(filterLocation) &&
+          filterLocation.length ? (
+            <List
+              component="nav"
+              aria-label="secondary mailbox folder"
+              className="searchLocationContainer"
+            >
+              {renderLocationList(filterLocation)}
+            </List>
+          ) : null}
         </div>
 
         <div className="home-header-banner">
@@ -89,7 +165,7 @@ export default function Home() {
           />
         </div>
       </div>
-
+      {/* solutions card */}
       <div className="solutions-container">
         <div className="solutions-container-description">
           <h1>Meet your workplace needs, we have the solution.</h1>
@@ -108,6 +184,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* sign up btn */}
       <div className="createAccount-container">
         <div className="createAccount-container-itemBox">
           <h2>Create your account today and get started for free!</h2>
@@ -128,4 +205,4 @@ export default function Home() {
       </div>
     </div>
   );
-}
+});

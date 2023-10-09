@@ -12,11 +12,11 @@ export const navList = [
       name: "SEARCH",
       class: "nav-desktop-item-wrap-item",
     },
-    {
-      path: "/Solutions",
-      name: "SOLUTIONS",
-      class: "nav-desktop-item-wrap-item",
-    },
+    // {
+    //   path: "/Solutions",
+    //   name: "SOLUTIONS",
+    //   class: "nav-desktop-item-wrap-item",
+    // },
     {
       path: "/contact",
       name: "CONTACT US",
@@ -39,11 +39,11 @@ export const navList = [
       name: "SEARCH",
       class: "nav-mobile-menu-container-item",
     },
-    {
-      path: "/solutions",
-      name: "SOLUTIONS",
-      class: "nav-mobile-menu-container-item",
-    },
+    // {
+    //   path: "/solutions",
+    //   name: "SOLUTIONS",
+    //   class: "nav-mobile-menu-container-item",
+    // },
     {
       path: "/contact",
       name: "CONTACT US",

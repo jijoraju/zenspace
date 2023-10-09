@@ -14,4 +14,4 @@ function Images(props) {
   );
 }
 
-export default Images;
+export default React.memo(Images);

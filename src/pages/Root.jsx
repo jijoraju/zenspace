@@ -6,7 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import '@Public/styles/main.scss'
 import RootLayout from "@components/RootLayout";
 import LoadingSpinner from "@components/LoadingSpinner";
+
 const Home = lazy(() => import('./Home'));
+const Search = lazy(() => import('./Search'));
 const ErrorPage = lazy(() => import('./ErrorPage'));
 const Contact = lazy(() => import('./Contact'));
 const Sign = lazy(() => import('./Sign'));
@@ -22,6 +24,14 @@ function Root() {
           index: true,
           path: "/",
           element: <Home />,
+          // loader: postsLoader,
+          // children: [
+          //   { path: '/:postId', element: <PostDetails />, loader: postDetailsLoader }
+          // ],
+        },
+        {
+          path: "/search",
+          element: <Search />,
           // loader: postsLoader,
           // children: [
           //   { path: '/:postId', element: <PostDetails />, loader: postDetailsLoader }

@@ -44,4 +44,4 @@ function NavDesktopMenu(props) {
   )
 }
 
-export default NavDesktopMenu
+export default React.memo(NavDesktopMenu)

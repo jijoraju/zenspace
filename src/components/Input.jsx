@@ -22,6 +22,7 @@ const Input = React.forwardRef((props, ref) => {
         id={props.id}
         value={props.value}
         onChange={props.onChange}
+        onFocus={props?.onFocus}
         onBlur={props.onBlur}
         placeholder={props?.placeholder}
         // {...props}
@@ -33,4 +34,4 @@ const Input = React.forwardRef((props, ref) => {
   );
 });
 
-export default Input;
+export default React.memo(Input);

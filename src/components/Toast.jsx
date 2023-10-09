@@ -9,7 +9,7 @@ export const showToast = (message, type = 'info', s= 3000,icon) => {
   //   position = toast.POSITION.TOP_CENTER, // 指定位置
   //   toastClassName = '', // 添加自定義 CSS 類
   // } = options;
-
+  toast.dismiss();
   switch (type) {
     case 'success':
       toast.success(message,{

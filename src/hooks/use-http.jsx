@@ -1,6 +1,11 @@
-import { useReducer, useCallback } from "react";
+import React,{ useReducer, useCallback ,useMemo} from "react";
 import { showToast, closeToast, toastPromise } from "@components/Toast";
 import CircularProgress from '@mui/material/CircularProgress';
+import { useDispatch } from "react-redux";
+
+import { logOutHandler } from "@Reducer/user/user-action";
+import { useNavigate } from "react-router-dom";
+
 const second = 30000;
 
 function httpReducer(state, action) {
@@ -32,6 +37,8 @@ function httpReducer(state, action) {
 }
 
 function useHttp(requestFunction, startWithPending = false) {
+  const reduxDispatch = useDispatch()
+  const navigate = useNavigate()
   const [httpState, dispatch] = useReducer(httpReducer, {
     status: startWithPending ? "pending" : null,
     data: null,
@@ -60,6 +67,12 @@ function useHttp(requestFunction, startWithPending = false) {
           type: "ERROR",
           errorMessage:error, 
         });
+
+        const Unauthorized = error?.message.match(/Unauthorized/ig)
+        if(Unauthorized.length){
+          reduxDispatch(logOutHandler())
+          // navigate('/login')
+        }
       }
     },
     [requestFunction]

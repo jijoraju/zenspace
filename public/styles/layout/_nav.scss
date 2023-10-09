@@ -5,7 +5,8 @@
   grid-template-columns: 1fr min-content;
   justify-content: center;
   align-items: center;
-  @include boxShadow(0px, 4px, 4px, 0px, rgba(0, 0, 0, 0.25));
+  z-index: 9;
+  @include boxShadow(0px, 2px, 20px, 0px, rgba(0, 0, 0, 0.1));
 
   @include respond($bp-medium) {
     padding: 1.5rem 2rem;
@@ -49,6 +50,7 @@
       background-color: transparent;
       margin: 0.2rem 0;
       transition: 0.3s;
+      width: 7rem;
       cursor: pointer;
       @include border-style(2px, solid, $color-primary);
       @include flexCenter();

@@ -52,4 +52,4 @@ const CustomMap = ({ center, zoom, markers, style }) => {
   );
 };
 
-export default CustomMap;
+export default React.memo(CustomMap);

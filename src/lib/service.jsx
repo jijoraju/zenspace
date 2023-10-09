@@ -1,4 +1,5 @@
 import { toastPromise, closeToast } from "@components/Toast";
+
 const domain = API_DOMAIN;
 const second = 30000;
 // const domain = 'http://localhost:5173'
@@ -45,25 +46,25 @@ export async function fetchHandler(url, fetchParams) {
       console.log("respondData", respondData);
 
       if (!response?.ok && respondData) {
-        const error = errorHandler(response?.status, respondData);
+        const error = errorHandler(respondData,response);
         reject(error);
         return;
       }
-
+      
       resolve(respondData);
     } catch (err) {
-      const error = errorHandler(500, err);
+      const error = errorHandler(err);
       reject(error);
     }
   });
 }
 
-const errorHandler = (status, err) => {
-  console.log("request err", err);
+const errorHandler = (err,status) => {
+  // console.log("request err",status,err);
   const error = {
     status: status || 500,
     errorCode: "RESOURCE_NOT_FOUND",
-    message: err?.message || "Something went wrong!",
+    message: err?.message||"Something went wrong!",
   };
 
   closeToast();
