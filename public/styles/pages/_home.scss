@@ -466,6 +466,8 @@
         top: 25%;
         @include border-style(1.5rem, solid, $color-tertiary);
         @include whSize(60%, auto-fit);
+        max-width: 40.2rem;
+        max-height: 38.4rem;
       }
     }
   }
