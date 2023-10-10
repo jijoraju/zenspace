@@ -5,10 +5,12 @@ import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import RoomOutlinedIcon from "@mui/icons-material/RoomOutlined";
 
 const mapData = {
+    // '43.466243710128296, -80.51753878383373'
   center: { lat: 43.47948476630009, lng: -80.5184849866083 },
   zoom :15,
   markers:[
     { position: { lat: 43.47948476630009, lng: -80.5184849866083 } },
+    { position: { lat: 43.476064964767424, lng: -80.51615542231036 } },
   ],
 }
 

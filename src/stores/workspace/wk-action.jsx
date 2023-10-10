@@ -5,7 +5,6 @@ export async function getLocationHandler() {
   return response;
 }
 
-
 export const  storeLocation=(data)=>{
   return async (dispatch)=>{
       dispatch(wksActions.addLocation({

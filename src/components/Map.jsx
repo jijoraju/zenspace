@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState ,useEffect,useCallback} from "react";
 import { GoogleMap, Marker,useJsApiLoader } from "@react-google-maps/api";
 
 const containerStyle = {
@@ -13,16 +13,22 @@ const CustomMap = ({ center, zoom, markers, style }) => {
     googleMapsApiKey: MAP_API_KEY,
   })
 
-  const [map, setMap] = React.useState(null)
+  const [map, setMap] = useState(null)
 
-  const onLoad = React.useCallback(function callback(map) {
+  const onLoad = useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-    
+    /**
+     * The function of map.fitBounds(bounds) is to automatically adjust the map's field of view based on the specified LatLngBounds object to ensure that the map area contained within this bounding box is visible. This is often useful when multiple markers or a specific area need to be displayed so that the user can see all markers or a specific geographic area.
+    */
+    // map.fitBounds(bounds);
+    /**
+     * setMap(map) is typically used to store a map object in the component's state so that further operations on the map can be performed later. In your code, these two lines of code are commented out, so they don't do anything.
+    */
     setMap(map)
+    // console.log('map',map)
   }, [])
 
-  const onUnmount = React.useCallback(function callback(map) {
+  const onUnmount = useCallback(function callback(map) {
     setMap(null)
   }, [])
 
@@ -33,6 +39,7 @@ const CustomMap = ({ center, zoom, markers, style }) => {
           mapContainerStyle={containerStyle}
           center={center}
           zoom={zoom}
+          defaultZoom={zoom} 
           onLoad={onLoad}
           onUnmount={onUnmount}
         >
@@ -41,6 +48,7 @@ const CustomMap = ({ center, zoom, markers, style }) => {
             <Marker
               key={index}
               position={marker.position}
+              onClick={() => console.log('marker',marker)}
             />
           ))
           }

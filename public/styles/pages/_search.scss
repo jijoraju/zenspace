@@ -1,0 +1,19 @@
+.searchContainer {
+  margin: 0rem auto;
+  max-width: $maxWight;
+
+  &-selectionContainer {
+    display: flex;
+    // align-items: center;
+    flex-direction: column;
+    padding: 3rem 8rem;
+    // border-bottom: 1px solid rgba(53,81,137,.17);
+    @include boxShadow(0px, 1px, 2px, 0px, rgba(0, 0, 0, 0.17));
+
+    &-selectionsRow{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+  }
+}

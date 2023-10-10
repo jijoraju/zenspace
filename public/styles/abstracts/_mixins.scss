@@ -59,8 +59,8 @@ ORDER: Base + typography > general layout + grid > page layout > components
 @mixin button-style($text-color, $bg-color) {
   color: $text-color;
   background-color: $bg-color;
-  padding: 10px 20px;
-  border: 1px solid $bg-color;
+  padding: 1rem 2rem;
+  border: 0.1rem solid $bg-color;
   border-radius: 0.5rem;
   &:hover {
     background-color: darken($bg-color, 10%);
@@ -69,10 +69,10 @@ ORDER: Base + typography > general layout + grid > page layout > components
 
 @mixin card-style {
   background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 20px;
-  @include boxShadow(0px, 2px, 4px, 0px, rgba(0, 0, 0, 0.1));
+  border: 0.1rem solid #ccc;
+  border-radius: 0.4rem;
+  padding: 2rem;
+  @include boxShadow(0px, 0.2rem, 0.4rem, 0px, rgba(0, 0, 0, 0.1));
 }
 
 @mixin boxShadow($x,$y,$xe,$ye,$color){

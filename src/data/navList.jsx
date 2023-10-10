@@ -8,7 +8,7 @@ export const navList = [
       img3: "logo/logo@3x.png",
     },
     {
-      path: "/Search",
+      path: "/search",
       name: "SEARCH",
       class: "nav-desktop-item-wrap-item",
     },

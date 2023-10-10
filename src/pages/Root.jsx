@@ -30,15 +30,15 @@ function Root() {
           // ],
         },
         {
-          path: "/search",
+          path: "search",
           element: <Search />,
           // loader: postsLoader,
           // children: [
-          //   { path: '/:postId', element: <PostDetails />, loader: postDetailsLoader }
+          //   { path: ':postId',  }
           // ],
         },
         {
-          path: "/contact",
+          path: "contact",
           element: <Contact />,
           // loader: postsLoader,
           // children: [
@@ -46,11 +46,11 @@ function Root() {
           // ],
         },
         {
-          path: "/login",
+          path: "login",
           element: <Sign />,
         },
         {
-          path: "/register",
+          path: "register",
           element: <Sign />,
         },
       ],
