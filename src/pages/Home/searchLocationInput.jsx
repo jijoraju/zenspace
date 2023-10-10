@@ -2,39 +2,46 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+// MUI
 import { List, ListItemButton, ListItemText } from "@mui/material";
-
+// components
 import Button from "@components/Button";
 import Image from "@components/Images";
 import Input from "@components/Input";
 import useInput from "@hook/use-input";
 import useHttp from "@hook/use-http";
-
+// reducer
 import {
   getLocationHandler,
   storeLocation,
+  getLocationFromStorage,
 } from "@Reducer/workspace/wk-action";
-import { solutions } from "@Data/home";
+
 
 export default React.memo(function SearchLocationInput() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const searchInputRef = useRef();
+
   const locationArr = useSelector((state) => state.workSpace.location);
   const [filterLocation, setFilterLocation] = useState([]);
-
+  // use http hook
   const {
     sendRequest: fetchLocationApi,
     status,
     data: locationData,
   } = useHttp(getLocationHandler);
 
+  // fetch location api or from localStorage
   useEffect(() => {
     if(!locationArr.length){
+      const locationList = getLocationFromStorage();
+      dispatch(storeLocation({data:locationList}));
       fetchLocationApi();
     }
   }, []);
 
+  // store location list to reducer
   useEffect(() => {
     if(locationData?.data?.length){
       dispatch(storeLocation(locationData));
@@ -47,6 +54,7 @@ export default React.memo(function SearchLocationInput() {
     inputBlurHandler: searchBlurHandler,
   } = useInput();
 
+  // match search variable with location api
   useEffect(() => {
     const typing = setTimeout(() => {
       const search_val = enteredSearch || "";
@@ -56,14 +64,6 @@ export default React.memo(function SearchLocationInput() {
     }, 500);
     return () => clearTimeout(typing);
   }, [enteredSearch, locationArr]);
-
-  // click event
-  const clickLocation = (e, item) => {
-    searchChangeHandler(item);
-    setTimeout(() => {
-      setFilterLocation([]);
-    }, 600);
-  };
 
   // search input variable
   const searchInputProps = {
@@ -78,24 +78,14 @@ export default React.memo(function SearchLocationInput() {
     className: `home-header-searchBox-container-inputBox`,
   };
 
-  // render solution cards
-  const renderSolutionCards = solutions.map((item, index) => (
-    <div className="solutionsCard-container-card" key={index}>
-      <div className="solutionsCard-container-card-front">
-        <Image
-          src={item.default}
-          alt={`solution-${index} Card`}
-          styles={item.class}
-          img2={item.img2}
-          img3={item.img3}
-        />
-      </div>
-      <div className="solutionsCard-container-card-back">
-        <h2 className="card__price-only">{item.title}</h2>
-        <p className="card__price-value">{item.content}</p>
-      </div>
-    </div>
-  ));
+  // click event
+  const clickLocation = (e, item) => {
+    searchChangeHandler(item);
+    searchInputRef.current.value = item
+    setTimeout(() => {
+      setFilterLocation([]);
+    }, 600);
+  };
 
   // render location List
   const renderLocationList = (List) => {
@@ -113,7 +103,6 @@ export default React.memo(function SearchLocationInput() {
   // submit search then redirect to search page
   const submitSearch = () => {
     navigate(`/search?location=${enteredSearch}`);
-    // navigate(`/search/123`);
   };
 
   return (

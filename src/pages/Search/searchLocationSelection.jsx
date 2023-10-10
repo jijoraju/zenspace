@@ -6,10 +6,12 @@ import { useSelector, useDispatch } from "react-redux";
 import Select from "@components/Selection";
 import useInput from "@hook/use-input";
 import useHttp from "@hook/use-http";
+
 // reducer and actions
 import {
   getLocationHandler,
   storeLocation,
+  getLocationFromStorage,
 } from "@Reducer/workspace/wk-action";
 
 function SearchLocationSelection() {
@@ -22,7 +24,6 @@ function SearchLocationSelection() {
   const locationArr = useSelector((state) => state.workSpace.location);
   
 
-
   // fetch location api
   const {
     sendRequest: fetchLocationApi,
@@ -32,8 +33,10 @@ function SearchLocationSelection() {
 
   // store location api
   useEffect(() => { 
-    if(locationData?.data?.length){
-      dispatch(storeLocation(locationData));
+    if(!locationArr.length){
+      const locationList = getLocationFromStorage();
+      dispatch(storeLocation({data:locationList}));
+      fetchLocationApi();
     }
   }, [locationData, storeLocation, dispatch]);
 

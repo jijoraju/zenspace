@@ -1,13 +1,16 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
+// components
 import Input from "@components/Input";
 import Button from "@components/Button";
 import useInput from "@hook/use-input";
 import useHttp from "@hook/use-http";
+
+// validation
 import {emailReg,nameReg,passwordReg} from '$LIB/validation';
 
+// reducer
 import {
   postSignUpHandler,
   postSignInHandler,

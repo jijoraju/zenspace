@@ -23,9 +23,7 @@ export const getUserInfo = ()=>{
   const token = localStorage.getItem('token');
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
-  if(!token && !userInfo){
-    return null
-  }
+  if(!token && !userInfo) return null
 
   return {
     token,
