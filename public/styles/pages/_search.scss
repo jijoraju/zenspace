@@ -1,19 +1,152 @@
 .searchContainer {
   margin: 0rem auto;
-  max-width: $maxWight;
+  
 
   &-selectionContainer {
+    max-width: $maxWight;
+    margin: 0rem auto;
+    
     display: flex;
-    // align-items: center;
+    flex-wrap: wrap;
     flex-direction: column;
     padding: 3rem 8rem;
-    // border-bottom: 1px solid rgba(53,81,137,.17);
     @include boxShadow(0px, 1px, 2px, 0px, rgba(0, 0, 0, 0.17));
+
+    @include respond($bp-medium) {
+      padding: 3rem 5rem;
+    }
+
+    @include respond($bp-small) {
+      padding: 2rem 2rem 1rem;
+    }
 
     &-selectionsRow{
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
+      width: 100%;
+
+      @include respond($bp-medium) {
+        flex-direction: column;
+      }
+
+      &-types{
+        display: flex;
+        flex-direction: row;
+
+        @include respond($bp-small) {
+          justify-content: space-around;
+        }
+
+        &-Container{
+          width: 15rem;
+          margin-right: 1.5rem !important;
+
+          &:last-child{
+            margin-right: 0 !important;
+          }
+
+          &:nth-child(2){
+            width: 7rem;
+          }
+
+          @include respond($bp-medium) {
+            flex-basis: 35%;
+          }
+          @include respond($bp-small) {
+            width: 5rem;
+          }
+
+          &-list{
+            font-size: 1.4rem !important;
+
+            @include respond($bp-small) {
+              & .MuiOutlinedInput-input{
+                padding: 1rem !important;
+              }
+            }
+
+            &-item{
+              font-size: 1.6rem !important;
+
+              @include respond($bp-medium){
+                  font-size: 1.4rem !important;
+              }
+
+              @include respond($bp-small){
+                  font-size: 1.2rem !important;
+              }
+            }
+          }
+        }
+      }
+
+      &-datePicker{
+        margin: 0rem 3rem;
+        @include flexCenter();
+        flex-direction: row;
+        justify-content: space-around;
+
+        @include respond($bp-medium) {
+          flex-basis: 100%;
+          justify-content: center;
+          margin: 2rem 0;
+        }
+
+        @include respond($bp-small) {
+          flex-basis: 100%;
+          margin: 1rem 0;
+          justify-content: center;
+        }
+
+        & span {
+          margin: 0 1rem;
+          font-size: 1.6rem;
+          flex:1;
+
+          @include respond($bp-medium) {
+            flex:0;
+          }
+        }
+
+        &-item{
+          flex:1;
+          // width:100%;
+          
+          @include respond($bp-medium) {
+            flex:2;
+          }
+
+          @include respond($bp-medium) {
+            flex:2;
+            width: 2rem;
+          }
+
+          & input{
+            padding: 1.5rem 2rem;
+            font-size: 1.4rem;
+            border-radius: 0.5rem;
+            @include border-style(0.1rem, solid, $color-gray-light1);
+            width: 15rem;
+
+            &:focus{
+              outline-color: $color-secondary; 
+            }
+
+            @include respond($bp-medium) {
+              width: 100%;
+            }
+            
+            @include respond($bp-small) {
+              padding: 1rem 2rem;
+              width: 100%;
+            }
+          }
+        }
+      }
     }
+
+
+
   }
 }

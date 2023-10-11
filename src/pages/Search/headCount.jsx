@@ -2,10 +2,13 @@ import React,{useRef,useEffect} from 'react'
 
 // components
 import Select from "@components/Selection";
+import MuiSelection from '@components/MuiSelection'
+
+// custom hook
 import useInput from "@hook/use-input";
 
 // selection data
-const headCountArr = Array(10).fill(1).map((item,index)=> item = index+1)
+const headCountArr = Array(10).fill(1).map((item,index)=> item = {name:index+1})
 
 function HeadCount(props) {
   const headCountRef = useRef();
@@ -20,15 +23,17 @@ function HeadCount(props) {
 
   // date input props variable
   const datePickerProps = { 
-    ref: headCountRef,
-    id: `headCount`,
+    // ref: headCountRef,
+    id: `HeadCount`,
     label: ``,
-    name: `headCount`,
+    name: `Head Count`,
     value: headCountValue,
     onChange: headCountChangeHandler,
     onBlur: headCountBlurHandler,
-    // options: headCountArr,
-    className: `home-header-CityBox-container-inputBox`,
+    options: headCountArr,
+    containerStyle: `searchContainer-selectionContainer-selectionsRow-types-Container`,
+    className: `searchContainer-selectionContainer-selectionsRow-types-Container-list`,
+    itemClassName: `searchContainer-selectionContainer-selectionsRow-types-Container-item`,
   };
   
   useEffect(()=>{
@@ -40,11 +45,12 @@ function HeadCount(props) {
   },[headCountValue])
 
   return (
-    <Select {...datePickerProps}>
-      {
-      headCountArr.map((item,index)=><option key={index} value={item}>{item}</option>) 
-      }
-    </Select>
+    // <Select {...datePickerProps}>
+    //   {
+    //   headCountArr.map((item,index)=><option key={index} value={item}>{item}</option>) 
+    //   }
+    // </Select>
+    <MuiSelection {...datePickerProps} />
   )
 }
 

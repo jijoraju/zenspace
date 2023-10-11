@@ -48,3 +48,15 @@ body {
     }
 }
 
+
+.searchContainer-selectionContainer-selectionsRow-types-Container-item{
+    font-size: 1.6rem !important;
+
+    @include respond($bp-medium){
+        font-size: 1.4rem !important;
+    }
+
+    @include respond($bp-small){
+        font-size: 1.2rem !important;
+    }
+}

@@ -21,8 +21,9 @@ $color-red:#ff0d0d;
 $color-white: #fff;
 $color-black: #000;
 $color-gray: #727373;
-$color-gray-light: lighten($color-gray, 50%);
-$color-gray-dark: darken($color-gray, 50%);
+$color-gray-light: lighten($color-gray, 10%);
+$color-gray-light1: #BDBDBD;
+$color-gray-dark: darken($color-gray, 10%);
 
 // width 
 $maxWight: 1440px;

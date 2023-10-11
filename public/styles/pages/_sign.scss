@@ -65,14 +65,14 @@
           @include respond($bp-medium){
             padding: 0.8rem;
             font-size: 2rem;
-            @include border-style(2px, solid, $color-primary);
+            @include border-style(0.1rem, solid, $color-primary);
             border-radius: .5rem;
           }
 
           @include respond($bp-small){
             padding: 0.8rem;
             font-size: 1.4rem;
-            @include border-style(1px, solid, $color-primary);
+            @include border-style(0.1rem, solid, $color-primary);
           }
         }
 

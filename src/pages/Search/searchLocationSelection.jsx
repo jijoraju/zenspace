@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 // components
 import Select from "@components/Selection";
+import MuiSelection from '@components/MuiSelection'
+
+// custom hook
 import useInput from "@hook/use-input";
 import useHttp from "@hook/use-http";
 
@@ -31,13 +34,17 @@ function SearchLocationSelection(props) {
 
   //  if no location list will fetch location api and then store them
   useEffect(() => {
-    if (!locationArr.length) {
-      const locationList = getLocationFromStorage();
-      dispatch(storeLocation({ data: locationList }));
-      fetchLocationApi();
-    } else {
-      defaultHandler(location || locationArr[0].name);
+   async function test(){
+      if (!locationArr.length) {
+        const locationList = await getLocationFromStorage();
+      await  dispatch(storeLocation({ data: locationList }));
+       await fetchLocationApi();
+      } else {
+        defaultHandler(location || locationArr[0].name);
+      }
     }
+
+    test()
   }, [locationData, storeLocation, dispatch]);
 
   // city location input
@@ -50,15 +57,18 @@ function SearchLocationSelection(props) {
 
   // City input props variable
   const cityInputProps = {
-    ref: cityInputRef,
+    // ref: cityInputRef,
     id: `City`,
     label: ``,
-    name: `city`,
+    name: `Location`,
     value: enteredCity,
+    defaultValue: location,
     onChange: cityChangeHandler,
     onBlur: cityBlurHandler,
     options: locationArr || [],
-    className: `home-header-CityBox-container-inputBox`,
+    containerStyle: `searchContainer-selectionContainer-selectionsRow-types-Container`,
+    className: `searchContainer-selectionContainer-selectionsRow-types-Container-list`,
+    itemClassName: `searchContainer-selectionContainer-selectionsRow-types-Container-item`,
   };
 
   useEffect(() => {
@@ -68,13 +78,14 @@ function SearchLocationSelection(props) {
   return (
     <>
       {/* <Select optionActive={location} {...cityInputProps} /> */}
-      <Select optionActive={location} {...cityInputProps}>
+      {/* <Select optionActive={location} {...cityInputProps}>
         {locationArr.map((item, index) => (
           <option key={index} value={item.name}>
             {item.name}
           </option>
         ))}
-      </Select>
+      </Select> */}
+      <MuiSelection {...cityInputProps} />
     </>
   );
 }

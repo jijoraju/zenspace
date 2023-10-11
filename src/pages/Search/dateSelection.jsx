@@ -7,6 +7,9 @@ import Button from "@components/Button";
 import Image from "@components/Images";
 import Input from "@components/Input";
 import Select from "@components/Selection";
+import MuiSelection from '@components/MuiSelection'
+
+// custom hook
 import useInput from "@hook/use-input";
 import useHttp from "@hook/use-http";
 
@@ -27,20 +30,27 @@ function DateSelection(props) {
     value: enteredDate,
     valueChangeHandler: dateChangeHandler,
     inputBlurHandler: dateBlurHandler,
+    defaultHandler,
   } = useInput();
 
   // date input props variable
   const datePickerProps = { 
-    ref: dateInputRef,
-    id: `City`,
+    // ref: dateInputRef,
+    id: `Date`,
     label: ``,
-    name: `city`,
+    name: `Date Picker`,
     value: enteredDate,
     onChange: dateChangeHandler,
     onBlur: dateBlurHandler,
     options:dateOptions || [],
-    className: `home-header-CityBox-container-inputBox`,
+    containerStyle: `searchContainer-selectionContainer-selectionsRow-types-Container`,
+    className: `searchContainer-selectionContainer-selectionsRow-types-Container-list`,
+    itemClassName: `searchContainer-selectionContainer-selectionsRow-types-Container-item`,
   };
+
+  useEffect(()=>{
+    defaultHandler(`Single Day`)
+  },[])
 
   useEffect(()=>{
     if(enteredDate == 'Multiple Day'){
@@ -53,9 +63,10 @@ function DateSelection(props) {
   return (
     <>
       {/* <Select {...datePickerProps} /> */}
-      <Select {...datePickerProps}>
+      {/* <Select {...datePickerProps}>
         {dateOptions.map((item,index)=><option key={index} value={item.name}  >{item.name}</option>)}
-      </Select>
+      </Select> */}
+      <MuiSelection {...datePickerProps} />
     </>
   );
 }
