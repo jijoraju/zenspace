@@ -10,22 +10,16 @@ import Select from "@components/Selection";
 import useInput from "@hook/use-input";
 import useHttp from "@hook/use-http";
 
-// reducer and actions
-import {
-  getLocationHandler,
-  storeLocation,
-} from "@Reducer/workspace/wk-action";
-
 const dateOptions = [
   {
-    name: 'Today',
+    name: 'Single Day',
   },
   {
-    name: 'Custom',
+    name: 'Multiple Day',
   },
 ]
 
-function DatePicker(props) {
+function DateSelection(props) {
   const dateInputRef = useRef();
 
   // date location input
@@ -49,19 +43,21 @@ function DatePicker(props) {
   };
 
   useEffect(()=>{
-    if(enteredDate == 'Custom'){
-      props.datePickerVisible(true)
+    if(enteredDate == 'Multiple Day'){
+      props.datePickerVisible(`range`)
     }else{
-      props.datePickerVisible(false)
+      props.datePickerVisible(`single`)
     }
   },[enteredDate])
 
-  // console.log('enteredDate',enteredDate)
   return (
     <>
-      <Select {...datePickerProps} />
+      {/* <Select {...datePickerProps} /> */}
+      <Select {...datePickerProps}>
+        {dateOptions.map((item,index)=><option key={index} value={item.name}  >{item.name}</option>)}
+      </Select>
     </>
   );
 }
 
-export default React.memo(DatePicker)
+export default React.memo(DateSelection)

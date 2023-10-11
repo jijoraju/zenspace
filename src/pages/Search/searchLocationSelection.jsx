@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect, } from "react";
-import { useNavigate, Link, useParams,useSearchParams ,useLocation} from "react-router-dom";
+import React, { useRef, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // components
@@ -14,15 +14,13 @@ import {
   getLocationFromStorage,
 } from "@Reducer/workspace/wk-action";
 
-function SearchLocationSelection() {
+function SearchLocationSelection(props) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const cityInputRef = useRef();
-  const [searchParams,] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
-  const location = searchParams.get("location")
+  const location = searchParams.get("location");
   const locationArr = useSelector((state) => state.workSpace.location);
-  
 
   // fetch location api
   const {
@@ -31,24 +29,27 @@ function SearchLocationSelection() {
     data: locationData,
   } = useHttp(getLocationHandler);
 
-  // store location api
-  useEffect(() => { 
-    if(!locationArr.length){
+  //  if no location list will fetch location api and then store them
+  useEffect(() => {
+    if (!locationArr.length) {
       const locationList = getLocationFromStorage();
-      dispatch(storeLocation({data:locationList}));
+      dispatch(storeLocation({ data: locationList }));
       fetchLocationApi();
+    } else {
+      defaultHandler(location || locationArr[0].name);
     }
   }, [locationData, storeLocation, dispatch]);
 
   // city location input
-  const { 
+  const {
     value: enteredCity,
     valueChangeHandler: cityChangeHandler,
     inputBlurHandler: cityBlurHandler,
+    defaultHandler,
   } = useInput();
 
   // City input props variable
-  const cityInputProps = { 
+  const cityInputProps = {
     ref: cityInputRef,
     id: `City`,
     label: ``,
@@ -56,27 +57,26 @@ function SearchLocationSelection() {
     value: enteredCity,
     onChange: cityChangeHandler,
     onBlur: cityBlurHandler,
-    options:locationArr || [],
+    options: locationArr || [],
     className: `home-header-CityBox-container-inputBox`,
   };
 
-  // location api effect
-  useEffect(()=>{ 
-    if(!locationArr.length){
-      fetchLocationApi();
-    }else if(locationArr.length && location){
-      cityChangeHandler(location)
-      cityInputRef.current.value = location
-    }
-    
-    console.log('cityInputRef.current.value',cityInputRef.current.value)
-  },[locationArr,location])
+  useEffect(() => {
+    props.setLocationHandler(enteredCity);
+  }, [enteredCity]);
 
   return (
     <>
-      <Select optionActive={location} {...cityInputProps} />
+      {/* <Select optionActive={location} {...cityInputProps} /> */}
+      <Select optionActive={location} {...cityInputProps}>
+        {locationArr.map((item, index) => (
+          <option key={index} value={item.name}>
+            {item.name}
+          </option>
+        ))}
+      </Select>
     </>
   );
 }
 
-export default React.memo(SearchLocationSelection)
+export default React.memo(SearchLocationSelection);

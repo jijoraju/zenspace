@@ -26,7 +26,8 @@ const Selection = React.forwardRef((props, ref) => {
         defaultValue={props.optionActive||''}
       >
         {
-          props.options.map((item,index)=> <option key={index} value={item.name}  >{item.name}</option> )
+          props.children
+          // props.options.map((item,index)=> <option key={index} value={item.name}  >{item.name}</option> )
         }
       </select>
     </div>

@@ -5,6 +5,9 @@ import Root from './pages/Root'
 import store from "@Reducer/index";
 import service from '$LIB/service';
 
+import '@Public/styles/main.scss'
+import 'react-day-picker/dist/style.css';
+
 function App() {
 
   return (

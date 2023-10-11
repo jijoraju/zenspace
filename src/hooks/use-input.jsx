@@ -7,6 +7,9 @@ const initialInputState = {
 
 const inputStateReducer = (state, action) => {
   if (action.type === "INPUT") {
+    return { value: action.value, isTouched:state.isTouched  };
+  }
+  if (action.type === "DEFAULT") {
     return { value: action.value, isTouched: state.isTouched };
   }
   if (action.type === "BLUR") {
@@ -36,6 +39,10 @@ const useInput = (validateValue) => {
     dispatch({ type: "BLUR" });
   };
 
+  const defaultHandler = (value) => {
+    dispatch({ type: "DEFAULT", value: value  });
+  };
+
   const reset = () => {
     dispatch({ type: "RESET" });
   };
@@ -46,6 +53,7 @@ const useInput = (validateValue) => {
     hasError,
     valueChangeHandler,
     inputBlurHandler,
+    defaultHandler,
     reset,
   };
 };

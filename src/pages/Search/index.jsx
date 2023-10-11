@@ -1,45 +1,78 @@
-import React, { useState, useRef, useEffect, } from "react";
+import React, { useState, useRef, useEffect, useReducer } from "react";
 import { useNavigate,Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // components
-import DatePicker from "./datePicker";
 import SearchLocationSelection from "./searchLocationSelection";
+import DateSelection from "./dateSelection";
+import DatePicker from './DatePickerComponent';
+import HeadCount from "./headCount";
 
-// reducers and actions
-import {
-  getLocationHandler,
-  storeLocation,
-} from "@Reducer/workspace/wk-action";
+function reducer(state, action) {
+  switch (action.type) {
+    case 'setLocation':
+      return {...state, location:action.param};
+    case 'setStartDate':
+      return{
+        ...state, 
+        dateSelected: { start: action.param?.start, end: action.param?.end },
+    };
+    case 'setEndDate':
+      return {
+        ...state,
+        dateSelected: { start: action.param?.start, end: action.param?.end },
+      };
+    case 'setHeadCount':
+      return {
+        ...state,
+        headcounts: +action.param,
+      };
+    default:
+      return state
+  }
+}
 
 function Search() {
-  const [showDatePicker, setShowDatePicker] = useState(false)
-  const [dateRange, setDateRange] = useState([null, null]);
+  const [searchPageState, dispatch] = useReducer(reducer, {
+  location: null,
+  dateSelected: {start: null, end: null},
+  headcounts: null,
+});
+  const [showDatePicker, setShowDatePicker] = useState(`single`)
 
-  const handleDateChange = (newDateRange) => {
-    setDateRange(newDateRange);
+  const setLocationHandler = (param)=>{
+    dispatch({type:`setLocation`,param })
+  }
 
-    console.log('dateRange',newDateRange)
-  };
+  const setDateRangeHandler = (param)=>{
+    if(showDatePicker == 'single'){
+      dispatch({type:`setStartDate`,param })
+    }else{
+      dispatch({type:`setEndDate`,param })
+    }
+  }
+
+  const setHeadCountHandler = (param)=>{
+    dispatch({type:`setHeadCount`,param })
+  }
+
+  useEffect(()=>{
+    console.log('searchPageState',searchPageState)
+  },[searchPageState])
 
   return (
     <div className="searchContainer">
+      <div className="searchContainer-selectionContainer">
+        <div className="searchContainer-selectionContainer-selectionsRow">
+          <SearchLocationSelection setLocationHandler={setLocationHandler} />
+          <DateSelection datePickerVisible={(val) => setShowDatePicker(val)} />
+          <HeadCount setHeadCountHandler={setHeadCountHandler} />
+        </div>
 
-    <div className="searchContainer-selectionContainer">
-      <div className="searchContainer-selectionContainer-selectionsRow">
-        <SearchLocationSelection />
-        <DatePicker datePickerVisible={(val)=>setShowDatePicker(val)}  />
+        <div>
+          <DatePicker type={showDatePicker} setDateRangeHandler={setDateRangeHandler} />
+        </div>
       </div>
-      
-      <div >
-        {
-          showDatePicker?(
-            <div>Date Picker</div>
-          ):null
-        }
-      </div>
-    </div>
-
     </div>
   );
 }
