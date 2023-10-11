@@ -11,7 +11,7 @@ export const localDateFormat = (val)=>{
 }
 // extend a day or multiple days
 export const extendDaysHandler = (date,num=1)=>{
-  const day = num==1 ?`day`: `days`
+  const day = num == 1 ? `day`: `days`
   return moment(date).add(num, day)
 }
 
@@ -39,8 +39,8 @@ const CustomDatePicker = React.forwardRef((props, ref) => {
         onChange={props.onChange}
         onFocus={props?.onFocus}
         onBlur={props.onBlur}
-        min={dateFormat(props.min)}
-        max={props?.max && dateFormat(props?.max)}
+        min={localDateFormat(props.min)}
+        max={props?.max && localDateFormat(props?.max)}
       />
     </div>
   );
