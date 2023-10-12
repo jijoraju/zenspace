@@ -1,0 +1,10 @@
+.favoriteBtn{
+  background-color: transparent;
+  border:0;
+  cursor: pointer;
+
+  &-img{
+    width: 3rem;
+    height: 3rem;
+  }
+}

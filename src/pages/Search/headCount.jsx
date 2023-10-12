@@ -8,7 +8,7 @@ import MuiSelection from '@components/MuiSelection'
 import useInput from "@hook/use-input";
 
 // selection data
-const headCountArr = Array(10).fill(1).map((item,index)=> item = {name:index+1})
+const headCountArr = Array(10).fill(null).map((item,index)=> item = {name:index+1})
 
 function HeadCount(props) {
   const headCountRef = useRef();

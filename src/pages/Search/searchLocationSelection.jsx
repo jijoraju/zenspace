@@ -72,7 +72,8 @@ function SearchLocationSelection(props) {
   };
 
   useEffect(() => {
-    props.setLocationHandler(enteredCity);
+    const filterSelected = locationArr.filter((item)=>item.name.toLowerCase() == enteredCity.toLowerCase())[0]
+    props.setLocationHandler(filterSelected);
   }, [enteredCity]);
 
   return (

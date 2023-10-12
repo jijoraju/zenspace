@@ -7,21 +7,37 @@ import SearchLocationSelection from "./searchLocationSelection";
 import DateSelection from "./dateSelection";
 import DatePicker from "./DatePickerComponent";
 import HeadCount from "./headCount";
+import Cards from './Cards'
+
+// custom hook
+import useHttp from "@hook/use-http";
+
+// reducer
+import {
+  getWorkSpaceHandler,
+} from "@Reducer/workspace/wk-action";
 
 function reducer(state, action) {
   switch (action.type) {
     case "setLocation":
       return { ...state, location: action.param };
-    case "setStartDate":
+    case "setDate":
       return {
         ...state,
-        dateSelected: { start: action.param?.start, end: action.param?.end },
+        dateSelected: { 
+          ...state.dateSelected,
+          start: action.param?.start, 
+          end: action.param?.end,
+        },
       };
-    case "setEndDate":
+    case "setWorkspace_type":
       return {
         ...state,
-        dateSelected: { start: action.param?.start, end: action.param?.end },
-      };
+        dateSelected: { 
+          ...state.dateSelected,
+          workspace_type: action.param,
+        },
+    };
     case "setHeadCount":
       return {
         ...state,
@@ -35,53 +51,73 @@ function reducer(state, action) {
 function Search() {
   const [searchPageState, dispatch] = useReducer(reducer, {
     location: null,
-    dateSelected: { start: null, end: null },
+    dateSelected: { start: null, end: null, workspace_type:`ONE_DAY`  },
     headcounts: null,
+    maxPrice: 200,
+    rating: 1,
   });
-  const [showDatePicker, setShowDatePicker] = useState(`single`);
 
   const setLocationHandler = (param) => {
     dispatch({ type: `setLocation`, param });
   };
 
   const setDateRangeHandler = (param) => {
-    if (showDatePicker == "single") {
-      dispatch({ type: `setStartDate`, param });
-    } else {
-      dispatch({ type: `setEndDate`, param });
-    }
+    dispatch({ type: `setDate`, param });
   };
 
   const setHeadCountHandler = (param) => {
     dispatch({ type: `setHeadCount`, param });
   };
 
-  useEffect(() => {
-    console.log("searchPageState", searchPageState);
-  }, [searchPageState]);
+  const setWorkSpaceType = (param)=>{
+    dispatch({ type: `setWorkspace_type`, param });
+  }
+
+  // useEffect(() => {
+  //   console.log("searchPageState", searchPageState);
+  // }, [searchPageState]);
+
+  // use http hook
+  const {
+    sendRequest: fetchWorkSpaceApi,
+    status,
+    data: workSpaceResult,
+  } = useHttp(getWorkSpaceHandler);
+
+  useEffect(()=>{
+   const fetchAPpi = setTimeout(()=>{
+      fetchWorkSpaceApi(searchPageState)
+    },500)
+    return ()=>clearTimeout(fetchAPpi)
+  },[fetchWorkSpaceApi,searchPageState])
+
+  // useEffect(()=>{
+  //   console.log('workSpaceResult',workSpaceResult)
+  // },[workSpaceResult])
 
   return (
     <div className="searchContainer">
 
       <div className="searchContainer-selectionContainer">
+        {/* filter */}
         <div className="searchContainer-selectionContainer-selectionsRow">
-
           <div className="searchContainer-selectionContainer-selectionsRow-types">
             <SearchLocationSelection setLocationHandler={setLocationHandler} />
             <HeadCount setHeadCountHandler={setHeadCountHandler} />
-            <DateSelection datePickerVisible={(val) => setShowDatePicker(val)} />
+            <DateSelection datePickerVisible={setWorkSpaceType} />
           </div>
-
+          {/* date picker */}
           <div className="searchContainer-selectionContainer-selectionsRow-datePicker">
             <DatePicker
-              type={showDatePicker}
+              type={searchPageState.dateSelected.workspace_type}
               setDateRangeHandler={setDateRangeHandler}
             />
           </div>
         </div>
 
-
       </div>
+      {/* cards */}
+      <Cards workSpaceResult={workSpaceResult} loadingStatus={status == 'pending'} />
     </div>
   );
 }

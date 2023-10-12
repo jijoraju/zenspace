@@ -1,0 +1,42 @@
+import React from "react";
+import { useNavigate, Link, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+// components
+import Card from './Card'
+import NotFound from "../../components/NotFound";
+import CardContainer from "@components/Card/CardContainer";
+import CardSkeleton from "@components/Card/CardSkeleton";
+
+
+function Cards(props) {
+  const { workSpaceResult,loadingStatus } = props;
+
+  if(!workSpaceResult?.data?.length && !loadingStatus){
+    return <NotFound />
+  }
+
+  const renderCards = ()=>{
+    return workSpaceResult?.data.map((item, index) => {
+
+      const cardProps = {
+        imgDefault: `home/solutions/Gallery_Workplace.jpg`,
+        img2:`home/solutions/Gallery_Workplace.jpg`,
+        img3:`home/solutions/Gallery_Workplace.jpg`,
+        fullInfo: item,
+      }
+
+      return (<Card key={index} {...cardProps} />);
+    })
+  }
+  
+  return (
+    <div className="searchContainer-selectionContainer-cards">
+      {loadingStatus?(
+        Array.from(new Array(6)).map((item, index) => <CardSkeleton key={index} />)
+      ):renderCards()}
+    </div>
+  );
+}
+
+export default React.memo(Cards);

@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Image from "@components/Images";
 
 // components
+import Image from "@components/Images";
 import SearchLocationInput from "./searchLocationInput";
+
 // data
 import { solutions } from "@Data/home";
 

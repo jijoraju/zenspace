@@ -104,7 +104,7 @@ function DatePicker(props) {
 
   return (
     <>
-      {props.type == "single" ? (
+      {props.type == "ONE_DAY" ? (
         <CustomDatePicker {...startDateProps} />
       ) : (
         <>

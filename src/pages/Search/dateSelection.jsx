@@ -36,9 +36,9 @@ function DateSelection(props) {
   // date input props variable
   const datePickerProps = { 
     // ref: dateInputRef,
-    id: `Date`,
+    id: `workSpaceType`,
     label: ``,
-    name: `Date Picker`,
+    name: `Work space type`,
     value: enteredDate,
     onChange: dateChangeHandler,
     onBlur: dateBlurHandler,
@@ -50,13 +50,14 @@ function DateSelection(props) {
 
   useEffect(()=>{
     defaultHandler(`Single Day`)
+    props.datePickerVisible(`ONE_DAY`);
   },[])
 
   useEffect(()=>{
     if(enteredDate == 'Multiple Day'){
-      props.datePickerVisible(`range`)
+      props.datePickerVisible(`MULTIPLE_DAYS`)
     }else{
-      props.datePickerVisible(`single`)
+      props.datePickerVisible(`ONE_DAY`);
     }
   },[enteredDate])
 
