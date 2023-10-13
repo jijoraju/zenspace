@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // components
 import Card from './Card'
-import NotFound from "../../components/NotFound";
+import NotFound from "@components/NotFound";
 import CardContainer from "@components/Card/CardContainer";
 import CardSkeleton from "@components/Card/CardSkeleton";
 
@@ -12,12 +12,12 @@ import CardSkeleton from "@components/Card/CardSkeleton";
 function Cards(props) {
   const { workSpaceResult,loadingStatus } = props;
 
-  if(!workSpaceResult?.data?.length && !loadingStatus){
+  if(!workSpaceResult.length && !loadingStatus){
     return <NotFound />
   }
 
   const renderCards = ()=>{
-    return workSpaceResult?.data.map((item, index) => {
+    return workSpaceResult.map((item, index) => {
 
       const cardProps = {
         imgDefault: `home/solutions/Gallery_Workplace.jpg`,
@@ -29,13 +29,15 @@ function Cards(props) {
       return (<Card key={index} {...cardProps} />);
     })
   }
-  
+
   return (
-    <div className="searchContainer-selectionContainer-cards">
-      {loadingStatus?(
-        Array.from(new Array(6)).map((item, index) => <CardSkeleton key={index} />)
-      ):renderCards()}
-    </div>
+    // <Suspense fallback={<LoadingSpinner />}>
+        <div className="searchContainer-selectionContainer-cards">
+        {loadingStatus?(
+          Array.from(new Array(6)).map((item, index) => <CardSkeleton key={index} />)
+        ):renderCards()}
+      </div>
+    // </Suspense>
   );
 }
 

@@ -8,6 +8,7 @@ import Image from "@components/Images";
 import Input from "@components/Input";
 import Select from "@components/Selection";
 import MuiSelection from '@components/MuiSelection'
+import MenuItem from "@mui/material/MenuItem";
 
 // custom hook
 import useInput from "@hook/use-input";
@@ -67,7 +68,17 @@ function DateSelection(props) {
       {/* <Select {...datePickerProps}>
         {dateOptions.map((item,index)=><option key={index} value={item.name}  >{item.name}</option>)}
       </Select> */}
-      <MuiSelection {...datePickerProps} />
+      <MuiSelection {...datePickerProps}>
+        {dateOptions.map((item, index) => (
+          <MenuItem
+            key={index}
+            value={item.name}
+            className={`searchContainer-selectionContainer-selectionsRow-types-Container-item`}
+          >
+            {item.name}
+          </MenuItem>
+        ))}
+      </MuiSelection>
     </>
   );
 }

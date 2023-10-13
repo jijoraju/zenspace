@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 // components
 import Select from "@components/Selection";
 import MuiSelection from '@components/MuiSelection'
+import MenuItem from "@mui/material/MenuItem";
 
 // custom hook
 import useInput from "@hook/use-input";
@@ -34,7 +35,7 @@ function SearchLocationSelection(props) {
 
   //  if no location list will fetch location api and then store them
   useEffect(() => {
-   async function test(){
+   async function getLocationList(){
       if (!locationArr.length) {
         const locationList = await getLocationFromStorage();
       await  dispatch(storeLocation({ data: locationList }));
@@ -44,7 +45,7 @@ function SearchLocationSelection(props) {
       }
     }
 
-    test()
+    getLocationList()
   }, [locationData, storeLocation, dispatch]);
 
   // city location input
@@ -86,7 +87,17 @@ function SearchLocationSelection(props) {
           </option>
         ))}
       </Select> */}
-      <MuiSelection {...cityInputProps} />
+      <MuiSelection {...cityInputProps}>
+        {locationArr.map((item, index) => (
+          <MenuItem
+            key={index}
+            value={item.name}
+            className={`searchContainer-selectionContainer-selectionsRow-types-Container-item`}
+          >
+            {item.name}
+          </MenuItem>
+        ))}
+      </MuiSelection>
     </>
   );
 }

@@ -18,7 +18,8 @@ function MuiSelection(props) {
         onChange={props.onChange}
         className={props.className}
       >
-        {props.options.map((item, index) => (
+        {props.children}
+        {/* {props.options.map((item, index) => (
           <MenuItem
             key={index}
             value={item.name}
@@ -26,7 +27,7 @@ function MuiSelection(props) {
           >
             {item.name}
           </MenuItem>
-        ))}
+        ))} */}
       </Select>
     </FormControl>
   );
