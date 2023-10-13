@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useReducer } from "react";
 import { useNavigate, Link, useParams,Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // components
-import SearchLocationSelection from "./components/searchLocationSelection";
+import LocationSelection from "./components/locationSelection";
 import DateSelection from "./components/dateSelection";
 import DatePicker from "./components/DatePickerComponent";
 import HeadCount from "./components/headCount";
@@ -52,7 +52,7 @@ function reducer(state, action) {
   }
 }
 
-function Search() {
+function ProductList() {
   const [searchPageState, dispatch] = useReducer(reducer, {
     location: null,
     dateSelected: { start: null, end: null, workspace_type: `ONE_DAY` },
@@ -136,7 +136,7 @@ function Search() {
         {/* filter */}
         <div className="searchContainer-selectionContainer-selectionsRow">
           <div className="searchContainer-selectionContainer-selectionsRow-types">
-            <SearchLocationSelection setLocationHandler={setLocationHandler} />
+            <LocationSelection setLocationHandler={setLocationHandler} />
             <HeadCount setHeadCountHandler={setHeadCountHandler} />
             <RateComponent setRateComponent={(val) => setRating(val)} />
             <PriceRange setPriceRangeHandler={(val) => setPriceRange(val)} showMore={showMore} />
@@ -176,4 +176,4 @@ function Search() {
   );
 }
 
-export default React.memo(Search);
+export default React.memo(ProductList);

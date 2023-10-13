@@ -7,8 +7,8 @@ import RootLayout from "@components/RootLayout";
 import LoadingSpinner from "@components/LoadingSpinner";
 
 const Home = lazy(() => import('./Home'));
-const Search = lazy(() => import('./Search'));
-const SearchDetail = lazy(() => import('./Search/SearchDetail'));
+const ProductList = lazy(() => import('./Product'));
+const ProductDetail = lazy(() => import('./Product/ProductDetail'));
 const ErrorPage = lazy(() => import('./ErrorPage'));
 const Contact = lazy(() => import('./Contact'));
 const Sign = lazy(() => import('./Sign'));
@@ -30,19 +30,12 @@ function Root() {
           // ],
         },
         {
-          path: "search",
-          element: <Search />,
-          // children: [
-          //   { path: ':workspace_id', element: <SearchDetail /> }
-          // ],
+          path: "product",
+          element: <ProductList />,
         },
         {
-          path: "search/:productId",
-          element: <SearchDetail />,
-          // loader: postsLoader,
-          // children: [
-          //   { path: ':productId', element: <SearchDetail /> }
-          // ],
+          path: "product/:productId",
+          element: <ProductDetail />,
         },
         {
           path: "contact",

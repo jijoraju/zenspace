@@ -8,7 +8,7 @@ export const navList = [
       img3: "logo/logo@3x.png",
     },
     {
-      path: "/search",
+      path: "/product",
       name: "SEARCH",
       class: "nav-desktop-item-wrap-item",
     },
@@ -35,7 +35,7 @@ export const navList = [
       img3: "logo/logo@3x.png",
     },
     {
-      path: "/search",
+      path: "/product",
       name: "SEARCH",
       class: "nav-mobile-menu-container-item",
     },

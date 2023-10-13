@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate, Link, useParams } from "react-router-dom";
 
-function Detail() {
+function ProductDetail() {
   return (
     <div>
       <h1>DetailDetailDetailDetailDetail</h1>
@@ -10,4 +10,4 @@ function Detail() {
   )
 }
 
-export default Detail
+export default ProductDetail
