@@ -44,7 +44,7 @@ function DateSelection(props) {
     onChange: dateChangeHandler,
     onBlur: dateBlurHandler,
     options:dateOptions || [],
-    containerStyle: `searchContainer-selectionContainer-selectionsRow-types-Container`,
+    containerStyle: `searchContainer-selectionContainer-selectionsRow-types-Container ${props.showMore ? 'showMore' : '' }`,
     className: `searchContainer-selectionContainer-selectionsRow-types-Container-list`,
     itemClassName: `searchContainer-selectionContainer-selectionsRow-types-Container-item`,
   };

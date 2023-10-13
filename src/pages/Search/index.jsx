@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useReducer } from "react";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useNavigate, Link, useParams,Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
 // components
 import SearchLocationSelection from "./components/searchLocationSelection";
 import DateSelection from "./components/dateSelection";
@@ -10,9 +9,11 @@ import HeadCount from "./components/headCount";
 import RateComponent from "./components/RateComponent";
 import PriceRange from "./components/PriceRange";
 import Cards from "./components/Cards";
+import Button from "@components/Button";
 
 // MUI
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import {KeyboardArrowDownOutlined,KeyboardArrowUpOutlined} from '@mui/icons-material';
+
 
 // custom hook
 import useHttp from "@hook/use-http";
@@ -62,6 +63,7 @@ function Search() {
   const [workSpaceList, setWorkSpaceList] = useState([]);
   const [rating, setRating] = useState(3);
   const [priceRange, setPriceRange] = useState(`160-200`);
+  const [showMore, setShowMore] = useState(false);
 
   const setLocationHandler = (param) => {
     dispatch({ type: `setLocation`, param });
@@ -111,7 +113,7 @@ function Search() {
           (total, item) => total.rating + item.rating
         );
         const averageResult = sumRating / item.reviews.length;
-        const ratingResult = rating >= Math.round(averageResult);
+        const ratingResult = Math.round(averageResult) >= rating;
 
         const result = ratingResult && isQualified
         return  result
@@ -124,6 +126,9 @@ function Search() {
   }, [workSpaceResult, rating, priceRange]);
 
 
+  const showMoreHandler = ()=>{
+    setShowMore(!showMore)
+  }
 
   return (
     <div className="searchContainer">
@@ -134,11 +139,11 @@ function Search() {
             <SearchLocationSelection setLocationHandler={setLocationHandler} />
             <HeadCount setHeadCountHandler={setHeadCountHandler} />
             <RateComponent setRateComponent={(val) => setRating(val)} />
-            <PriceRange setPriceRangeHandler={(val) => setPriceRange(val)} />
-            <DateSelection datePickerVisible={setWorkSpaceType} />
+            <PriceRange setPriceRangeHandler={(val) => setPriceRange(val)} showMore={showMore} />
+            <DateSelection datePickerVisible={setWorkSpaceType} showMore={showMore} />
           </div>
           {/* date picker */}
-          <div className="searchContainer-selectionContainer-selectionsRow-datePicker">
+          <div className={`searchContainer-selectionContainer-selectionsRow-datePicker ${showMore? 'showMore':''}`}>
             <DatePicker
               type={searchPageState.dateSelected.workspace_type}
               setDateRangeHandler={setDateRangeHandler}
@@ -146,12 +151,27 @@ function Search() {
           </div>
         </div>
       </div>
-      {/* <KeyboardArrowDownOutlinedIcon className="searchContainer-mobileMoreIcon" /> */}
+      <Button
+        disabled={false}
+        onClick={showMoreHandler}
+        className={`searchContainer-showMoreBtn`}
+      >
+        {showMore ?(
+        <KeyboardArrowUpOutlined className="searchContainer-showMoreBtn-icon" />
+        ):(
+        <KeyboardArrowDownOutlined className="searchContainer-showMoreBtn-icon" />
+        )
+        }
+
+      </Button>
+
       {/* cards */}
       <Cards
         workSpaceResult={workSpaceList}
         loadingStatus={status == "pending"}
       />
+
+      {/* <Outlet /> */}
     </div>
   );
 }

@@ -38,15 +38,15 @@ function SearchLocationSelection(props) {
    async function getLocationList(){
       if (!locationArr.length) {
         const locationList = await getLocationFromStorage();
-      await  dispatch(storeLocation({ data: locationList }));
-       await fetchLocationApi();
+        await dispatch(storeLocation({ data: locationList }));
+        await fetchLocationApi();
       } else {
         defaultHandler(location || locationArr[0].name);
       }
     }
 
     getLocationList()
-  }, [locationData, storeLocation, dispatch]);
+  }, [locationData, storeLocation, dispatch,locationArr]);
 
   // city location input
   const {

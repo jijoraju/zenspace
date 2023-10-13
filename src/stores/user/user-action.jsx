@@ -20,8 +20,8 @@ export async function getLogoutHandler(data) {
 
 // get user info from localStorage
 export const getUserInfo = ()=>{
-  const token = localStorage.getItem('token');
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const token = sessionStorage.getItem('token');
+  const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
 
   if(!token && !userInfo) return null
 
@@ -38,8 +38,8 @@ export const LoginHandler = (res) =>{
 
   return async (dispatch)=>{
     if(!requestData) return  
-    localStorage.setItem('token', requestData.token);
-    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    sessionStorage.setItem('token', requestData.token);
+    sessionStorage.setItem('userInfo', JSON.stringify(userInfo));
 
     dispatch(userActions.userLogin({
       isLogin: true,
@@ -52,8 +52,8 @@ export const LoginHandler = (res) =>{
 // clear user info
 export const logOutHandler = ()=> {
   return async (dispatch)=>{
-    localStorage.removeItem('token');
-    localStorage.removeItem('userInfo');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userInfo');
 
     getLogoutHandler()
     dispatch(userActions.userLogout({

@@ -49,7 +49,7 @@ function PriceRangeSelection(props) {
     onChange: priceChangeHandler,
     onBlur: priceBlurHandler,
     // options: priceRangeData || [],
-    containerStyle: `searchContainer-selectionContainer-selectionsRow-types-Container`,
+    containerStyle: `searchContainer-selectionContainer-selectionsRow-types-Container ${props.showMore ? 'showMore' : '' }`,
     className: `searchContainer-selectionContainer-selectionsRow-types-Container-list`,
     itemClassName: `searchContainer-selectionContainer-selectionsRow-types-Container-item`,
   };
@@ -59,8 +59,6 @@ function PriceRangeSelection(props) {
   }, []);
 
   useEffect(() => {
-
-    console.log('enteredPriceRange',enteredPriceRange)
     props.setPriceRangeHandler(enteredPriceRange);
   }, [enteredPriceRange]);
 

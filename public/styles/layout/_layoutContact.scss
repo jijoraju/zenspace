@@ -85,13 +85,12 @@
       }
 
       &-button{
-        background-color: $color-tertiary;
+        @include button-style($color-primary, $color-tertiary);
         display: flex;
         padding: 2rem 3rem;
         align-items: center;
         gap: 8px;
         text-decoration: none;
-        color:$color-primary;
         font-size: 2rem;
         font-weight: bold;
         border-radius: 1rem;

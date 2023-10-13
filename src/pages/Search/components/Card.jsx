@@ -1,11 +1,14 @@
 import React, {useState, useEffect}  from "react";
+import { useNavigate, Link, useParams } from "react-router-dom";
 
 // components
 import Image from "@components/Images";
 import FavoriteBtn from "@components/FavoriteBtn";
 import Rating from "@components/Rating";
+import Button from "@components/Button";
 
 function Card(props) {
+  const navigate = useNavigate();
   const {imgDefault,img2,img3,fullInfo} = props
 
   const {
@@ -61,43 +64,56 @@ function Card(props) {
     localStorage.setItem('favoriteList',JSON.stringify(favoriteList))
   }
 
+  const goToDetail = ()=>{
+    navigate(`${workspace_id}`)
+  }
+  
   return (
-    <div className="searchContainer-selectionContainer-cards-card">
-      {/* card media */}
-      <div className="searchContainer-selectionContainer-cards-card-media">
-        <Image
-          src={imgDefault}
-          alt={`Word space card`}
-          styles={`searchContainer-selectionContainer-cards-card-media-img`}
-          img2={img2}
-          img3={img3}
-        />
-      </div>
-      {/* card body */}
-      <div className="searchContainer-selectionContainer-cards-card-body">
-        <div className="searchContainer-selectionContainer-cards-card-body-topPart">
-          <h1>CAD ${price}/day-pass</h1>
-          <p>1 Private Office{`(${no_of_spaces} Available)`}</p>
-        </div>
-        <div className="searchContainer-selectionContainer-cards-card-body-bottomPart">
-          <h2>{spaceName}</h2>
-          <p>{address}</p>
-        </div>
-        {/* favorite */}
-        <div className="searchContainer-selectionContainer-cards-card-body-favorite">
-          <FavoriteBtn
-            isFavorite={isFavorite}
-            toggleToFavorite={toggleToFavorite}
+    <div className="searchContainer-selectionContainer-cards-wrap">
+      <Button
+        disabled={false}
+        onClick={goToDetail}
+        className={`searchContainer-selectionContainer-cards-wrap-card`}
+      >
+        {/* card media */}
+        <div className="searchContainer-selectionContainer-cards-wrap-card-media">
+          <Image
+            src={imgDefault}
+            alt={`Word space card`}
+            styles={`searchContainer-selectionContainer-cards-wrap-card-media-img`}
+            img2={img2}
+            img3={img3}
           />
         </div>
-      </div>
-      {/* card footer */}
-      <div className="searchContainer-selectionContainer-cards-card-footer">
-        <div className="searchContainer-selectionContainer-cards-card-footer-container">
-          <Rating value={ratingNum} />
+        {/* card body */}
+        <div className="searchContainer-selectionContainer-cards-wrap-card-body">
+          <div className="searchContainer-selectionContainer-cards-wrap-card-body-topPart">
+            <h1>CAD ${price}/day-pass</h1>
+            <p>1 Private Office{`(${no_of_spaces} Available)`}</p>
+          </div>
+          <div className="searchContainer-selectionContainer-cards-wrap-card-body-bottomPart">
+            <h2>{spaceName}</h2>
+            <p>{address}</p>
+          </div>
+
         </div>
+        {/* card footer */}
+        <div className="searchContainer-selectionContainer-cards-wrap-card-footer">
+          <div className="searchContainer-selectionContainer-cards-wrap-card-footer-container">
+            <Rating value={ratingNum} />
+          </div>
+        </div>
+      </Button>
+
+      {/* favorite */}
+      <div className="searchContainer-selectionContainer-cards-wrap-favorite">
+        <FavoriteBtn
+          isFavorite={isFavorite}
+          toggleToFavorite={toggleToFavorite}
+        />
       </div>
     </div>
+
   );
 }
 
