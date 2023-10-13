@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 
 // components
 import Image from "@components/Images";
-import SearchLocationInput from "./searchLocationInput";
+import ProductLocationInput from "./ProductLocationInput";
 
 // data
 import { solutions } from "@Data/home";
 
 export default React.memo(function Home() {
-  
   // render solution cards
   const renderSolutionCards = solutions.map((item, index) => (
     <div className="solutionsCard-container-card" key={index}>
@@ -33,8 +32,8 @@ export default React.memo(function Home() {
     <div className="home_container">
       {/* header */}
       <div className="home-header">
-      {/* search container */}
-        <SearchLocationInput />
+        {/* product container */}
+        <ProductLocationInput />
         <div className="home-header-banner">
           <Image
             src={`home/banner/homeBanner.png`}

@@ -1,21 +1,23 @@
-import React,{useRef,useEffect} from 'react'
+import React, { useRef, useEffect } from "react";
 
 // components
 import Select from "@components/Selection";
-import MuiSelection from '@components/MuiSelection'
+import MuiSelection from "@components/MuiSelection";
 import MenuItem from "@mui/material/MenuItem";
 
 // custom hook
 import useInput from "@hook/use-input";
 
 // selection data
-const headCountArr = Array(10).fill(null).map((item,index)=> item = {value:index+1})
+const headCountArr = Array(10)
+  .fill(null)
+  .map((item, index) => (item = { value: index + 1 }));
 
 function HeadCount(props) {
   const headCountRef = useRef();
 
   // date location input
-  const { 
+  const {
     value: headCountValue,
     valueChangeHandler: headCountChangeHandler,
     inputBlurHandler: headCountBlurHandler,
@@ -23,7 +25,7 @@ function HeadCount(props) {
   } = useInput();
 
   // date input props variable
-  const datePickerProps = { 
+  const datePickerProps = {
     // ref: headCountRef,
     id: `HeadCount`,
     label: ``,
@@ -32,37 +34,37 @@ function HeadCount(props) {
     onChange: headCountChangeHandler,
     onBlur: headCountBlurHandler,
     options: headCountArr,
-    containerStyle: `searchContainer-selectionContainer-selectionsRow-types-Container`,
-    className: `searchContainer-selectionContainer-selectionsRow-types-Container-list`,
-    itemClassName: `searchContainer-selectionContainer-selectionsRow-types-Container-item`,
+    containerStyle: `productContainer-selectionContainer-selectionsRow-types-Container`,
+    className: `productContainer-selectionContainer-selectionsRow-types-Container-list`,
+    itemClassName: `productContainer-selectionContainer-selectionsRow-types-Container-item`,
   };
-  
-  useEffect(()=>{
-    defaultHandler(1)
-  },[])
 
-  useEffect(()=>{
-    props.setHeadCountHandler(headCountValue)
-  },[headCountValue])
+  useEffect(() => {
+    defaultHandler(1);
+  }, []);
+
+  useEffect(() => {
+    props.setHeadCountHandler(headCountValue);
+  }, [headCountValue]);
 
   return (
     // <Select {...datePickerProps}>
     //   {
-    //   headCountArr.map((item,index)=><option key={index} value={item}>{item}</option>) 
+    //   headCountArr.map((item,index)=><option key={index} value={item}>{item}</option>)
     //   }
     // </Select>
     <MuiSelection {...datePickerProps}>
-        {headCountArr.map((item, index) => (
-          <MenuItem
-            key={index}
-            value={item.value}
-            className={`searchContainer-selectionContainer-selectionsRow-types-Container-item`}
-          >
-            {item.value}
-          </MenuItem>
-        ))}
+      {headCountArr.map((item, index) => (
+        <MenuItem
+          key={index}
+          value={item.value}
+          className={`productContainer-selectionContainer-selectionsRow-types-Container-item`}
+        >
+          {item.value}
+        </MenuItem>
+      ))}
     </MuiSelection>
-  )
+  );
 }
 
-export default React.memo(HeadCount)
+export default React.memo(HeadCount);

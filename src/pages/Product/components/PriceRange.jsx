@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 // components
 import Select from "@components/Selection";
-import MuiSelection from '@components/MuiSelection'
+import MuiSelection from "@components/MuiSelection";
 import MenuItem from "@mui/material/MenuItem";
 
 // custom hook
@@ -26,10 +26,9 @@ const priceRangeData = [
   {
     value: `160-200`,
   },
-]
+];
 
 function PriceRangeSelection(props) {
-
   // price range input
   const {
     value: enteredPriceRange,
@@ -49,13 +48,15 @@ function PriceRangeSelection(props) {
     onChange: priceChangeHandler,
     onBlur: priceBlurHandler,
     // options: priceRangeData || [],
-    containerStyle: `searchContainer-selectionContainer-selectionsRow-types-Container ${props.showMore ? 'showMore' : '' }`,
-    className: `searchContainer-selectionContainer-selectionsRow-types-Container-list`,
-    itemClassName: `searchContainer-selectionContainer-selectionsRow-types-Container-item`,
+    containerStyle: `productContainer-selectionContainer-selectionsRow-types-Container ${
+      props.showMore ? "showMore" : ""
+    }`,
+    className: `productContainer-selectionContainer-selectionsRow-types-Container-list`,
+    itemClassName: `productContainer-selectionContainer-selectionsRow-types-Container-item`,
   };
 
   useEffect(() => {
-    defaultHandler(priceRangeData[4].value)
+    defaultHandler(priceRangeData[4].value);
   }, []);
 
   useEffect(() => {
@@ -69,7 +70,7 @@ function PriceRangeSelection(props) {
           <MenuItem
             key={index}
             value={item.value}
-            className={`searchContainer-selectionContainer-selectionsRow-types-Container-item`}
+            className={`productContainer-selectionContainer-selectionsRow-types-Container-item`}
           >
             {item.value}
           </MenuItem>

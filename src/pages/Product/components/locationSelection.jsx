@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 // components
 import Select from "@components/Selection";
-import MuiSelection from '@components/MuiSelection'
+import MuiSelection from "@components/MuiSelection";
 import MenuItem from "@mui/material/MenuItem";
 
 // custom hook
@@ -21,9 +21,9 @@ import {
 function SearchLocationSelection(props) {
   const dispatch = useDispatch();
   const cityInputRef = useRef();
-  const [searchParams] = useSearchParams();
+  const [productParams] = useSearchParams();
 
-  const location = searchParams.get("location");
+  const location = productParams.get("location");
   const locationArr = useSelector((state) => state.workSpace.location);
 
   // fetch location api
@@ -35,7 +35,7 @@ function SearchLocationSelection(props) {
 
   //  if no location list will fetch location api and then store them
   useEffect(() => {
-   async function getLocationList(){
+    async function getLocationList() {
       if (!locationArr.length) {
         const locationList = await getLocationFromStorage();
         await dispatch(storeLocation({ data: locationList }));
@@ -45,8 +45,8 @@ function SearchLocationSelection(props) {
       }
     }
 
-    getLocationList()
-  }, [locationData, storeLocation, dispatch,locationArr]);
+    getLocationList();
+  }, [locationData, storeLocation, dispatch, locationArr]);
 
   // city location input
   const {
@@ -67,13 +67,15 @@ function SearchLocationSelection(props) {
     onChange: cityChangeHandler,
     onBlur: cityBlurHandler,
     options: locationArr || [],
-    containerStyle: `searchContainer-selectionContainer-selectionsRow-types-Container`,
-    className: `searchContainer-selectionContainer-selectionsRow-types-Container-list`,
-    itemClassName: `searchContainer-selectionContainer-selectionsRow-types-Container-item`,
+    containerStyle: `productContainer-selectionContainer-selectionsRow-types-Container`,
+    className: `productContainer-selectionContainer-selectionsRow-types-Container-list`,
+    itemClassName: `productContainer-selectionContainer-selectionsRow-types-Container-item`,
   };
 
   useEffect(() => {
-    const filterSelected = locationArr.filter((item)=>item.name.toLowerCase() == enteredCity.toLowerCase())[0]
+    const filterSelected = locationArr.filter(
+      (item) => item.name.toLowerCase() == enteredCity.toLowerCase()
+    )[0];
     props.setLocationHandler(filterSelected);
   }, [enteredCity]);
 
@@ -92,7 +94,7 @@ function SearchLocationSelection(props) {
           <MenuItem
             key={index}
             value={item.name}
-            className={`searchContainer-selectionContainer-selectionsRow-types-Container-item`}
+            className={`productContainer-selectionContainer-selectionsRow-types-Container-item`}
           >
             {item.name}
           </MenuItem>

@@ -43,7 +43,7 @@ function DatePicker(props) {
     onChange: startDateChangeHandler,
     onBlur: startDateBlurHandler,
     min: nowDate,
-    className: `searchContainer-selectionContainer-selectionsRow-datePicker-item`,
+    className: `productContainer-selectionContainer-selectionsRow-datePicker-item`,
   };
 
   // end date custom input hook
@@ -66,7 +66,7 @@ function DatePicker(props) {
     onBlur: endDateBlurHandler,
     min: enteredStartDate ? minDateEnd : nextDate,
     max: maxDateEnd,
-    className: `searchContainer-selectionContainer-selectionsRow-datePicker-item`,
+    className: `productContainer-selectionContainer-selectionsRow-datePicker-item`,
   };
 
   // default start date and end date

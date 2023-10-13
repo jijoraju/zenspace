@@ -1,62 +1,62 @@
 *,
 *::after,
 *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
-    font-family: 'DM Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  font-family: "DM Sans", sans-serif;
 }
 
 html {
-    // This defines what 1rem is
-    // 1 rem = 10px; 10px/16px = 62.5%
-    font-size: 62.5%; 
-    scroll-behavior: smooth;
+  // This defines what 1rem is
+  // 1 rem = 10px; 10px/16px = 62.5%
+  font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-#root{
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
+#root {
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
 
-    // display: grid;
-    // grid-auto-rows: auto;
-    // grid-template-rows: min-content 80vh repeat(2, min-content);
-    // grid-template-columns: repeat(1, minmax(200px, 1fr));
-    // grid-template-columns: repeat(auto-fill, minmax(min-content, max-content));
+  // display: grid;
+  // grid-auto-rows: auto;
+  // grid-template-rows: min-content 80vh repeat(2, min-content);
+  // grid-template-columns: repeat(1, minmax(200px, 1fr));
+  // grid-template-columns: repeat(auto-fill, minmax(min-content, max-content));
 }
 
-.Toastify__toast-container--top-right,.Toastify__toast-container--top-center {
-    @include absCenter();
-    position: fixed;
-    top: 12%;
+.Toastify__toast-container--top-right,
+.Toastify__toast-container--top-center {
+  @include absCenter();
+  position: fixed;
+  top: 12%;
+  font-size: 1.6rem;
+
+  @include respond($bp-medium) {
+    top: 13%;
+    font-size: 1.8rem;
+  }
+  @include respond($bp-small) {
+    top: 15%;
+    width: 80vw !important;
     font-size: 1.6rem;
-
-    @include respond($bp-medium){
-        top: 13%;
-        font-size: 1.8rem;
-    }
-    @include respond($bp-small){
-        top: 15%;
-        width: 80vw !important;
-        font-size: 1.6rem;
-    }
+  }
 }
 
+.productContainer-selectionContainer-selectionsRow-types-Container-item {
+  font-size: 1.6rem !important;
 
-.searchContainer-selectionContainer-selectionsRow-types-Container-item{
-    font-size: 1.6rem !important;
+  @include respond($bp-medium) {
+    font-size: 1.4rem !important;
+  }
 
-    @include respond($bp-medium){
-        font-size: 1.4rem !important;
-    }
-
-    @include respond($bp-small){
-        font-size: 1.2rem !important;
-    }
+  @include respond($bp-small) {
+    font-size: 1.2rem !important;
+  }
 }

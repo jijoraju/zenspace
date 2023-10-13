@@ -20,11 +20,10 @@ import {
   getLocationFromStorage,
 } from "@Reducer/workspace/wk-action";
 
-
-export default React.memo(function SearchLocationInput() {
+export default React.memo(function ProductLocationInput() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const searchInputRef = useRef();
+  const productInputRef = useRef();
 
   const locationArr = useSelector((state) => state.workSpace.location);
   const [filterLocation, setFilterLocation] = useState([]);
@@ -37,54 +36,54 @@ export default React.memo(function SearchLocationInput() {
 
   // fetch location api or from localStorage
   useEffect(() => {
-    if(!locationArr.length){
+    if (!locationArr.length) {
       const locationList = getLocationFromStorage();
-      dispatch(storeLocation({data:locationList}));
+      dispatch(storeLocation({ data: locationList }));
       fetchLocationApi();
     }
   }, []);
 
   // store location list to reducer
   useEffect(() => {
-    if(locationData?.data?.length){
+    if (locationData?.data?.length) {
       dispatch(storeLocation(locationData));
     }
   }, [locationData, storeLocation, dispatch]);
 
   const {
-    value: enteredSearch,
-    valueChangeHandler: searchChangeHandler,
-    inputBlurHandler: searchBlurHandler,
+    value: enteredProduct,
+    valueChangeHandler: productChangeHandler,
+    inputBlurHandler: productBlurHandler,
   } = useInput();
 
-  // match search variable with location api
+  // match product variable with location api
   useEffect(() => {
     const typing = setTimeout(() => {
-      const search_val = enteredSearch || "";
-      const pattern = new RegExp(search_val, "gi");
+      const product_val = enteredProduct || "";
+      const pattern = new RegExp(product_val, "gi");
       const result = locationArr.filter((item) => item.name.match(pattern));
       setFilterLocation(result || locationData);
     }, 500);
     return () => clearTimeout(typing);
-  }, [enteredSearch, locationArr]);
+  }, [enteredProduct, locationArr]);
 
-  // search input variable
-  const searchInputProps = {
-    ref: searchInputRef,
-    id: `searchLocation`,
+  // product input variable
+  const productInputProps = {
+    ref: productInputRef,
+    id: `productLocation`,
     label: ``,
     type: `text`,
-    value: enteredSearch,
-    onChange: searchChangeHandler,
-    onBlur: searchBlurHandler,
+    value: enteredProduct,
+    onChange: productChangeHandler,
+    onBlur: productBlurHandler,
     placeholder: `Find a workspace for you...`,
-    className: `home-header-searchBox-container-inputBox`,
+    className: `home-header-productBox-container-inputBox`,
   };
 
   // click event
   const clickLocation = (e, item) => {
-    searchChangeHandler(item);
-    searchInputRef.current.value = item
+    productChangeHandler(item);
+    productInputRef.current.value = item;
     setTimeout(() => {
       setFilterLocation([]);
     }, 600);
@@ -95,7 +94,7 @@ export default React.memo(function SearchLocationInput() {
     return List.map((item, index) => (
       <ListItemButton
         key={index}
-        selected={enteredSearch.toLowerCase() === item.name.toLowerCase()}
+        selected={enteredProduct.toLowerCase() === item.name.toLowerCase()}
         onClick={(e) => clickLocation(e, item)}
       >
         <ListItemText>{item.name}</ListItemText>
@@ -103,41 +102,41 @@ export default React.memo(function SearchLocationInput() {
     ));
   };
 
-  // submit search then redirect to search page
-  const submitSearch = () => {
-    navigate(`/search?location=${enteredSearch}`);
+  // submit product then redirect to product page
+  const submitProduct = () => {
+    navigate(`/product?location=${enteredProduct}`);
   };
 
   return (
-    <div className="home-header-searchBox">
-      <h1 className="home-header-searchBox-title">
-        Where to work, search locations anytime.
+    <div className="home-header-productBox">
+      <h1 className="home-header-productBox-title">
+        Where to work, product locations anytime.
       </h1>
-      <p className="home-header-searchBox-content">
-        Discovering a nearby office space is a breeze. We provide an array
-        of options to choose from. Why not input your location now?
+      <p className="home-header-productBox-content">
+        Discovering a nearby office space is a breeze. We provide an array of
+        options to choose from. Why not input your location now?
       </p>
 
-      <div className="home-header-searchBox-container">
-        <Input {...searchInputProps} />
-      <SearchOutlinedIcon className="home-header-searchBox-container-icon" />
+      <div className="home-header-productBox-container">
+        <Input {...productInputProps} />
+        <SearchOutlinedIcon className="home-header-productBox-container-icon" />
       </div>
 
       <Button
-        disabled={status == "pending" || !enteredSearch}
-        onClick={submitSearch}
-        className={`home-header-searchBox-submitBtn`}
+        disabled={status == "pending" || !enteredProduct}
+        onClick={submitProduct}
+        className={`home-header-productBox-submitBtn`}
       >
         {status == "pending" ? `Loading` : `Submit`}
       </Button>
 
-      {enteredSearch?.length &&
+      {enteredProduct?.length &&
       Array.isArray(filterLocation) &&
       filterLocation.length ? (
         <List
           component="nav"
           aria-label="secondary mailbox folder"
-          className="searchLocationContainer"
+          className="productLocationContainer"
         >
           {renderLocationList(filterLocation)}
         </List>

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useReducer } from "react";
-import { useNavigate, Link, useParams,Outlet } from "react-router-dom";
+import { useNavigate, Link, useParams, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // components
 import LocationSelection from "./components/locationSelection";
@@ -12,8 +12,10 @@ import Cards from "./components/Cards";
 import Button from "@components/Button";
 
 // MUI
-import {KeyboardArrowDownOutlined,KeyboardArrowUpOutlined} from '@mui/icons-material';
-
+import {
+  KeyboardArrowDownOutlined,
+  KeyboardArrowUpOutlined,
+} from "@mui/icons-material";
 
 // custom hook
 import useHttp from "@hook/use-http";
@@ -53,7 +55,7 @@ function reducer(state, action) {
 }
 
 function ProductList() {
-  const [searchPageState, dispatch] = useReducer(reducer, {
+  const [productPageState, dispatch] = useReducer(reducer, {
     location: null,
     dateSelected: { start: null, end: null, workspace_type: `ONE_DAY` },
     headcounts: null,
@@ -90,23 +92,23 @@ function ProductList() {
 
   useEffect(() => {
     const fetchAPpi = setTimeout(() => {
-      fetchWorkSpaceApi(searchPageState);
+      fetchWorkSpaceApi(productPageState);
     }, 1000);
     return () => clearTimeout(fetchAPpi);
-  }, [fetchWorkSpaceApi, searchPageState]);
+  }, [fetchWorkSpaceApi, productPageState]);
 
   useEffect(() => {
     async function filterNewData() {
       if (!workSpaceResult?.data?.length) {
-        setWorkSpaceList([])
-        return
-      };
+        setWorkSpaceList([]);
+        return;
+      }
 
       const filterResult = await workSpaceResult?.data?.filter((item) => {
         // price from api
-        const price = item.price_per_day
-        const pr = priceRange.split('-')
-        const isQualified = (price >= pr[0] && price <= pr[1])
+        const price = item.price_per_day;
+        const pr = priceRange.split("-");
+        const isQualified = price >= pr[0] && price <= pr[1];
 
         // sum rating
         const sumRating = item.reviews.reduce(
@@ -115,8 +117,8 @@ function ProductList() {
         const averageResult = sumRating / item.reviews.length;
         const ratingResult = Math.round(averageResult) >= rating;
 
-        const result = ratingResult && isQualified
-        return  result
+        const result = ratingResult && isQualified;
+        return result;
       });
 
       setWorkSpaceList(filterResult);
@@ -125,27 +127,36 @@ function ProductList() {
     filterNewData();
   }, [workSpaceResult, rating, priceRange]);
 
-
-  const showMoreHandler = ()=>{
-    setShowMore(!showMore)
-  }
+  const showMoreHandler = () => {
+    setShowMore(!showMore);
+  };
 
   return (
-    <div className="searchContainer">
-      <div className="searchContainer-selectionContainer">
+    <div className="productContainer">
+      <div className="productContainer-selectionContainer">
         {/* filter */}
-        <div className="searchContainer-selectionContainer-selectionsRow">
-          <div className="searchContainer-selectionContainer-selectionsRow-types">
+        <div className="productContainer-selectionContainer-selectionsRow">
+          <div className="productContainer-selectionContainer-selectionsRow-types">
             <LocationSelection setLocationHandler={setLocationHandler} />
             <HeadCount setHeadCountHandler={setHeadCountHandler} />
             <RateComponent setRateComponent={(val) => setRating(val)} />
-            <PriceRange setPriceRangeHandler={(val) => setPriceRange(val)} showMore={showMore} />
-            <DateSelection datePickerVisible={setWorkSpaceType} showMore={showMore} />
+            <PriceRange
+              setPriceRangeHandler={(val) => setPriceRange(val)}
+              showMore={showMore}
+            />
+            <DateSelection
+              datePickerVisible={setWorkSpaceType}
+              showMore={showMore}
+            />
           </div>
           {/* date picker */}
-          <div className={`searchContainer-selectionContainer-selectionsRow-datePicker ${showMore? 'showMore':''}`}>
+          <div
+            className={`productContainer-selectionContainer-selectionsRow-datePicker ${
+              showMore ? "showMore" : ""
+            }`}
+          >
             <DatePicker
-              type={searchPageState.dateSelected.workspace_type}
+              type={productPageState.dateSelected.workspace_type}
               setDateRangeHandler={setDateRangeHandler}
             />
           </div>
@@ -154,15 +165,13 @@ function ProductList() {
       <Button
         disabled={false}
         onClick={showMoreHandler}
-        className={`searchContainer-showMoreBtn`}
+        className={`productContainer-showMoreBtn`}
       >
-        {showMore ?(
-        <KeyboardArrowUpOutlined className="searchContainer-showMoreBtn-icon" />
-        ):(
-        <KeyboardArrowDownOutlined className="searchContainer-showMoreBtn-icon" />
-        )
-        }
-
+        {showMore ? (
+          <KeyboardArrowUpOutlined className="productContainer-showMoreBtn-icon" />
+        ) : (
+          <KeyboardArrowDownOutlined className="productContainer-showMoreBtn-icon" />
+        )}
       </Button>
 
       {/* cards */}
