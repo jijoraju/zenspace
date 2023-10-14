@@ -88,7 +88,12 @@ function Card(props) {
   };
 
   const goToDetail = () => {
-    navigate(`${workspace_id}`);
+
+    const data =  {
+      detailData: fullInfo,
+    }
+
+    navigate(`${workspace_id}`,{state:data});
   };
 
   return (
