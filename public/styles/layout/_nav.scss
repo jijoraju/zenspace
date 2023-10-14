@@ -74,7 +74,7 @@
       right: 0%;
       top: 110%;
       background-color: $color-white;
-      @include whSize(24rem, 18rem);
+      @include whSize(24rem, auto);
       padding: 1.5rem 3rem;
       @include boxShadow(0px, 2px, 4px, 4px, rgba(0, 0, 0, 0.2));
       z-index: 9;
@@ -118,13 +118,14 @@
         border-width: 0;
         background-color: transparent;
         cursor: pointer;
-        @include whSize(100%, 3rem);
+        @include whSize(100%, auto);
         display: grid;
         grid-template-columns: 30% 1fr;
         align-items: center;
         justify-items: center;
         transition: 0.3s;
-
+        padding: 1.2rem 0;
+        
         &:hover {
           background-color: $color-gray-light;
         }

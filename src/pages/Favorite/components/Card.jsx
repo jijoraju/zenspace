@@ -31,6 +31,7 @@ function Card(props) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [ratingNum, setRatingNum] = useState(0);
 
+  // calculate rating
   useEffect(() => {
     const sumRating = reviews.reduce(
       (total, item) => total.rating + item.rating
@@ -39,8 +40,8 @@ function Card(props) {
     setRatingNum(result);
   }, []);
 
+  // get favorite list
   useEffect(() => {
-
     async function getFavoriteList() {
       if(!user.isLogin) return
 
@@ -78,7 +79,8 @@ function Card(props) {
       setIsFavorite(true);
     }
     setFavoriteList(favoriteList);
-
+    props.setWorkSpaceList(favoriteList);
+    
     const storeData = {
       favoriteList,
       userId: user?.userInfo?.user_id
@@ -88,7 +90,7 @@ function Card(props) {
   };
 
   const goToDetail = () => {
-    navigate(`${workspace_id}`);
+    navigate(`/product/${workspace_id}`);
   };
 
   return (
@@ -111,8 +113,8 @@ function Card(props) {
         {/* card body */}
         <div className="productContainer-selectionContainer-cards-wrap-card-body">
           <div className="productContainer-selectionContainer-cards-wrap-card-body-topPart">
-            <h1>CAD ${price}/Day-pass</h1>
-            <p>1 Private Office{`(${no_of_spaces} Available)`}</p>
+            <h1>CAD ${price} / Day-pass</h1>
+            <p>1 Private Office {`(${no_of_spaces} Available)`}</p>
           </div>
           <div className="productContainer-selectionContainer-cards-wrap-card-body-bottomPart">
             <h2>{spaceName}</h2>

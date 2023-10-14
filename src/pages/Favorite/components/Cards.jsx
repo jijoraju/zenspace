@@ -9,7 +9,7 @@ import CardContainer from "@components/Card/CardContainer";
 import CardSkeleton from "@components/Card/CardSkeleton";
 
 function Cards(props) {
-  const { workSpaceResult, loadingStatus } = props;
+  const { workSpaceResult, loadingStatus, setWorkSpaceList } = props;
 
   if (!workSpaceResult?.length && !loadingStatus) {
     return <NotFound />;
@@ -22,6 +22,7 @@ function Cards(props) {
         img2: `home/solutions/Gallery_Workplace.jpg`,
         img3: `home/solutions/Gallery_Workplace.jpg`,
         fullInfo: item,
+        setWorkSpaceList,
       };
 
       return <Card key={index} {...cardProps} />;
@@ -29,7 +30,6 @@ function Cards(props) {
   };
 
   return (
-    // <Suspense fallback={<LoadingSpinner />}>
     <div className="productContainer-selectionContainer-cards">
       {loadingStatus
         ? Array.from(new Array(6)).map((item, index) => (
@@ -37,7 +37,6 @@ function Cards(props) {
           ))
         : renderCards()}
     </div>
-    // </Suspense>
   );
 }
 

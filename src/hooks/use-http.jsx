@@ -69,7 +69,7 @@ function useHttp(requestFunction, startWithPending = false) {
         });
 
         const Unauthorized = error?.message.match(/Unauthorized/ig)
-        if(Unauthorized.length){
+        if(Unauthorized?.length){
           reduxDispatch(logOutHandler())
           // navigate('/login')
         }

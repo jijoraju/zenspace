@@ -1,14 +1,22 @@
 import React from "react";
 import { useSelector,} from "react-redux";
-import {AccountCircleOutlined,PowerSettingsNew, AssignmentIndOutlined} from "@mui/icons-material";
+import {AccountCircleOutlined,PowerSettingsNew, AssignmentIndOutlined, FavoriteBorderOutlined} from "@mui/icons-material";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 
+// components
 import CustomButton from "@components/Button";
 
 function NavDesktopMenu(props) {
+  const navigate = useNavigate()
   const user = useSelector((state)=>state.user)
   const {fetchLogout} = props
 
   if(!user) return
+
+  const goToPage = (page)=>{
+    navigate(`/${page}`)
+  }
+
   return (
     <div className="nav-desktop-menu">
 
@@ -28,6 +36,15 @@ function NavDesktopMenu(props) {
       >
         <AssignmentIndOutlined  className={`nav-desktop-menu-logoutBtn-icon`} />
         <span>My Zenspace</span>
+      </CustomButton>
+
+      <CustomButton 
+        onClick={()=>goToPage('favorite')}
+        className={`nav-desktop-menu-logoutBtn`}
+        disabled={false}
+      >
+        <FavoriteBorderOutlined className={`nav-desktop-menu-logoutBtn-icon`} />
+        <span>Favorite</span>
       </CustomButton>
 
       {/* log out */}
