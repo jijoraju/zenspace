@@ -93,7 +93,7 @@ function Card(props) {
       detailData: fullInfo,
     }
 
-    navigate(`${workspace_id}`,{state:data});
+    navigate(`${spaceName}`,{state:data});
   };
 
   return (

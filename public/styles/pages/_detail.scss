@@ -1,0 +1,33 @@
+.detailContainer{
+  width: 100%;
+  max-width: $maxWight;
+  padding: 3rem 8rem;
+
+  // break crumbs
+  &-crumbs{
+
+    @include respond($bp-medium) {
+      display: none;
+    }
+
+    // @include respond($bp-small) {
+    //   padding: 2rem 2rem 1rem;
+    // }
+
+    & li{
+      font-size: 1.8rem;
+    }
+    &-crumb{
+      color: $color-gray-dark;
+      text-decoration: none;
+      font-size: 1.8rem;
+    }
+     
+  }
+
+  // detail
+  &-mainContent{
+
+  }
+
+}

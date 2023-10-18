@@ -94,7 +94,7 @@ function Card(props) {
       detailData: fullInfo,
     }
 
-    navigate(`/product/${workspace_id}`,{state:data});
+    navigate(`/product/${spaceName}`,{state:data});
   };
 
   return (
