@@ -39,11 +39,11 @@ export const navList = [
       name: "SEARCH",
       class: "nav-mobile-menu-container-item",
     },
-    // {
-    //   path: "/favorite",
-    //   name: "FAVORITE",
-    //   class: "nav-mobile-menu-container-item",
-    // },
+    {
+      path: "/favorite",
+      name: "FAVORITE",
+      class: "nav-mobile-menu-container-item",
+    },
     // {
     //   path: "/solutions",
     //   name: "SOLUTIONS",
