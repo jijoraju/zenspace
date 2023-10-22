@@ -38,14 +38,14 @@ function NavDesktopMenu(props) {
         <span>My Zenspace</span>
       </CustomButton>
 
-      {/* <CustomButton 
+      <CustomButton 
         onClick={()=>goToPage('favorite')}
         className={`nav-desktop-menu-logoutBtn`}
         disabled={false}
       >
         <FavoriteBorderOutlined className={`nav-desktop-menu-logoutBtn-icon`} />
         <span>Favorite</span>
-      </CustomButton> */}
+      </CustomButton>
 
       {/* log out */}
       <CustomButton 

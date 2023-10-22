@@ -171,7 +171,6 @@
     }
 
 
-
     &-menu {
       display: none;
       background-image: radial-gradient($color-secondary, $color-primary);
@@ -188,6 +187,7 @@
         display: block;
         opacity: 1;
         @include whSize(100%, 100%);
+        // max-width: 700px;
         z-index: 9;
       }
 

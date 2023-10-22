@@ -59,8 +59,6 @@ function ProductList() {
     location: null,
     dateSelected: { start: null, end: null, workspace_type: `ONE_DAY` },
     headcounts: null,
-    // maxPrice: 200,
-    // rating: 1,
   });
   const [workSpaceList, setWorkSpaceList] = useState([]);
   const [rating, setRating] = useState(3);

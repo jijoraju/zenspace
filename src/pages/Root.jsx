@@ -10,6 +10,7 @@ const Home = lazy(() => import('./Home'));
 const ProductList = lazy(() => import('./Product'));
 const ProductDetail = lazy(() => import('./Product/ProductDetail'));
 const Favorite = lazy(() => import('./Favorite'));
+const Solution = lazy(() => import('./Solution'));
 const ErrorPage = lazy(() => import('./ErrorPage'));
 const Contact = lazy(() => import('./Contact'));
 const Sign = lazy(() => import('./Sign'));
@@ -41,6 +42,10 @@ function Root() {
         {
           path: "favorite",
           element: <Favorite />,
+        },
+        {
+          path: "solutions",
+          element: <Solution />,
         },
         {
           path: "contact",

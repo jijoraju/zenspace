@@ -1,0 +1,305 @@
+.solution-banner {
+  padding-left: 6%;
+  // max-width: 1440px;
+  // margin:0 auto;
+
+  @include respond($bp-medium) {
+    padding-left: 5rem;
+  }
+
+  @include respond($bp-small) {
+    padding-left: 2rem;
+  }
+
+  & .carouselContainer {
+    overflow: visible;
+
+      @include respond($bp-medium) {
+        overflow: clip;
+      }
+
+      @include respond($bp-small) {
+        overflow: clip;
+      }
+
+    & .swiper-wrapper {
+      & .swiper-slide {
+        overflow: hidden;
+      }
+    }
+
+    & .swiper-button-prev {
+      left: -3rem;
+      color: $color-primary !important;
+      background: $color-white;
+      @include whSize(8rem, 8rem);
+      border-radius: 4rem;
+     
+
+      @include respond($bp-small) {
+        left: 0.5rem;
+        @include whSize(3rem, 3rem);
+        padding: 2.5rem;
+
+        &:after{
+          font-size: 2.2rem !important;
+          font-weight: bold;
+        }
+      }
+    }
+
+    & .swiper-button-next {
+      right: 3.5rem;
+      color: $color-primary !important;
+      background: $color-white;
+      width: 8rem;
+      height: 8rem;
+      border-radius: 4rem;
+
+      @include respond($bp-small) {
+        right: 1.5rem;
+        @include whSize(3rem, 3rem);
+        padding: 2.5rem;
+        
+        &:after{
+          font-size: 2.2rem !important;
+          font-weight: bold;
+        }
+        
+      }
+    }
+  }
+
+  &-slug{
+
+    padding: 5rem 8rem 5rem 0;
+
+    & h1{
+      font-size: 5.6rem;
+      font-weight: bold;
+      color: $color-primary;
+
+      @include respond($bp-medium) {
+        font-size: 4.2rem;
+      }
+
+      @include respond($bp-small) {
+        font-size: 2.8rem;
+      }
+    }
+
+    & p{
+      font-size: 2.4rem;
+      color: $color-gray-dark;
+
+      @include respond($bp-medium) {
+        font-size: 2rem;
+      }
+
+      @include respond($bp-small) {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
+
+// cooperation
+.solution-cooperation{
+  padding: 11.5rem 8rem;
+  background-color: $color-blue-light;
+  margin: 5rem 0;
+
+  display: flex;
+  justify-content: space-around;
+
+  @include respond($bp-medium) {
+    flex-direction: column;
+    padding: 5rem 3rem;
+    margin:0;
+  }
+
+  @include respond($bp-small) {
+    padding-left: 2.5rem;
+  }
+
+  &-ItemWrap{
+    flex:1
+  }
+
+  &-leftSide{
+    
+    & h2{
+      font-size: 4.4rem;
+      color: $color-primary;
+      padding: 0 3rem;
+
+      @include respond($bp-medium) {
+        text-align: center;
+        font-size: 3.2rem;
+        padding: 0 8rem;
+      }
+
+      @include respond($bp-small) {
+        font-size: 2.4rem;
+        padding: 0;
+      }
+    }
+  }
+
+  &-rightSide{
+    display: grid;
+    grid-template-columns: repeat(3, min-content);
+    grid-gap: 2rem;
+    justify-content: center;
+    align-items: center;
+
+    @include respond($bp-medium) {
+      margin: 3rem 0;
+    }
+
+    @include respond($bp-small) {
+     grid-gap: .5rem;
+    }
+  }
+}
+
+// feedbacks
+.solution-feedbacks{
+  padding: 6rem 8rem;
+
+  @include respond($bp-small) {
+    padding: 3rem 2.5rem;
+  }
+
+  &-descriptionWrap{
+
+    display: flex;
+    align-items: flex-end;
+
+    @include respond($bp-medium) {
+      flex-direction: column;
+    }
+
+    &-block{
+      flex:1;
+
+      &:first-child{
+        & h1{
+          font-size: 3.6rem;
+          color: $color-primary;
+
+          @include respond($bp-small) {
+            font-size: 2rem;
+          }
+        }
+
+        & p{
+          font-size: 2.4rem;
+          color: $color-gray-light1;
+
+          @include respond($bp-small) {
+            font-size: 1.4rem;
+          }
+        }
+
+      }
+
+      &:last-child{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        @include respond($bp-medium) {
+          justify-content: space-around;
+          margin: 3rem auto;
+        }
+
+        & .linkItem{
+          font-size: 1.8rem;
+          font-family: 700;
+          text-decoration: none;
+          margin: 0 2rem;
+          padding: 2rem 4rem;
+          transition: .3s;
+          @include border-style(1px, solid, $color-primary);
+
+
+          @include respond($bp-small) {
+            font-size: 1.6rem;
+            padding: 1rem 2rem;
+          }
+
+          &:first-child{
+            background-color: $color-primary;
+            color:$color-white;
+
+            &:hover{
+              background-color: $color-primary-light;
+            }
+          }
+
+          &:last-child{
+            background-color: $color-white;;
+            color:$color-primary;;
+
+            &:hover{
+              background-color: $color-gray-light;
+            }
+          }
+          
+        }
+      }
+    }
+  }
+
+  // cards
+  &-cards{
+    margin: 5rem auto;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    // flex-direction: column;
+
+    @include respond($bp-medium) {
+      flex-direction: column;
+    }
+
+    &-card{
+      padding: 3rem 2rem;
+      margin: 0 2rem;
+      transition: .3s;
+      @include boxShadow(0px, 2px, 20px, 0px, rgba(0, 0, 0, 0.1));
+      display: flex;
+      flex-direction: column;
+
+      &:hover{
+        @include boxShadow(0px, 2px, 20px, 0px, rgba(0, 0, 0, 0.3));
+      }
+
+      @include respond($bp-medium) {
+        margin-bottom: 2.5rem;
+      }
+
+      & p{
+        color: $color-gray;
+        margin: 2.5rem 0;
+        font-size: 1.8rem;
+      }
+
+      & h3{
+        font-size: 2rem;
+        color:$color-primary;
+
+        &:nth-of-type(1){
+          font-weight: bold;
+        }
+
+        &:nth-of-type(2){
+          font-size: 1.8rem;
+          font-weight: normal;
+        }
+      }
+    }
+  }
+}
