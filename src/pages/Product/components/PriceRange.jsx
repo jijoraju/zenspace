@@ -12,19 +12,19 @@ import useInput from "@hook/use-input";
 
 const priceRangeData = [
   {
-    value: `0-39`,
+    value: `Unlimited`,
   },
   {
-    value: `40-79`,
+    value: `101-200`,
   },
   {
-    value: `80-119`,
+    value: `201-300`,
   },
   {
-    value: `120-159`,
+    value: `301-500`,
   },
   {
-    value: `160-200`,
+    value: `500+`,
   },
 ];
 
@@ -56,7 +56,7 @@ function PriceRangeSelection(props) {
   };
 
   useEffect(() => {
-    defaultHandler(priceRangeData[4].value);
+    defaultHandler(priceRangeData[0].value);
   }, []);
 
   useEffect(() => {

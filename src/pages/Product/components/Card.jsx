@@ -32,6 +32,7 @@ function Card(props) {
   const [ratingNum, setRatingNum] = useState(0);
 
   useEffect(() => {
+    if(!reviews.length) return
     const sumRating = reviews.reduce(
       (total, item) => total.rating + item.rating
     );

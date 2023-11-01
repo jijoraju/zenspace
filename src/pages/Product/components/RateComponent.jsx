@@ -9,9 +9,9 @@ import MenuItem from "@mui/material/MenuItem";
 import useInput from "@hook/use-input";
 
 // selection data
-const headCountArr = Array(5)
+const headCountArr = Array(6)
   .fill(null)
-  .map((item, index) => (item = { value: index + 1 }));
+  .map((item, index) => (item = { value: index }));
 
 function RateComponent(props) {
   const headCountRef = useRef();
@@ -40,7 +40,7 @@ function RateComponent(props) {
   };
 
   useEffect(() => {
-    defaultHandler(3);
+    defaultHandler(headCountArr[0].value);
   }, []);
 
   useEffect(() => {
@@ -57,10 +57,10 @@ function RateComponent(props) {
       {headCountArr.map((item, index) => (
         <MenuItem
           key={index}
-          value={item.value}
+          value={item.value.toString()}
           className={`productContainer-selectionContainer-selectionsRow-types-Container-item`}
         >
-          {item.value}
+          {item.value.toString()}
         </MenuItem>
       ))}
     </MuiSelection>

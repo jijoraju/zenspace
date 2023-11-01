@@ -10,7 +10,7 @@ function Cards() {
   return (
     <div className="solution-feedbacks-cards">
       {cardsData.map((item, index) => (
-        <div className="solution-feedbacks-cards-card">
+        <div className="solution-feedbacks-cards-card" key={index}>
           <Rating
             name="simple-controlled"
             value={item.rating}

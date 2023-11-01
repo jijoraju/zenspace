@@ -34,7 +34,7 @@ function Carousel(props) {
       // }}
       modules={[Pagination, Navigation]}
       freeMode={true} // 启用Manipulation效果
-      freeModeSticky={true} // 使轮播项粘附在滑动结束的位置
+      // freeModeSticky={true} // 使轮播项粘附在滑动结束的位置
       // centeredSlides={true}
       className="carouselContainer"
     >
