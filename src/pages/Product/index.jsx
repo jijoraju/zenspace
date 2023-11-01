@@ -123,8 +123,6 @@ function ProductList() {
         const ratingResult = Math.round(averageResult) >= rating;
         
         const result = ratingResult && isQualified;
-
-        console.log('result',result)
         return result;
       });
 

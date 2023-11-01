@@ -14,6 +14,7 @@ function NavDesktopMenu(props) {
   if(!user) return
 
   const goToPage = (page)=>{
+    props.toggleMenu()
     navigate(`/${page}`)
   }
 

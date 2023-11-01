@@ -110,14 +110,24 @@ function ProductList() {
 
         // price from api
         const price = +item.price_per_day;
-        const pr = priceRange.split("-");
-        const isQualified = price >= Number(pr[0]) && price <= Number(pr[1]);
+         let isQualified
+        if(priceRange == 'Unlimited'){
+          isQualified = true
+        }else if(priceRange == '500+'){
+          isQualified = price >= 500
+        }else{
+          const pr = priceRange.split("-");
+          isQualified = price >= pr[0] && price <= pr[1];
+        }
+
+        // const pr = priceRange.split("-");
+        // const isQualified = price >= Number(pr[0]) && price <= Number(pr[1]);
 
         // sum rating
-        const sumRating = item.reviews.reduce(
+        const sumRating = item?.reviews.length && item?.reviews?.reduce(
           (total, item) => total.rating + item.rating
-        );
-        const averageResult = sumRating / item.reviews.length;
+        )|| 0;
+        const averageResult = sumRating / item.reviews.length || 0;
         const ratingResult = Math.round(averageResult) >= rating;
 
         const result = ratingResult && isQualified && isAccommodate && matchLocation;

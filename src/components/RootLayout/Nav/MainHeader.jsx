@@ -109,6 +109,10 @@ function MainHeader() {
     dispatch(logOutHandler());
   }, []);
 
+  const setToggleDeskMenuHandler = ()=>{
+    setToggleDeskMenu(!toggleDeskMenu)
+  }
+
   return (
     <nav className="nav">
       {/* desktop */}
@@ -125,7 +129,7 @@ function MainHeader() {
           </Button>
         ) : (
           <CustomButton
-            onClick={() => setToggleDeskMenu(!toggleDeskMenu)}
+            onClick={setToggleDeskMenuHandler}
             // onClick={fetchLogout}
             className={`nav-desktop-profileBtnWrap`}
             disabled={false}
@@ -141,7 +145,7 @@ function MainHeader() {
           </CustomButton>
         )}
 
-        {toggleDeskMenu && <NavDesktopMenu fetchLogout={fetchLogout} />}
+        {toggleDeskMenu && <NavDesktopMenu fetchLogout={fetchLogout} toggleMenu={setToggleDeskMenuHandler} />}
       </div>
 
       {/* mobile */}

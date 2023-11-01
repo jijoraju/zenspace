@@ -70,6 +70,7 @@
             flex-basis: 31% !important;
             flex: 1;
             margin: 1rem 0.5rem 1rem 0 !important;
+            transition: 1s;
 
             &:nth-child(3) {
               margin: 1rem 0rem 1rem 0 !important;
@@ -81,7 +82,6 @@
             
             &.showMore{
               display: flex;
-              transition: 1s;
             }
           }
 
@@ -292,7 +292,7 @@
           position: absolute;
           right: 1.5rem;
           top: 55%;
-          z-index: 999;
+          z-index: 1;
         }
       }
 
