@@ -14,17 +14,17 @@ export async function getWorkSpaceHandler(param) {
    * noOfSpace = Total space required.
    */
 
-  const { location, dateSelected, headcounts, maxPrice, rating } = param;
+  const { location, dateSelected, headcounts, maxPrice, rating, pageIndex } = param;
 
   const { location_id } = location;
-  const { start, end, workspace_type } = dateSelected;
+  const { start, end, workspace_type, } = dateSelected;
   // const response = await fetchRequest(
   // `/api/workspace/search?locationId=${location_id}&workspace_type=${workspace_type}&price=${``}&rating=${``}&noOfSpace=${headcounts}&startDate=${start}&endDate=${end}`,
   // `GET`
 
   const endDate = workspace_type == `ONE_DAY` ? start : end;
   const response = await fetchRequest(
-    `/api/workspace/search?locationId=${location_id}&workspace_type=${workspace_type}&noOfSpace=${headcounts}&startDate=${start}&endDate=${endDate}`,
+    `/api/workspace/search?locationId=${location_id}&workspace_type=${workspace_type}&noOfSpace=${headcounts}&startDate=${start}&endDate=${endDate}&page=${pageIndex}&pageSize=${6}`,
     `GET`
   );
 

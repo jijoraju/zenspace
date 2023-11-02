@@ -16,6 +16,7 @@ import {
   KeyboardArrowDownOutlined,
   KeyboardArrowUpOutlined,
 } from "@mui/icons-material";
+import Pagination from '@mui/material/Pagination';
 
 // custom hook
 import useHttp from "@hook/use-http";
@@ -49,6 +50,11 @@ function reducer(state, action) {
         ...state,
         headcounts: +action.param,
       };
+    case "pageHandler":
+      return {
+        ...state,
+        pageIndex: +action.param,
+      };
     default:
       return state;
   }
@@ -59,6 +65,7 @@ function ProductList() {
     location: null,
     dateSelected: { start: null, end: null, workspace_type: `ONE_DAY` },
     headcounts: null,
+    pageIndex: 1,
   });
   const [workSpaceList, setWorkSpaceList] = useState([]);
   const [rating, setRating] = useState(3);
@@ -79,6 +86,12 @@ function ProductList() {
 
   const setWorkSpaceType = (param) => {
     dispatch({ type: `setWorkspace_type`, param });
+  };
+
+  const setPageHandler = (event, param) => {
+    console.log('event',event)
+    console.log('param',param)
+    dispatch({ type: `pageHandler`, param });
   };
 
   // use http hook
@@ -126,6 +139,7 @@ function ProductList() {
         return result;
       });
 
+      console.log('workSpaceList',workSpaceList)
       setWorkSpaceList(filterResult);
     }
 
@@ -184,6 +198,15 @@ function ProductList() {
         workSpaceResult={workSpaceList}
         loadingStatus={status == "pending"}
       />
+
+      <div className="productContainer-paginationContainer">
+        <Pagination
+          count={workSpaceResult?.meta?.totalPages || 1}
+          page={productPageState?.pageIndex}
+          onChange={setPageHandler}
+          size="large"
+        />
+      </div>
 
       {/* <Outlet /> */}
     </div>

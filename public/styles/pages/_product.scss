@@ -316,4 +316,10 @@
       color: $color-primary;
     }
   }
+
+  &-paginationContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
