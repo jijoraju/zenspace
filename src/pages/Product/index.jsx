@@ -8,6 +8,7 @@ import DatePicker from "./components/DatePickerComponent";
 import HeadCount from "./components/headCount";
 import RateComponent from "./components/RateComponent";
 import PriceRange from "./components/PriceRange";
+import SequenceComponent from './components/sequence'
 import Cards from "./components/Cards";
 import Button from "@components/Button";
 
@@ -55,6 +56,11 @@ function reducer(state, action) {
         ...state,
         pageIndex: +action.param,
       };
+    case "sequenceHandler":
+      return {
+        ...state,
+        sequenceType: action.param,
+      };
     default:
       return state;
   }
@@ -66,6 +72,7 @@ function ProductList() {
     dateSelected: { start: null, end: null, workspace_type: `ONE_DAY` },
     headcounts: null,
     pageIndex: 1,
+    sequenceType: 'asc'
   });
   const [workSpaceList, setWorkSpaceList] = useState([]);
   const [rating, setRating] = useState(3);
@@ -89,9 +96,11 @@ function ProductList() {
   };
 
   const setPageHandler = (event, param) => {
-    console.log('event',event)
-    console.log('param',param)
     dispatch({ type: `pageHandler`, param });
+  };
+
+    const setSequenceHandler = ( param) => {
+    dispatch({ type: `sequenceHandler`, param });
   };
 
   // use http hook
@@ -157,6 +166,7 @@ function ProductList() {
         <div className="productContainer-selectionContainer-selectionsRow">
           <div className="productContainer-selectionContainer-selectionsRow-types">
             <LocationSelection setLocationHandler={setLocationHandler} />
+            <SequenceComponent setSequenceHandler={setSequenceHandler} />
             <HeadCount setHeadCountHandler={setHeadCountHandler} />
             <RateComponent setRateComponent={(val) => setRating(val)} />
             <PriceRange
@@ -199,14 +209,18 @@ function ProductList() {
         loadingStatus={status == "pending"}
       />
 
-      <div className="productContainer-paginationContainer">
-        <Pagination
-          count={workSpaceResult?.meta?.totalPages || 1}
-          page={productPageState?.pageIndex}
-          onChange={setPageHandler}
-          size="large"
-        />
-      </div>
+    {
+      workSpaceList.length && (
+              <div className="productContainer-paginationContainer">
+            <Pagination
+              count={workSpaceResult?.meta?.totalPages || 1}
+              page={productPageState?.pageIndex}
+              onChange={setPageHandler}
+              size="large"
+            />
+          </div>
+      )
+    }
 
       {/* <Outlet /> */}
     </div>

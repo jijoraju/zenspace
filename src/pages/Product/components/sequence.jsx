@@ -12,14 +12,14 @@ import useHttp from "@hook/use-http";
 
 const dateOptions = [
   {
-    name: "Single Day",
+    name: "ASC",
   },
   {
-    name: "Multiple Day",
+    name: "DES",
   },
 ];
 
-function DateSelection(props) {
+function Sequence(props) {
   const dateInputRef = useRef();
 
   // date location input
@@ -33,9 +33,9 @@ function DateSelection(props) {
   // date input props variable
   const datePickerProps = {
     // ref: dateInputRef,
-    id: `workSpaceType`,
+    id: `Sequence`,
     label: ``,
-    name: `Work space type`,
+    name: `Sequence`,
     value: enteredDate,
     onChange: dateChangeHandler,
     onBlur: dateBlurHandler,
@@ -48,15 +48,15 @@ function DateSelection(props) {
   };
 
   useEffect(() => {
-    defaultHandler(`Single Day`);
-    props.datePickerVisible(`ONE_DAY`);
+    defaultHandler(dateOptions[0].name);
+    props.setSequenceHandler(`asc`);
   }, []);
 
   useEffect(() => {
-    if (enteredDate == "Multiple Day") {
-      props.datePickerVisible(`MULTIPLE_DAYS`);
+    if (enteredDate == "DES") {
+      props.setSequenceHandler(`desc`);
     } else {
-      props.datePickerVisible(`ONE_DAY`);
+      props.setSequenceHandler(`asc`);
     }
   }, [enteredDate]);
 
@@ -77,4 +77,4 @@ function DateSelection(props) {
   );
 }
 
-export default React.memo(DateSelection);
+export default React.memo(Sequence);
