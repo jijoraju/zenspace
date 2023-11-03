@@ -33,6 +33,7 @@ function Card(props) {
 
   // calculate rating
   useEffect(() => {
+    if(!reviews.length) return
     const sumRating = reviews.reduce(
       (total, item) => total.rating + item.rating
     );
