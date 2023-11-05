@@ -6,6 +6,7 @@ import LocationSelection from "./components/locationSelection";
 import HeadCount from "./components/headCount";
 import RateComponent from "./components/RateComponent";
 import PriceRange from "./components/PriceRange";
+import SequenceComponent from './components/sequence'
 import Cards from "./components/Cards";
 import Button from "@components/Button";
 
@@ -34,6 +35,11 @@ function reducer(state, action) {
         ...state,
         priceRange: action.param,
       };
+    case "sequenceHandler":
+      return {
+        ...state,
+        sequenceType: action.param,
+      };
     default:
       return state;
   }
@@ -44,8 +50,9 @@ function ProductList() {
   const [productPageState, dispatch] = useReducer(reducer, {
     location: null,
     headcounts: null,
-    rating:3,
-    priceRange: `160-200`,
+    rating:0,
+    priceRange: `Unlimited`,
+    sequenceType: 'asc'
   });
 
   const [workSpaceList, setWorkSpaceList] = useState([]);
@@ -65,6 +72,10 @@ function ProductList() {
 
   const setPriceRangeHandler = (param) => {
     dispatch({ type: `setPriceRange`, param });
+  };
+
+  const setSequenceHandler = ( param) => {
+    dispatch({ type: `sequenceHandler`, param });
   };
 
   // get favorite list handler
@@ -93,9 +104,9 @@ function ProductList() {
 
   // filter side effect
   useEffect(() => {
-    async function filterNewData() {
-      const { priceRange, rating, headcounts, location} = productPageState;
+    const { priceRange, rating, headcounts, location, sequenceType} = productPageState;
 
+    async function filterNewData() {
       const favoriteList = await getFavoriteList()
       if(!favoriteList.length) return
 
@@ -120,9 +131,6 @@ function ProductList() {
           isQualified = price >= pr[0] && price <= pr[1];
         }
 
-        // const pr = priceRange.split("-");
-        // const isQualified = price >= Number(pr[0]) && price <= Number(pr[1]);
-
         // sum rating
         const sumRating = item?.reviews.length && item?.reviews?.reduce(
           (total, item) => total.rating + item.rating
@@ -131,8 +139,15 @@ function ProductList() {
         const ratingResult = Math.round(averageResult) >= rating;
 
         const result = ratingResult && isQualified && isAccommodate && matchLocation;
+
         return result;
       });
+
+      if(sequenceType == 'asc'){
+        filterResult.sort((a,b)=>a.name.localeCompare(b.name))
+      }else{
+        filterResult.sort((a,b)=>b.name.localeCompare(a.name))
+      }
 
       setWorkSpaceList(filterResult);
     }
@@ -151,6 +166,7 @@ function ProductList() {
         <div className="productContainer-selectionContainer-selectionsRow">
           <div className="productContainer-selectionContainer-selectionsRow-types">
             <LocationSelection setLocationHandler={setLocationHandler} />
+            <SequenceComponent setSequenceHandler={setSequenceHandler} />
             <HeadCount setHeadCountHandler={setHeadCountHandler} />
             <RateComponent setRateComponent={setRatingHandler} />
             <PriceRange

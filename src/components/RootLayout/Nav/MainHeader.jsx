@@ -12,6 +12,8 @@ import {
   PowerSettingsNew,
   AssignmentIndOutlined,
 } from "@mui/icons-material";
+import { motion } from "framer-motion";
+
 
 import Image from "@components/Images";
 import CustomButton from "@components/Button";
@@ -27,7 +29,7 @@ function MainHeader() {
   // desktop nav
   const renderDesktopNav = navList.map((item, index) => {
     return item.name == "Logo" ? (
-      <NavLink to={item.path} key={index}>
+      <NavLink to={item.path} key={index} onClick={() => setToggleDeskMenu(false)}>
         <Image
           src={item.default}
           alt={item.name}
@@ -47,6 +49,7 @@ function MainHeader() {
             : `${item.class}`
         }
         key={index}
+        onClick={() => setToggleDeskMenu(false)}
       >
         {item.name}
       </NavLink>
@@ -57,7 +60,7 @@ function MainHeader() {
   const renderMobileLogo = navMobileList.map((item, index) => {
     if (index != 0) return;
     return (
-      <NavLink to={item.path} key={index}>
+      <NavLink to={item.path} key={index} >
         <Image
           src={item.default}
           alt={item.name}
@@ -128,6 +131,11 @@ function MainHeader() {
             LOG IN
           </Button>
         ) : (
+          <motion.div
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
           <CustomButton
             onClick={setToggleDeskMenuHandler}
             // onClick={fetchLogout}
@@ -143,6 +151,7 @@ function MainHeader() {
               className={`nav-desktop-profileBtnWrap-icon`}
             />
           </CustomButton>
+          </motion.div>
         )}
 
         {toggleDeskMenu && <NavDesktopMenu fetchLogout={fetchLogout} toggleMenu={setToggleDeskMenuHandler} />}

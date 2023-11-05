@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link, useParams } from "react-router-dom";
+import { motion,AnimatePresence } from "framer-motion"
 
 // components
 import Image from "@components/Images";
@@ -32,13 +33,12 @@ function Card(props) {
   const [ratingNum, setRatingNum] = useState(0);
 
   useEffect(() => {
-    if(!reviews.length) return
-    const sumRating = reviews.reduce(
+    const sumRating = reviews.length ?reviews?.reduce(
       (total, item) => total.rating + item.rating
-    );
+    ): 0;
     const result = sumRating / reviews.length;
     setRatingNum(result);
-  }, []);
+  }, [fullInfo]);
 
   useEffect(() => {
 
@@ -58,7 +58,7 @@ function Card(props) {
     }
 
     getFavoriteList();
-  }, []);
+  }, [fullInfo]);
 
   const toggleToFavorite = () => {
 
@@ -98,7 +98,12 @@ function Card(props) {
   };
 
   return (
-    <div className="productContainer-selectionContainer-cards-wrap">
+    <motion.div 
+      className="productContainer-selectionContainer-cards-wrap"
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <Button
         disabled={false}
         onClick={goToDetail}
@@ -134,13 +139,18 @@ function Card(props) {
       </Button>
 
       {/* favorite */}
-      <div className="productContainer-selectionContainer-cards-wrap-favorite">
+      <motion.div 
+        className="productContainer-selectionContainer-cards-wrap-favorite"
+        whileHover={{ scale: 1.2 }}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      >
         <FavoriteBtn
           isFavorite={isFavorite}
           toggleToFavorite={toggleToFavorite}
         />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

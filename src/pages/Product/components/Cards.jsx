@@ -15,8 +15,7 @@ function Cards(props) {
     return <NotFound />;
   }
 
-  const renderCards = () => {
-    return workSpaceResult.map((item, index) => {
+  const renderCards = workSpaceResult.map((item, index) => {
       const cardProps = {
         imgDefault: `home/solutions/Gallery_Workplace.jpg`,
         img2: `home/solutions/Gallery_Workplace.jpg`,
@@ -26,19 +25,16 @@ function Cards(props) {
 
       return <Card key={index} {...cardProps} />;
     });
-  };
 
   return (
-    // <Suspense fallback={<LoadingSpinner />}>
     <div className="productContainer-selectionContainer-cards">
       {loadingStatus
         ? Array.from(new Array(6)).map((item, index) => (
             <CardSkeleton key={index} />
           ))
-        : renderCards()}
+        : renderCards}
     </div>
-    // </Suspense>
   );
 }
 
-export default React.memo(Cards);
+export default Cards;

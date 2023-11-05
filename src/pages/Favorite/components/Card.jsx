@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link, useParams } from "react-router-dom";
+import { motion,AnimatePresence } from "framer-motion"
 
 // components
 import Image from "@components/Images";
@@ -99,7 +100,14 @@ function Card(props) {
   };
 
   return (
-    <div className="productContainer-selectionContainer-cards-wrap">
+    <AnimatePresence>
+    <motion.div 
+      className="productContainer-selectionContainer-cards-wrap"
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <Button
         disabled={false}
         onClick={goToDetail}
@@ -141,7 +149,8 @@ function Card(props) {
           toggleToFavorite={toggleToFavorite}
         />
       </div>
-    </div>
+    </motion.div>
+    </AnimatePresence>
   );
 }
 

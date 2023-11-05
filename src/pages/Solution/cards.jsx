@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion,AnimatePresence } from "framer-motion"
 
 // components
 import Rating from '@mui/material/Rating';
@@ -8,7 +9,12 @@ import { cardsData } from "@Data/solutions";
 
 function Cards() {
   return (
-    <div className="solution-feedbacks-cards">
+    <motion.div 
+      className="solution-feedbacks-cards"
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       {cardsData.map((item, index) => (
         <div className="solution-feedbacks-cards-card" key={index}>
           <Rating
@@ -28,7 +34,7 @@ function Cards() {
           <h3>{item.occupation}</h3>
         </div>
       ))}
-    </div>
+    </motion.div>
   );
 }
 

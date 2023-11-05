@@ -75,8 +75,8 @@ function ProductList() {
     sequenceType: 'asc'
   });
   const [workSpaceList, setWorkSpaceList] = useState([]);
-  const [rating, setRating] = useState(3);
-  const [priceRange, setPriceRange] = useState(`160-200`);
+  const [rating, setRating] = useState(0);
+  const [priceRange, setPriceRange] = useState(`Unlimited`);
   const [showMore, setShowMore] = useState(false);
 
   const setLocationHandler = (param) => {
@@ -148,7 +148,7 @@ function ProductList() {
         return result;
       });
 
-      console.log('workSpaceList',workSpaceList)
+      console.log('filterResult',filterResult)
       setWorkSpaceList(filterResult);
     }
 

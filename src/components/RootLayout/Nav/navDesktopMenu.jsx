@@ -19,7 +19,9 @@ function NavDesktopMenu(props) {
   }
 
   return (
-    <div className="nav-desktop-menu">
+    <div 
+      className="nav-desktop-menu"
+    >
 
       <div className="nav-desktop-menu-profileBox">
         <AccountCircleOutlined sx={{ fontSize: '4rem' }} className={`nav-desktop-menu-profileBox-icon`} />
