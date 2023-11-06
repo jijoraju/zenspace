@@ -33,11 +33,11 @@ function NavDesktopMenu(props) {
 
       {/* profile */}
       <CustomButton 
-        onClick={()=>{}}
+        onClick={()=>goToPage('profile')}
         className={`nav-desktop-menu-logoutBtn`}
         disabled={false}
       >
-        <AssignmentIndOutlined  className={`nav-desktop-menu-logoutBtn-icon`} />
+        <AssignmentIndOutlined className={`nav-desktop-menu-logoutBtn-icon`} />
         <span>My Zenspace</span>
       </CustomButton>
 

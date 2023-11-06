@@ -1,12 +1,7 @@
 import React, { useState ,useEffect,useCallback} from "react";
 import { GoogleMap, Marker,useJsApiLoader } from "@react-google-maps/api";
 
-const containerStyle = {
-  width: '100%',
-  height: '70vh'
-};
-
-const CustomMap = ({ center, zoom, markers, style }) => {
+const CustomMap = ({ center, zoom, markers, style ,mapStyle}) => {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -36,7 +31,7 @@ const CustomMap = ({ center, zoom, markers, style }) => {
     <div className={style}>
       {isLoaded ? (
         <GoogleMap
-          mapContainerStyle={containerStyle}
+          mapContainerStyle={mapStyle}
           center={center}
           zoom={zoom}
           defaultZoom={zoom} 
@@ -44,13 +39,14 @@ const CustomMap = ({ center, zoom, markers, style }) => {
           onUnmount={onUnmount}
         >
           {
-          markers.map((marker, index) => (
-            <Marker
-              key={index}
-              position={marker.position}
-              onClick={() => console.log('marker',marker)}
-            />
-          ))
+            // markers.length && 
+            markers.map((marker, index) => (
+              <Marker
+                key={index}
+                position={marker.position}
+                onClick={() => console.log('marker',marker)}
+              />
+            ))
           }
         </GoogleMap>
       ) : (

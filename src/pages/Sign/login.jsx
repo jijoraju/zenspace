@@ -66,12 +66,12 @@ function Login() {
   // check form isValid
   useEffect(() => {
     const identifier = setTimeout(() => {
-      console.log("Checking form validity!");
+      // console.log("Checking form validity!");
       setFormIsValid(enteredEmailIsValid && enteredPasswordIsValid);
     }, 500);
 
     return () => {
-      console.log("CLEANUP");
+      // console.log("CLEANUP");
       clearTimeout(identifier);
     };
   }, [enteredEmailIsValid, enteredPasswordIsValid]);

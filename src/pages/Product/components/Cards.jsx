@@ -21,6 +21,7 @@ function Cards(props) {
         img2: `home/solutions/Gallery_Workplace.jpg`,
         img3: `home/solutions/Gallery_Workplace.jpg`,
         fullInfo: item,
+        // productPageState,
       };
 
       return <Card key={index} {...cardProps} />;

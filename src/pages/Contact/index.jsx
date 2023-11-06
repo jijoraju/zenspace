@@ -47,6 +47,10 @@ function Contact() {
         <CustomMap
           {...mapData}
           style={`contact-area-map-contactMap`}
+          mapStyle={ {
+            width: '100%',
+            height: '70vh'
+          }}
         />
 
         <div className="contact-area-map-info">

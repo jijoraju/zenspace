@@ -53,7 +53,7 @@
             margin-right: 0 !important;
           }
 
-          &:nth-child(2){
+          &:nth-child(2) {
             width: 8rem;
           }
 
@@ -62,7 +62,7 @@
             width: 7rem;
           }
 
-          &:nth-child(5){
+          &:nth-child(5) {
             width: 12rem;
           }
 
@@ -70,7 +70,7 @@
             flex: 1;
             &:nth-child(3),
             &:nth-child(4) {
-              flex:0;
+              flex: 0;
               flex-basis: 7rem !important;
             }
           }
@@ -80,19 +80,20 @@
             margin: 1rem 0.5rem 1rem 0 !important;
             transition: 1s;
 
-            &:nth-child(2){
-            flex-basis: 7rem !important;
+            &:nth-child(2) {
+              flex-basis: 7rem !important;
             }
 
             &:nth-child(4) {
               margin: 1rem 0rem 1rem 0 !important;
             }
 
-            &:nth-child(5),&:nth-child(6){
+            &:nth-child(5),
+            &:nth-child(6) {
               display: none;
             }
-            
-            &.showMore{
+
+            &.showMore {
               display: flex;
             }
           }
@@ -140,10 +141,10 @@
           justify-content: center;
           display: none;
         }
-        &.showMore{
+        &.showMore {
           display: flex;
         }
-        
+
         & span {
           margin: 0 1rem;
           font-size: 1.6rem;
@@ -210,19 +211,19 @@
         grid-template-columns: repeat(auto-fit, minmax(32%, 100%));
       }
 
-      &-wrap{
+      &-wrap {
         position: relative;
         display: grid;
         grid-template-columns: 100%;
-        
+
         &-card {
           position: relative;
           @include boxShadow(0px, 2px, 20px, 0px, rgba(0, 0, 0, 0.1));
-          border:0;
+          border: 0;
           background-color: $color-white;
           cursor: pointer;
 
-          &:hover{
+          &:hover {
             @include boxShadow(0px, 2px, 20px, 0px, rgba(11, 46, 114, 0.3));
           }
 
@@ -237,7 +238,12 @@
               position: absolute;
               top: -100%;
               left: 0;
+              transition: .3s;
               transform: translateY(15%);
+
+              &:hover{
+                transform: scale(1.05);
+              }
             }
           }
 
@@ -307,13 +313,11 @@
           z-index: 1;
         }
       }
-
     }
   }
 
-
-  &-showMoreBtn{
-    width:100%;
+  &-showMoreBtn {
+    width: 100%;
     height: 2rem;
     background-color: transparent;
     border: 0;
@@ -323,13 +327,13 @@
       display: block;
     }
 
-    &-icon{
+    &-icon {
       font-size: 3rem !important;
       color: $color-primary;
     }
   }
 
-  &-paginationContainer{
+  &-paginationContainer {
     display: flex;
     justify-content: center;
     align-items: center;

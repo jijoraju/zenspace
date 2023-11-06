@@ -148,7 +148,7 @@ function ProductList() {
         return result;
       });
 
-      console.log('filterResult',filterResult)
+      // console.log('filterResult',filterResult)
       setWorkSpaceList(filterResult);
     }
 
@@ -207,6 +207,7 @@ function ProductList() {
       <Cards
         workSpaceResult={workSpaceList}
         loadingStatus={status == "pending"}
+        // productPageState={productPageState}
       />
 
     {

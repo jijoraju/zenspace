@@ -8,12 +8,13 @@ import LoadingSpinner from "@components/LoadingSpinner";
 
 const Home = lazy(() => import('./Home'));
 const ProductList = lazy(() => import('./Product'));
-const ProductDetail = lazy(() => import('./Product/ProductDetail'));
+const ProductDetail = lazy(() => import('./ProductDetail'));
 const Favorite = lazy(() => import('./Favorite'));
 const Solution = lazy(() => import('./Solution'));
 const ErrorPage = lazy(() => import('./ErrorPage'));
 const Contact = lazy(() => import('./Contact'));
 const Sign = lazy(() => import('./Sign'));
+const Profile = lazy(() => import('./Profile'));
 
 function Root() {
   const router = createBrowserRouter([
@@ -58,6 +59,10 @@ function Root() {
         {
           path: "register",
           element: <Sign />,
+        },
+        {
+          path: "profile",
+          element: <Profile />,
         },
       ],
     },

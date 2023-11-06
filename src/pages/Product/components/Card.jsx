@@ -92,6 +92,7 @@ function Card(props) {
 
     const data =  {
       detailData: fullInfo,
+      // productPageState,
     }
 
     navigate(`${spaceName}`,{state:data});

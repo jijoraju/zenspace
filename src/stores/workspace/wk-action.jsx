@@ -28,6 +28,16 @@ export async function getWorkSpaceHandler(param) {
   return response;
 }
 
+// fetch product Detail api
+export async function fetchProductDetailHandler(id) {
+  const response = await fetchRequest(`/api/workspace/${id}`, `GET`);
+  return response;
+}
+
+
+// ---------------------------
+
+
 // get location from localStorage
 export const getLocationFromStorage = () => {
   const locationList = JSON.parse(localStorage.getItem("locationList"));

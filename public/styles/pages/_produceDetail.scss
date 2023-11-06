@@ -1,0 +1,238 @@
+.detailContainer{
+  max-width: 144rem;
+  margin: 0 auto;
+
+  // main content
+  &-mainContent{
+    padding: 3rem 0;
+
+    display: flex;
+    justify-content:space-between;
+
+    &-info{
+      max-width: 100%;
+      flex-direction: column;
+      padding-right: 5vw;
+
+      & h1{
+        font-size: 4.4rem;
+      }
+
+      & .subtitleWrap{
+        color: $color-primary;
+        font-size: 1.8rem;
+        line-height: 3rem;
+      }
+
+      & .detailWrap{
+          color: $color-primary;
+          font-size: 1.8rem;
+          line-height: 3rem;
+          margin: 3rem 0;
+
+          & p:first-child{
+            font-weight: bold;
+            font-size: 2.4rem;
+          }
+      }
+
+      & .workspaceAmenities{
+        & p{
+          color: $color-primary;
+          font-weight: bold;
+          font-size: 2.4rem;
+        }
+        // facilities
+        & .amenities{
+          padding: 2rem 0;
+          width: 50vw;
+          display: flex;
+          flex-wrap: wrap;
+
+
+          & div{
+            margin-bottom: 1rem;
+            margin-right: 1rem;
+            padding: 1rem 3rem;
+            color: $color-primary;
+            @include border-style(0.1rem,solid, $color-primary);
+            display: flex;
+            align-items: center;
+
+            & p{
+              display: inline-block;
+              padding-left: 1rem;
+              font-size: 1.4rem;
+            }
+          }
+        }
+      }
+    }
+
+    // checkBox
+    & .checkBox{
+      width: 38.8rem;
+      height: 52.4rem;
+      @include border-style(0.1rem,solid, $color-primary);
+      padding: 5rem 3rem;
+      display: flex;
+      flex-direction: column;
+
+      &-priceInfo{
+        padding: 3rem 0;
+        border-bottom: 1px solid $color-primary;
+        width: 100%;
+
+        & .priceDay{
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          align-items: flex-end;
+
+          & h1, & p{
+            display: inline-block;
+            color:$color-primary;
+          }
+
+          & h1{
+            font-size: 5.6rem;
+            font-weight: bold;
+          }
+
+          & p{
+            font-size: 2.2rem;
+            padding-bottom: 1.5rem;
+          }
+        }
+
+      }
+
+      &-info{
+        padding: 3rem 0;
+
+        &-infoRow{
+          padding: 1rem 0;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+
+          & img{
+            width: 2.6rem;
+            height: 2.6rem;
+          }
+
+          & p{
+            padding-left: 1.2rem;
+            display: inline-block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color:$color-primary;
+          }
+        }
+      }
+
+      &-submitBtn{
+        width:100%;
+        padding: 1.6rem 3.6rem;
+        background-color: $color-primary;
+        color:$color-white;
+        border:0;
+        font-size: 1.8rem;
+        font-weight: 700;
+        align-self: flex-end;
+      }
+    }
+  }
+
+  // map
+  & .detailContainer-mapWrap{
+    // max-height: 32rem;
+
+    &-title{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      color: $color-primary;
+
+      & p{
+        font-size: 1.5vw;
+        color: $color-primary;
+        font-weight: bold;
+        padding: 2rem 0;
+      }
+    }
+
+    &-map{
+      max-height: 31.1rem;
+    }
+
+    &-description{
+      color: $color-primary;
+      font-size: 1.5vw;
+      line-height: 3rem;
+      margin: 3rem 0;
+    }
+  }
+
+  // reviews cards
+  &-cards{
+    margin: 5rem auto 0;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+
+    @include respond($bp-medium) {
+      // flex-direction: column;
+      justify-content: center;
+    }
+
+    &-card{
+      padding: 3rem 2rem;
+      margin-right: 3rem;
+      transition: .3s;
+      @include whSize(30rem,25rem);
+      @include boxShadow(0px, 2px, 20px, 0px, rgba(0, 0, 0, 0.1));
+      display: flex;
+      flex-direction: column;
+
+      &:hover{
+        @include boxShadow(0px, 2px, 20px, 0px, rgba(0, 0, 0, 0.3));
+      }
+
+      @include respond($bp-medium) {
+        margin-bottom: 2.5rem;
+      }
+
+      & p{
+        color: $color-gray;
+        margin: 2.5rem 0;
+        font-size: 1.8rem;
+      }
+
+      & h3{
+        font-size: 2rem;
+        color:$color-primary;
+        margin: .7rem 0;
+
+        &:nth-of-type(1){
+          font-weight: bold;
+        }
+
+        &:nth-of-type(2){
+          font-size: 1.8rem;
+          font-weight: normal;
+        }
+      }
+
+      & h4{
+        color:$color-primary;
+      }
+    }
+
+  }
+}
