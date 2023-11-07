@@ -96,7 +96,7 @@ function Card(props) {
       detailData: fullInfo,
     }
 
-    navigate(`/product/${spaceName}`,{state:data});
+    navigate(`/favorite/${spaceName}`,{state:data});
   };
 
   return (

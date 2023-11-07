@@ -21,11 +21,18 @@ const CustomMap = ({ center, zoom, markers, style ,mapStyle}) => {
     */
     setMap(map)
     // console.log('map',map)
-  }, [])
+  }, [center])
 
+  // useEffect(()=>{
+  //   onLoad()
+  // },[onLoad,markers])
+  
   const onUnmount = useCallback(function callback(map) {
     setMap(null)
   }, [])
+
+
+  if(!markers) return 
 
   return (
     <div className={style}>

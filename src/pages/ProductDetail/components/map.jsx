@@ -20,6 +20,8 @@ function Map(props) {
     ],
   })
 
+  if(!mapData && !mapLocation) return
+  
   return (
     <div className='detailContainer-mapWrap'>
 
@@ -29,7 +31,7 @@ function Map(props) {
       </div>
 
       {
-        mapData &&
+        mapData?.latitude && mapData?.longitude && 
         <CustomMap
           {...mapLocation}
           style={`detailContainer-mapWrap-map`}

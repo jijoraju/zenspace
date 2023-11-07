@@ -23,7 +23,6 @@ function ProductDetail() {
   const {pathname, state} = location
   const { detailData } = state
 
-
   // use http hook
   const {
     sendRequest: fetchDetailApi,
@@ -35,12 +34,6 @@ function ProductDetail() {
   useEffect(()=>{
     fetchDetailApi(detailData.workspace_id)
   },[])
-
-  // get data
-  useEffect(()=>{
-    console.log('productDetailData',productDetailData)
-  },[productDetailData])
-
 
   if(!productDetailData)return
 
@@ -62,6 +55,7 @@ function ProductDetail() {
 
 
   const { workspaceAddress, description, reviews } = productDetailData?.data
+
   return (
     <div className="detailContainer">
       {/* bread crumbs */}

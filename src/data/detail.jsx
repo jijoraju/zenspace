@@ -41,4 +41,8 @@ export const facilities = [
     name: "Coffee/Tea",
     img: "Coffee",
   },
+  {
+    name: "Locker",
+    img: "Locker",
+  },
 ]

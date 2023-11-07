@@ -45,6 +45,10 @@ function Root() {
           element: <Favorite />,
         },
         {
+          path: "favorite/:productId",
+          element: <ProductDetail />,
+        },
+        {
           path: "solutions",
           element: <Solution />,
         },
