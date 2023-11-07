@@ -42,19 +42,39 @@
     display: flex;
     justify-content:space-between;
 
+    @include respond($bp-medium) {
+      flex-direction: column;
+    }
+
+    // @include respond($bp-small) {
+    //   padding: 2rem 2rem 1rem;
+    // }
+
     &-info{
       max-width: 100%;
       flex-direction: column;
       padding-right: 5vw;
 
+      @include respond($bp-medium) {
+        width:100%;
+      }
+
       & h1{
         font-size: 4.4rem;
+
+        @include respond($bp-small) {
+          font-size: 2.4rem;
+        }
       }
 
       & .subtitleWrap{
         color: $color-primary;
         font-size: 1.8rem;
         line-height: 3rem;
+
+        @include respond($bp-small) {
+          font-size: 4.5vw;
+        }
       }
 
       & .detailWrap{
@@ -63,9 +83,17 @@
           line-height: 3rem;
           margin: 3rem 0;
 
+          @include respond($bp-small) {
+            font-size: 3.7vw;
+          }
+
           & p:first-child{
             font-weight: bold;
             font-size: 2.4rem;
+
+            @include respond($bp-small) {
+              font-size: 2rem;
+            }
           }
       }
 
@@ -82,6 +110,9 @@
           display: flex;
           flex-wrap: wrap;
 
+          @include respond($bp-medium) {
+            width: 100%;
+          }
 
           & div{
             margin-bottom: 1rem;
@@ -92,6 +123,10 @@
             display: flex;
             align-items: center;
 
+            @include respond($bp-small) {
+              padding: 1rem 1.8rem;
+            }
+
             & p{
               display: inline-block;
               padding-left: 1rem;
@@ -100,6 +135,7 @@
           }
         }
       }
+
     }
 
     // checkBox
@@ -110,6 +146,10 @@
       padding: 5rem 3rem;
       display: flex;
       flex-direction: column;
+
+      @include respond($bp-medium) {
+        width: 100%;
+      }
 
       &-priceInfo{
         padding: 3rem 0;
@@ -194,6 +234,11 @@
         color: $color-primary;
         font-weight: bold;
         padding: 2rem 0;
+
+        @include respond($bp-medium) {
+          font-size: 3.5vw;
+        }
+
       }
     }
 
@@ -206,6 +251,16 @@
       font-size: 1.5vw;
       line-height: 3rem;
       margin: 3rem 0;
+
+      @include respond($bp-medium) {
+        font-size: 2.8vw;
+      }
+
+      @include respond($bp-small) {
+        font-size: 3vw;
+        line-height: 2rem;
+        margin: 1.5rem 0;
+      }
     }
   }
 
@@ -238,12 +293,12 @@
       }
 
       @include respond($bp-medium) {
-        width: 32rem;
+        width: 48%;
         margin-bottom: 2.5rem;
         margin-right: 0rem;
       }
 
-      @include respond($bp-medium) {
+      @include respond($bp-small) {
         width: 100%;
       }
 
