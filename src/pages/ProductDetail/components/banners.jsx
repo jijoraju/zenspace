@@ -1,101 +1,66 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 
-// MUI
-import Modal from '@mui/material/Modal';
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
+import PhotoAlbum from "react-photo-album";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
-// Swiper
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper/modules";
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-
-
-
-// import PhotoAlbum from "react-photo-album";
-// import Lightbox from "yet-another-react-lightbox";
+import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
+import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
+import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import "yet-another-react-lightbox/plugins/thumbnails.css";
 
 // components
-import Image from "@components/Images";
+// import Image from "@components/Images";
 
 function Banners(props) {
-  // const [swiperRef, setSwiperRef] = useState(null);
-  // const [sliderView, setSliderView] = useState(3);
-  const [open, setOpen] = React.useState(false);
 
-  // const [photoIndex,setPhotoIndex] = useState(0);
-
+  const [index, setIndex] = useState(-1);
+  const [photos, setPhotos] = useState(null); 
   const { bannerData } = props;
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  useEffect(()=>{
 
-  // const renderImgs = bannerData?.map((item, index) => (
-  //   // <SwiperSlide key={index}>
-  //     <Image
-  //       key={index}
-  //       src={item}
-  //       alt={`detail img ${index + 1}`}
-  //       styles={`detail-img`}
-  //       img2={item}
-  //       img3={item}
-  //     />
-  //   // </SwiperSlide>
-  // ));
+    const photosHandler = () =>{
+     const imgs =  bannerData.map((item)=>({
+        src: item,
+        width: 1080,
+        height: 800,
+        srcSet: [
+          { src: item, width: 1080, height: 800 },
+          { src: item, width: 1080, height: 800 },
+        ],
+      }))
+
+      setPhotos(imgs)
+      console.log('photos',photos)
+    }
+
+    photosHandler()
+  },[bannerData])
+
 
   return (
     <div className="bannerContainer">
-      {/* <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      > */}
-        {/* <Swiper
-          onSwiper={setSwiperRef}
-          spaceBetween={30}
-          slidesPerView={sliderView}
-          navigation={true}
-          // loop={true}
-          // pagination={{
-          //   type: 'fraction',
-          // }}
-          pagination={true} 
-          modules={[Pagination, Navigation]}
-          freeMode={true} // 启用Manipulation效果
-          // freeModeSticky={true} // 使轮播项粘附在滑动结束的位置
-          centeredSlides={true}
-          className="productDetailCarousel"
-        >
-          {renderImgs}
-        </Swiper> */}
-      {/* </Modal> */}
+      {
+        photos?.length ?
+        <>
+          <PhotoAlbum
+            layout="rows"
+            photos={photos}
+            targetRowHeight={150}
+            onClick={({ index }) => setIndex(index)}
+          />
 
-      {/* {renderImgs} */}
-      <ImageList sx={{ width: "100%", height: 450 }} cols={3} rowHeight={164}>
-        {bannerData.map((item, index) => (
-          <div
-            onClick={handleOpen}
-            className="bannerContainer-imgBtn"
-            key={index}
-          >
-            <ImageListItem>
-              <img srcSet={item} src={item} alt={index + 1} loading="lazy" />
-            </ImageListItem>
-          </div>
-        ))}
-      </ImageList>
-
-      {/* <PhotoAlbum
-        layout="rows"
-        photos={bannerData}
-        targetRowHeight={150}
-        onClick={({ index: current }) => setIndex(current)}
-      /> */}
+          <Lightbox
+            index={index}
+            open={index >= 0}
+            slides={photos}
+            close={() => setIndex(-1)}
+            plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
+          />
+        </>:null
+      }
     </div>
   );
 }
