@@ -9,6 +9,7 @@ import LoadingSpinner from "@components/LoadingSpinner";
 const Home = lazy(() => import('./Home'));
 const ProductList = lazy(() => import('./Product'));
 const ProductDetail = lazy(() => import('./ProductDetail'));
+const Payment = lazy(() => import('./Payment'));
 const Favorite = lazy(() => import('./Favorite'));
 const Solution = lazy(() => import('./Solution'));
 const ErrorPage = lazy(() => import('./ErrorPage'));
@@ -47,6 +48,10 @@ function Root() {
         {
           path: "favorite/:productId",
           element: <ProductDetail />,
+        },
+        {
+          path: "payment",
+          element: <Payment />,
         },
         {
           path: "solutions",

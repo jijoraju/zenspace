@@ -1,4 +1,5 @@
 import React, { useReducer, useState, useEffect } from "react";
+import { useNavigate, Link, useParams, useLocation, } from "react-router-dom";
 import moment from 'moment';
 
 // MUI
@@ -16,6 +17,7 @@ import { checkBoxDes, facilities} from '@Data/detail'
 
 
 function MainContent({productDetailData}) {
+  const navigate = useNavigate()
   
   const {name, no_of_spaces, workspaceAddress, description,amenities,avgRating, price_per_day, reviews, workspace_type} = productDetailData?.data
 
@@ -39,6 +41,9 @@ function MainContent({productDetailData}) {
 
   },[dateData])
 
+  const submitPay = ()=>{
+    navigate('/payment')
+  }
 
   return (
     <div className="detailContainer-mainContent">
@@ -139,8 +144,7 @@ function MainContent({productDetailData}) {
 
         {/* submit */}
         <CustomButton
-          // onClick={setToggleDeskMenuHandler}
-          // onClick={fetchLogout}
+          onClick={submitPay}
           className={`checkBox-submitBtn`}
           disabled={false}
         >
