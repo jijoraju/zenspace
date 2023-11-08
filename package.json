@@ -24,7 +24,6 @@
     "install": "^0.13.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
-    "npm": "^10.2.0",
     "react": "^18.2.0",
     "react-day-picker": "^8.8.2",
     "react-dom": "^18.2.0",

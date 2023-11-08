@@ -8,6 +8,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import MainContent from './components/mainContent'
 import MapComponent from './components/map'
 import Reviews from './components/reviews'
+import Banner from './components/banners'
 
 // custom hook
 import useHttp from "@hook/use-http";
@@ -48,13 +49,14 @@ function ProductDetail() {
             </span>
           ) : (
             <Link key={to} to={to} className='detailContainer-crumbs-crumb'>
-              {decodeURIComponent(value.toUpperCase())}
+              {/* {decodeURIComponent(value.toUpperCase())} */}
+              {`Workspace`.toUpperCase()}
             </Link>
           );
         })
 
 
-  const { workspaceAddress, description, reviews } = productDetailData?.data
+  const { workspaceAddress, description, reviews, photos } = productDetailData?.data
 
   return (
     <div className="detailContainer">
@@ -64,7 +66,7 @@ function ProductDetail() {
       </Breadcrumbs>
 
       {/* banner */}
-      <div></div>
+      <Banner bannerData={photos} />
 
       {/* detail */}
       <MainContent productDetailData={productDetailData} />

@@ -20,11 +20,11 @@ function MainContent({productDetailData}) {
     <div className="detailContainer-mainContent">
       {/* information */}
       <div className="detailContainer-mainContent-info">
-        <h1>Private Pass - {no_of_spaces} Available</h1>
+        <h1>{name}</h1>
         <Rating value={avgRating} />
 
         <div className='subtitleWrap'>
-          <p>{name}</p>
+          <p>Private Pass - {no_of_spaces} Available</p>
           <p>{workspaceAddress?.address}</p>
         </div>
 
@@ -71,7 +71,7 @@ function MainContent({productDetailData}) {
         {/* price info */}
         <div className='checkBox-priceInfo'>
           <div className='priceDay'>
-            <h1>${price_per_day}</h1>
+            <h1>CA$ {price_per_day}</h1>
             <p>/Daily</p>
           </div>
         </div>
