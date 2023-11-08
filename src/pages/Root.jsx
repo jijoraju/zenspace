@@ -9,7 +9,7 @@ import LoadingSpinner from "@components/LoadingSpinner";
 const Home = lazy(() => import('./Home'));
 const ProductList = lazy(() => import('./Product'));
 const ProductDetail = lazy(() => import('./ProductDetail'));
-const Payment = lazy(() => import('./Payment'));
+const Payment = lazy(() => import('./Checkout'));
 const Favorite = lazy(() => import('./Favorite'));
 const Solution = lazy(() => import('./Solution'));
 const ErrorPage = lazy(() => import('./ErrorPage'));
