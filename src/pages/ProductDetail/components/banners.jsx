@@ -10,9 +10,6 @@ import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 
-// components
-// import Image from "@components/Images";
-
 function Banners(props) {
 
   const [index, setIndex] = useState(-1);
@@ -33,7 +30,6 @@ function Banners(props) {
       }))
 
       setPhotos(imgs)
-      console.log('photos',photos)
     }
 
     photosHandler()

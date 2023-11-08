@@ -4,13 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 // components
 import LocationSelection from "./components/locationSelection";
 import DateSelection from "./components/dateSelection";
-import DatePicker from "./components/DatePickerComponent";
+// import DatePicker from "./components/DatePickerComponent";
 import HeadCount from "./components/headCount";
 import RateComponent from "./components/RateComponent";
 import PriceRange from "./components/PriceRange";
 import SequenceComponent from './components/sequence'
 import Cards from "./components/Cards";
 import Button from "@components/Button";
+import DatePicker from "@components/DatePickerComponent";
 
 // MUI
 import {
@@ -187,6 +188,7 @@ function ProductList() {
             <DatePicker
               type={productPageState.dateSelected.workspace_type}
               setDateRangeHandler={setDateRangeHandler}
+              cssStyle={`productContainer-selectionContainer-selectionsRow-datePicker`}
             />
           </div>
         </div>
