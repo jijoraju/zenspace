@@ -31,6 +31,11 @@ function ProductDetail() {
     data: productDetailData,
   } = useHttp(fetchProductDetailHandler);
 
+  // GA
+  useEffect(()=>{
+    window.GaTracePageHandler(location.pathname)
+  },[])
+
   // fetch api
   useEffect(()=>{
     fetchDetailApi(detailData.workspace_id)
