@@ -95,7 +95,7 @@ function Card(props) {
       // productPageState,
     }
 
-    navigate(`${spaceName}`,{state:data});
+    navigate(`${workspace_id}`,{state:data});
   };
 
   return (

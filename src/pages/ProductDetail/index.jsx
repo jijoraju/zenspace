@@ -45,7 +45,7 @@ function ProductDetail() {
           const to = `/${pathnames.slice(0, index + 1).join('/')}`;
           return last ? (
             <span key={to} className='detailContainer-crumbs-crumb'>
-              {decodeURIComponent(value)}
+              {decodeURIComponent(detailData.name)}
             </span>
           ) : (
             <Link key={to} to={to} className='detailContainer-crumbs-crumb'>

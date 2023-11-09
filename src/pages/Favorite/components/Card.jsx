@@ -96,7 +96,7 @@ function Card(props) {
       detailData: fullInfo,
     }
 
-    navigate(`/favorite/${spaceName}`,{state:data});
+    navigate(`/favorite/${workspace_id}`,{state:data});
   };
 
   return (
