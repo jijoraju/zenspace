@@ -23,5 +23,6 @@ export default defineConfig({
   define: {
     'MAP_API_KEY': JSON.stringify(process.env.VITE_MAP_API_KEY),
     'API_DOMAIN': JSON.stringify(process.env.VITE_API_DOMAIN),
+    // 'GA_KEY': JSON.stringify(process.env.GA_KEY),
   },
 })
