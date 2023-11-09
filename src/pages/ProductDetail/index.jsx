@@ -33,7 +33,7 @@ function ProductDetail() {
 
   // GA
   useEffect(()=>{
-    window.GaTracePageHandler(location.pathname)
+    window.GaTracePageHandler(location.pathname,'product detail')
   },[])
 
   // fetch api
