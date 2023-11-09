@@ -96,7 +96,7 @@ function Card(props) {
       detailData: fullInfo,
     }
 
-    navigate(`/favorite/${workspace_id}`,{state:data});
+    navigate(`${spaceName?.replaceAll(' ','-')}`,{state:data});
   };
 
   return (

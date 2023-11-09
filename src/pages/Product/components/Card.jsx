@@ -95,7 +95,7 @@ function Card(props) {
       // productPageState,
     }
 
-    navigate(`${workspace_id}`,{state:data});
+    navigate(`${spaceName?.replaceAll(' ','-')}`,{state:data});
   };
 
   return (
