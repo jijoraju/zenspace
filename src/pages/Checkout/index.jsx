@@ -1,10 +1,6 @@
 import React, { useEffect, useReducer } from 'react'
-import { useNavigate, Link, useParams, useLocation, } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-
-import moment from 'moment';
-// MUI
-import Breadcrumbs from '@mui/material/Breadcrumbs';
+import { useNavigate, useLocation, } from "react-router-dom";
+import { useSelector, } from "react-redux";
 
 // components 
 import BookingDetail from './components/BookingDetail'
@@ -17,7 +13,6 @@ import useHttp from "@hook/use-http";
 
 // reducer
 import { fetchProductDetailHandler } from "@Reducer/workspace/wk-action";
-
 
 function paymentReducer(state, action){
   switch (action.type) {
