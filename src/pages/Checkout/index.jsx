@@ -10,6 +10,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import BookingDetail from './components/BookingDetail'
 import PaymentMethods from './components/PaymentMethods'
 import CheckoutDetail from './components/checkoutDetail'
+import CustomButton from "@components/Button";
 
 // custom hook
 import useHttp from "@hook/use-http";
@@ -35,7 +36,7 @@ function paymentReducer(state, action){
   }
 }
 
-function index(props) {
+function Checkout(props) {
   const location = useLocation();
   const navigate = useNavigate()
   const user = useSelector((state)=>state.user)
@@ -43,10 +44,13 @@ function index(props) {
   const { pathname , state} = location
 
   const [checkoutState , dispatch] = useReducer(paymentReducer,{
-    selectedDate: state?.selectedDate,
-    productDetail: state?.detailData,
+    // productDetail: state?.detailData,
+    productDetailData: state?.productDetailData,
     checkoutDetail: null,
-    bookingDetail: null,
+    bookingDetail: {
+      dateSelected:state?.selectedDate,
+      peopleCount:1,
+    },
   })
 
   const setCheckoutDetailHandler = (param) => {
@@ -60,9 +64,9 @@ function index(props) {
   // GA
   useEffect(()=>{
     window.GaTracePageHandler(pathname,'checkout detail')
-    if(!user?.isLogin){
-      navigate(`/login`);
-    }
+    // if(!user?.isLogin){
+    //   navigate(`/login`);
+    // }
   },[])
 
   useEffect(()=>{
@@ -75,7 +79,7 @@ function index(props) {
       const pathnames = state?.fromPage.split('/').filter((x) => x);
 
       const data ={
-        detailData: state?.detailData
+        detailData: checkoutState?.productDetailData
       }
 
       navigate(`/${pathnames[0]}/${pathnames[1]}`, { replace: true, state:data });
@@ -98,12 +102,42 @@ function index(props) {
           <PaymentMethods onChange={setCheckoutDetailHandler} />
         </div>
 
-        <div>
-          <CheckoutDetail />
+        <div className="checkout-container-right">
+          <CheckoutDetail checkoutState={checkoutState} />
+
+          {/* Cancellation policy */}
+          <div className='policyWrap'>
+            <h1>Cancellation policy</h1>
+            <p className='refundable'>This booking is non-refundable. <span>Learn more</span></p>
+
+            <div className='policyCheckBox'>
+              <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked />
+              <label for="vehicle1">Please check to acknowledge our Privacy & <a href="#">Terms Policy</a></label>
+            </div>
+          </div>
+
+
+          {/* Submit button */}
+          <div className='checkoutSubmitWrap'>
+
+            <CustomButton
+              // onClick={setToggleDeskMenuHandler}
+              // onClick={fetchLogout}
+              className={`checkoutSubmitWrap-submitBtn buttons`}
+              disabled={false}
+            >Confirm and pay</CustomButton>
+
+
+            <CustomButton
+              onClick={backToPreviousHandler}
+              className={`checkoutSubmitWrap-cancelBtn buttons`}
+              disabled={false}
+            >Cancel</CustomButton>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default index
+export default Checkout

@@ -13,14 +13,17 @@
   &-container {
     display: flex;
     // justify-content: space-around;
-    align-items: center;
+    // align-items: center;
 
     &-section {
       @include border-style(0.1rem, solid, $color-primary);
       padding: 2.5rem;
-      margin-right: 3rem;
       margin-bottom: 3rem;
       position: relative;
+
+      // &:nth-child(2){
+      //   margin-right: 0rem;
+      // }
 
       & h1 {
         font-size: 1.7vw;
@@ -29,7 +32,8 @@
     }
 
     &-left {
-      width: 60%;
+      width: 55%;
+      margin-right: 3rem;
 
       &-bookingDetail {
         // @include border-style(0.1rem, solid, $color-primary);
@@ -259,6 +263,166 @@
         width: 21%;
         justify-content: space-around;
       }
+    }
+
+    &-right{
+      width: 45%;
+
+      &-Info{
+        display: flex;
+        flex-direction: column;
+        padding: 4rem 2.5rem;
+
+        &-Detail{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          & .imageWrap-img{
+            width: 17rem;
+            height: 13.6rem;
+            display: block;
+          }
+
+          & .product-info{
+            padding-left: 2rem;
+
+            & h1{
+              font-size: 2rem;
+            }
+            
+            & .PrivatePass{
+              font-size: 1.6rem;
+              color: $color-primary;
+              line-height: 2.5rem;
+            }
+
+            & .address{
+              font-size: 1.8rem;
+              color: $color-gray;
+              line-height: 2.5rem;
+            }
+          }
+        }
+
+
+        & .daysInfoWrap{
+          padding: 2rem 0;
+          margin: 4rem 0;
+          border-top: 0.1rem solid $color-gray;
+          border-bottom: 0.1rem solid $color-gray;
+
+          & h2{
+            font-size: 2.2rem;
+          }
+
+          & p{
+            text-align: end;
+            color: $color-gray;
+            font-size: 2rem;
+            font-style: italic;
+          }
+        }
+
+
+        & .priceWrap{
+          & h2{
+            font-size: 2.2rem;
+          }
+
+          & .rowWrap{
+            padding: .5rem 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            p{
+              font-size: 1.8rem;
+
+              &.totalChange{
+                font-size: 2.8rem;
+                font-weight: bold;
+                color: $color-primary;
+              }
+            }
+          }
+
+          & .Disclaimer{
+            text-align: end;
+            color: $color-gray-light1;
+            font-size: 1.8rem;
+          }
+        }
+
+      }
+
+
+      & .policyWrap{
+
+        & h1{
+          font-size: 2.8rem;
+        }
+
+        & .refundable{
+          font-size: 1.8rem;
+          color: $color-gray;
+          line-height: 3rem;
+          padding-top: 2rem;
+
+          & span{
+            color: $color-primary;
+            font-weight: bold;
+          }
+        }
+
+        & .policyCheckBox{
+
+          display: flex;
+          align-items: center;
+
+          & input[type=checkbox]{
+            width: 2rem;
+            height: 2rem;
+          }
+
+          & label{
+            padding-left: 1rem;
+            font-size: 2rem;
+
+            & a{
+              color: $color-secondary;
+            }
+          }
+        }
+
+      }
+
+      & .checkoutSubmitWrap{
+        padding: 2.7rem 0;
+
+        &-submitBtn{
+          @include button-style($color-white,$color-primary);
+        }
+
+        &-cancelBtn{
+          @include button-style($color-primary,$color-white);
+          border: 0.1rem solid $color-primary;
+          margin-left: 2rem;
+        }
+
+        & .buttons{
+          padding: 1.3rem 3.6rem;
+          width: 25rem;
+          cursor: pointer;
+          // font-weight: bold;
+          font-size: 2rem;
+        }
+
+
+      }
+
+
     }
   }
 }

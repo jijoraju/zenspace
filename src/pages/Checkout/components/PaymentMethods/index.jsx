@@ -74,10 +74,15 @@ function PaymentMethods(props) {
   useEffect(()=>{
     const {NameOfCard, expiration, cardNumber,cvvNum,postCode} = detailState
 
-    if(NameOfCard && expiration && cardNumber && cvvNum && postCode){
-      props.onChange(detailState)
-    }
+    const validateDate = setTimeout(()=>{
+      if(NameOfCard && expiration && cardNumber && cvvNum && postCode){
+        props.onChange(detailState)
+      }else{
+        props.onChange(null)
+      }
+    },500)
 
+    return ()=> clearTimeout(validateDate)
   },[detailState])
 
   const inputs = [
@@ -136,8 +141,7 @@ function PaymentMethods(props) {
       max: 7,
     },
   ];
-
-
+  // render Icons
   const iconsData = [
     {
       default: `icon/payIns/visa/visa.png`,      

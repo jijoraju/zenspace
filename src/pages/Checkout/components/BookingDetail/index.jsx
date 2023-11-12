@@ -29,15 +29,15 @@ function detailReducer(state,action){
 
 function BookingDetail(props) {
   // props
-  const {productDetail, selectedDate} = props.checkoutState
-  const { workspace_type, no_of_spaces } = productDetail
+  const {productDetailData, bookingDetail} = props.checkoutState
+  const { workspace_type, no_of_spaces } = productDetailData
 
   // state
   const [dateEdited, setDateEdited] = useState(false)
   const [peopleEdited, setPeopleEdited] = useState(false)
   
   const [ detailState , dispatch] = useReducer(detailReducer,{
-    dateSelected: selectedDate,
+    dateSelected: bookingDetail?.dateSelected,
     peopleCount: 1,
   })
 

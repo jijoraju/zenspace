@@ -49,9 +49,10 @@ function MainContent({productDetailData}) {
     const {pathname, state} = location
 
     const data = {
-      detailData: state?.detailData,
+      // detailData: state?.detailData,
       fromPage: pathname,
       selectedDate: dateData,
+      productDetailData: productDetailData?.data,
     }
 
     if(!user?.isLogin){
