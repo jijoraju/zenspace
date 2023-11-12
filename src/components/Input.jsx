@@ -18,6 +18,7 @@ const Input = React.forwardRef((props, ref) => {
       <label htmlFor={props.id}>{props.label}</label>
       <input
         ref={inputRef}
+        className={props?.inputStyle}
         type={props.type}
         id={props.id}
         value={props.value}
@@ -25,6 +26,7 @@ const Input = React.forwardRef((props, ref) => {
         onFocus={props?.onFocus}
         onBlur={props.onBlur}
         placeholder={props?.placeholder}
+        maxLength={props.max}
         // {...props}
       />
       {

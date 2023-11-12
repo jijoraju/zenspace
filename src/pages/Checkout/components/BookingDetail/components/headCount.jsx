@@ -8,13 +8,13 @@ import MenuItem from "@mui/material/MenuItem";
 // custom hook
 import useInput from "@hook/use-input";
 
-// selection data
-const headCountArr = Array(10)
-  .fill(null)
-  .map((item, index) => (item = { value: index + 1 }));
-
 function HeadCount(props) {
   const headCountRef = useRef();
+
+  // selection data
+  const headCountArr = Array(props?.maximum || 10)
+  .fill(null)
+  .map((item, index) => (item = { value: index + 1 }));
 
   // date location input
   const {

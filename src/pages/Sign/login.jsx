@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // components
@@ -9,7 +9,7 @@ import useInput from "@hook/use-input";
 import useHttp from "@hook/use-http";
 
 // validation
-import {emailReg,passwordReg} from '$LIB/validation';
+import { emailReg, passwordReg } from "$LIB/validation";
 
 // reducer
 import { postSignInHandler, LoginHandler } from "@Reducer/user/user-action";
@@ -17,6 +17,7 @@ import { postSignInHandler, LoginHandler } from "@Reducer/user/user-action";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const user = useSelector((state) => state.user);
@@ -49,8 +50,20 @@ function Login() {
 
   useEffect(() => {
     const checkUserStatus = () => {
+      const {state} = location
+
       if (user.isLogin) {
-        navigate("/", { replace: true });
+        if(state?.fromPage){
+          const pathnames = state?.fromPage.split('/').filter((x) => x);
+
+          const data ={
+            detailData: state?.detailData
+          }
+
+          navigate(`/${pathnames[0]}/${pathnames[1]}`, { replace: true, state:data });
+        }else{
+          navigate("/", { replace: true });
+        }
       }
     };
     checkUserStatus();
@@ -124,7 +137,7 @@ function Login() {
       hasError: passwordInputHasError,
     },
   ];
-  
+
   return (
     <>
       <h1>Log in</h1>
@@ -132,7 +145,8 @@ function Login() {
       <form onSubmit={submitHandler} className="sign-container-area-form">
         {inputs.map((item, index) => (
           <Input
-            key={index} {...item}
+            key={index}
+            {...item}
             className={`sign-container-area-form-inputBox`}
           />
         ))}

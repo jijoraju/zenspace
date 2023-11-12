@@ -149,7 +149,6 @@ function ProductList() {
         return result;
       });
 
-      // console.log('filterResult',filterResult)
       setWorkSpaceList(filterResult);
     }
 
@@ -188,7 +187,7 @@ function ProductList() {
             <DatePicker
               type={productPageState.dateSelected.workspace_type}
               setDateRangeHandler={setDateRangeHandler}
-              cssStyle={`productContainer-selectionContainer-selectionsRow-datePicker`}
+              cssStyle={`datePicker`}
             />
           </div>
         </div>

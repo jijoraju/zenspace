@@ -1,0 +1,52 @@
+.datePicker{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0;
+
+  &-item {
+    flex: 1;
+
+    @include respond($bp-medium) {
+      flex: 2;
+    }
+
+    @include respond($bp-medium) {
+      flex: 2;
+      width: 2rem;
+    }
+
+    & input {
+      padding: 1.5rem 2rem;
+      font-size: 1.4rem;
+      border-radius: 0.5rem;
+      @include border-style(0.1rem, solid, $color-gray-light1);
+      width: 100%;
+
+      &:focus {
+        outline-color: $color-secondary;
+      }
+
+      @include respond($bp-medium) {
+        width: 100%;
+      }
+
+      @include respond($bp-small) {
+        padding: 1rem 2rem;
+        width: 100%;
+      }
+    }
+
+    & + span {
+      margin: 0 1rem;
+      font-size: 2rem;
+    }
+  }
+
+  // & span {
+  //   margin: 0 1rem;
+  //   font-size: 2rem;
+  // }
+
+}

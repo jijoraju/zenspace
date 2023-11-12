@@ -13,17 +13,16 @@ import 'react-day-picker/dist/style.css';
 import ReactGA from "react-ga4";
 ReactGA.initialize([
   {
-    trackingId: "G-7DM34QP1HW",
+    trackingId: GA_KEY,
     // gaOptions: {...}, // optional
     // gtagOptions: {...}, // optional
   },
   {
-    trackingId: "G-7DM34QP1HW'",
+    trackingId: GA_KEY,
   },
 ]);
 
 window.GaTracePageHandler = (location,title) =>{
-  console.log('location',location)
   ReactGA.send({ hitType: "pageview", page: location, title: title});
 }
 

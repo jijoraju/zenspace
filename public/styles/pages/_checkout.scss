@@ -1,0 +1,264 @@
+.checkout {
+  max-width: $maxWight;
+  margin: 0 auto;
+  padding: 2rem 8rem;
+
+  &-backBtn {
+    font-size: 2rem;
+    cursor: pointer;
+    color: $color-gray-dark;
+    padding: 2rem 0;
+  }
+
+  &-container {
+    display: flex;
+    // justify-content: space-around;
+    align-items: center;
+
+    &-section {
+      @include border-style(0.1rem, solid, $color-primary);
+      padding: 2.5rem;
+      margin-right: 3rem;
+      margin-bottom: 3rem;
+      position: relative;
+
+      & h1 {
+        font-size: 1.7vw;
+        color: $color-primary;
+      }
+    }
+
+    &-left {
+      width: 60%;
+
+      &-bookingDetail {
+        // @include border-style(0.1rem, solid, $color-primary);
+        // padding: 2.5rem;
+
+        & .bookingDetail-contentContainer {
+          padding: 2rem 3rem 2rem 0;
+          display: flex;
+          flex-direction: column;
+          // align-items: center;
+
+          &:last-child {
+            padding-bottom: 0;
+          }
+
+          &-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            &:last-child {
+              padding: 1rem 0;
+              width: 40%;
+            }
+
+            & h2 {
+              font-size: 2rem;
+            }
+
+            & p {
+              font-size: 1.8rem;
+            }
+
+            &-editBtn {
+              border: 0 none;
+              background-color: transparent;
+              font-size: 2rem;
+              color: $color-primary;
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      &-payment {
+        @include border-style(0.1rem, solid, $color-primary);
+        padding: 2.5rem;
+
+        & .paymentForm{
+          width:100%;
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: row;
+          align-items: center;
+          
+
+          @include respond($bp-medium){
+            width: 90%;
+          }
+
+          &-inputBox{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 70%;
+            margin: 2rem 0;
+
+            &:nth-child(4){
+              width: 25%;
+              margin-left: 1.5rem;
+            }
+
+            &:last-child{
+              width: 100%;
+              // margin-left: 1.5rem;
+            }
+
+            @include respond($bp-medium){
+              margin: 1.5rem auto;
+            }
+
+            @include respond($bp-small){
+              margin: 1rem auto;
+            }
+
+            & label{
+              font-size: 2rem;
+              color:$color-gray;
+
+              @include respond($bp-medium){
+                font-size: 1.8rem;
+              }
+              @include respond($bp-small){
+                font-size: 1.4rem;
+              }
+            }
+
+            & input{
+              padding: 1.2rem;
+              // border-width: 0;
+              // background-color: $color-light-blue;
+              @include border-style(0.1rem, solid, $color-gray-light1);
+              border-radius: 5px;
+              font-size: 2rem;
+              
+              &::placeholder{
+                color: $color-gray-light1;
+              }
+
+              &.nameInput{
+                width: 100%;
+              }
+
+              &:focus{
+                outline-color: $color-secondary; 
+              }
+
+              @include respond($bp-medium){
+                padding: 0.8rem;
+                font-size: 2rem;
+                @include border-style(0.1rem, solid, $color-primary);
+                border-radius: .5rem;
+              }
+
+              @include respond($bp-small){
+                padding: 0.8rem;
+                font-size: 1.4rem;
+                @include border-style(0.1rem, solid, $color-primary);
+              }
+            }
+
+            & .error-text{
+              color:$color-red;
+              font-size: 1.4rem;
+              line-height: 2rem;
+              height: 1.2rem;
+
+              @include respond($bp-small){
+                font-size: 1.2rem;
+              }
+            }
+          }
+
+
+          & .exp-Container{
+            width: 25%;
+
+            & p.title{
+              font-size: 2rem;
+              color: $color-gray;
+              padding-left: 1.5rem;
+            }
+
+            & p.exp-err{
+              color: $color-red;
+              font-size: 1.4rem;
+              line-height: 2rem;
+              height: 1.2rem;
+               padding-left: 1.5rem;
+            }
+
+            & .exp-wrapper{
+              position: relative;
+              // border: 1px solid #aaa;
+              display: flex;
+              width: 100%;
+              justify-content: space-around;
+              // height: 36px;
+              line-height: 3rem;
+              font-size: 2rem;
+              padding: 1.5rem;
+              @include border-style(1px, solid, $color-gray-light1);
+              border-radius: .3rem;
+              margin-left: 1.5rem;
+              // margin-bottom: 1rem;
+
+              &:after{
+                content: '/';
+                position: absolute;
+                left: 50%;
+                top: 20%;
+                margin-left: -4px;
+                color: #aaa;
+              }
+
+              & input{
+                font-family: monospace;
+                border: 0;
+                width: 3rem;
+                outline: none;
+                appearance: none;
+                font-size: 1.8rem;
+
+                &::placeholder{
+                  color: $color-gray-light1;
+                }
+              }
+            }
+
+          }
+
+        }
+
+        & .disclaimerWrap{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          &-disclaimer{
+            font-size: 1vw;
+            color:$color-primary;
+            padding-left: 1rem;
+          }
+        }
+
+      }
+
+      & .iconsWrap{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: absolute;
+        right: 6%;
+        top: 8%;
+        width: 21%;
+        justify-content: space-around;
+      }
+    }
+  }
+}

@@ -16,8 +16,9 @@ import useInput from "@hook/use-input";
 function DatePicker(props) {
   const startDateRef = useRef();
   const endDateRef = useRef();
-
+  
   const nowDate = moment().tz("America/Toronto");
+  const duration = moment.duration(moment(props?.initialDate?.end).diff(moment(props?.initialDate?.start))) || 1;
   const nextDate = extendDaysHandler(nowDate);
   const sevenDays = extendDaysHandler(nowDate, 6);
 
@@ -71,8 +72,8 @@ function DatePicker(props) {
 
   // default start date and end date
   useEffect(() => {
-    defaultStartDate(localDateFormat(nowDate));
-    defaultEndDate(localDateFormat(minDateEnd));
+    defaultStartDate(localDateFormat(moment(props?.initialDate?.start).tz("America/Toronto") || nowDate));
+    defaultEndDate(localDateFormat(moment(props?.initialDate?.end).tz("America/Toronto") || minDateEnd));
   }, []);
 
   useEffect(() => {

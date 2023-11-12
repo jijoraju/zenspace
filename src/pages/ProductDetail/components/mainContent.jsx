@@ -1,5 +1,7 @@
 import React, { useReducer, useState, useEffect } from "react";
 import { useNavigate, Link, useParams, useLocation, } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
 import moment from 'moment';
 
 // MUI
@@ -17,9 +19,11 @@ import { checkBoxDes, facilities} from '@Data/detail'
 
 
 function MainContent({productDetailData}) {
+  const location = useLocation();
   const navigate = useNavigate()
+  const user = useSelector((state)=>state.user)
   
-  const {name, no_of_spaces, workspaceAddress, description,amenities,avgRating, price_per_day, reviews, workspace_type} = productDetailData?.data
+  const {name, no_of_spaces, workspaceAddress, description,amenities,avgRating, price_per_day, reviews, workspace_type, workspace_id} = productDetailData?.data
 
   const [ dateData, setDateData] = useState({});
   const [ gap, setGap] = useState(1);
@@ -42,7 +46,20 @@ function MainContent({productDetailData}) {
   },[dateData])
 
   const submitPay = ()=>{
-    navigate('/payment')
+    const {pathname, state} = location
+
+    const data = {
+      detailData: state?.detailData,
+      fromPage: pathname,
+      selectedDate: dateData,
+    }
+
+    if(!user?.isLogin){
+      navigate('/login',{ state:data })
+    }else{
+      navigate('/payment',{ state:data })
+    }
+    
   }
 
   return (
@@ -116,7 +133,7 @@ function MainContent({productDetailData}) {
         <div  className='checkBox-datePicker'>
           <DatePicker
             type={workspace_type}
-            cssStyle={`checkBox-datePicker`}
+            cssStyle={`datePicker`}
             setDateRangeHandler={setDateRangeHandler}
           />
         </div>
