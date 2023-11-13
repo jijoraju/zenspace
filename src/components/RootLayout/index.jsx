@@ -15,6 +15,14 @@ function RootLayout() {
     location.pathname
   );
 
+  // GA
+  useEffect(()=>{
+    const { pathname } = location
+    const page = pathname.split('/')
+    console.log('page',page.join('/'))
+    window.GaTracePageHandler(pathname,page.join('/'))
+  },[])
+
   useEffect(() => {
     const getUser = getUserInfo();
     if (getUser) {

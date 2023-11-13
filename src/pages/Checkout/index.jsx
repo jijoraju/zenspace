@@ -58,10 +58,10 @@ function Checkout(props) {
 
   // GA
   useEffect(()=>{
-    window.GaTracePageHandler(pathname,'checkout detail')
-    // if(!user?.isLogin){
-    //   navigate(`/login`);
-    // }
+    // window.GaTracePageHandler(pathname,'checkout detail')
+    if(!user?.isLogin){
+      navigate(`/login`);
+    }
   },[])
 
   useEffect(()=>{
@@ -106,8 +106,8 @@ function Checkout(props) {
             <p className='refundable'>This booking is non-refundable. <span>Learn more</span></p>
 
             <div className='policyCheckBox'>
-              <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked />
-              <label for="vehicle1">Please check to acknowledge our Privacy & <a href="#">Terms Policy</a></label>
+              <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" defaultChecked />
+              <label htmlFor="vehicle1">Please check to acknowledge our Privacy & <a href="#">Terms Policy</a></label>
             </div>
           </div>
 

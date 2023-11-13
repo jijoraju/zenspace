@@ -57,7 +57,7 @@ function Login() {
           const pathnames = state?.fromPage.split('/').filter((x) => x);
 
           const data ={
-            detailData: state?.detailData
+            detailData: state?.productDetailData
           }
 
           navigate(`/${pathnames[0]}/${pathnames[1]}`, { replace: true, state:data });
