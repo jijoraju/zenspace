@@ -11,31 +11,33 @@ import 'react-day-picker/dist/style.css';
 
 // GA
 import ReactGA from "react-ga4";
-ReactGA.initialize([
-  {
-    trackingId: 'G-7DM34QP1HW',
-    // gaOptions: {...}, // optional
-    // gtagOptions: {...}, // optional
-  },
-  // {
-  //   trackingId: GA_KEY,
-  // },
-]);
 
-window.GaTracePageHandler = (location,title) =>{
-  ReactGA.send({ hitType: "pageview", page: location, title: title});
-}
-
-window.GaEvent = ({category,action,label}) =>{
-  // 追踪自定義事件
-  ReactGA.event({
-    category: category,
-    action: action,
-    label: label,
-  });
-}
 
 function App() {
+
+  ReactGA.initialize([
+    {
+      trackingId: GA_KEY,
+      // gaOptions: {...}, // optional
+      // gtagOptions: {...}, // optional
+    },
+    // {
+    //   trackingId: GA_KEY,
+    // },
+  ]);
+
+  window.GaTracePageHandler = (location,title) =>{
+    ReactGA.send({ hitType: "pageview", page: location, title: title});
+  }
+
+  window.GaEvent = ({category,action,label}) =>{
+    // 追踪自定義事件
+    ReactGA.event({
+      category: category,
+      action: action,
+      label: label,
+    });
+  }
 
   return (
     <Provider store={store}>
