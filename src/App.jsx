@@ -13,7 +13,7 @@ import 'react-day-picker/dist/style.css';
 import ReactGA from "react-ga4";
 ReactGA.initialize([
   {
-    trackingId: GA_KEY,
+    trackingId: 'G-7DM34QP1HW',
     // gaOptions: {...}, // optional
     // gtagOptions: {...}, // optional
   },

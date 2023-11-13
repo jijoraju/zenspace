@@ -32,9 +32,9 @@ function ProductDetail() {
   } = useHttp(fetchProductDetailHandler);
 
   // GA
-  useEffect(()=>{
-    window.GaTracePageHandler(location.pathname,'product detail')
-  },[])
+  // useEffect(()=>{
+  //   window.GaTracePageHandler(location.pathname,'product detail')
+  // },[])
 
   // fetch api
   useEffect(()=>{
