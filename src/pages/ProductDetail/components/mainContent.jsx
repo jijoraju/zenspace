@@ -8,6 +8,7 @@ import moment from 'moment';
 import Rating from "@components/Rating";
 // MUI icon
 import StarIcon from '@mui/icons-material/Star';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 // components
 import Image from "@components/Images";
@@ -141,7 +142,7 @@ function MainContent({productDetailData}) {
         </div>
         
         <div className="priceGapArea">
-          <p>CA$ {price_per_day} * {gap} days</p>
+          <p>CA$ {price_per_day} <CloseRoundedIcon /> {gap} days</p>
           <p>CA$ {price_per_day * gap}</p>
         </div>
 

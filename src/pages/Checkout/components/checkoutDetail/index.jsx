@@ -2,6 +2,9 @@ import React, { useState, useEffect, useReducer } from "react";
 
 import moment from 'moment';
 
+// MUI icon
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+
 // components
 import Image from "@components/Images";
 
@@ -28,11 +31,12 @@ function CheckoutDetail(props) {
 
     // 取得間隔的天數
     const days = duration.asDays();
-    const countTotal = price_per_day * days
-    const countTax = countTotal * 0.13
     const type = workspace_type == "ONE_DAY" ? 0 : 1
-
-    setGap(days+type)
+    const resultDays = days + type
+    const countTotal = price_per_day * resultDays
+    const countTax = countTotal * 0.13
+    
+    setGap(resultDays)
     setTotal(countTotal)
     setTax(countTax)
 
@@ -44,11 +48,11 @@ function CheckoutDetail(props) {
       <div className="checkout-container-right-Info-Detail">
         {/* avatar */}
         <Image
-          src={photos.length? photos[0]:`profile/avatar.png`}
+          src={photos.length? photos[0]:`home/solutions/Gallery_Workplace.jpg`}
           alt={`productImg`}
           styles={`imageWrap-img`}
-          img2={photos.length? photos[0]:`profile/avatar.png`}
-          img3={photos.length? photos[0]:`profile/avatar.png`}
+          img2={photos.length? photos[0]:`home/solutions/Gallery_Workplace.jpg`}
+          img3={photos.length? photos[0]:`home/solutions/Gallery_Workplace.jpg`}
         />
 
         {/* info */}
@@ -62,8 +66,8 @@ function CheckoutDetail(props) {
       {/* Items */}
       <div className="daysInfoWrap">
         <h2>Items</h2>
-        <p>Selected days * {gap}</p>
-        <p>Person * {bookingDetail?.peopleCount}</p>
+        <p>Selected days <CloseRoundedIcon /> {gap}</p>
+        <p>Person <CloseRoundedIcon /> {bookingDetail?.peopleCount}</p>
       </div>
 
       {/* Price */}
