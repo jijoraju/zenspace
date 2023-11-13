@@ -55,7 +55,7 @@ function Root() {
           element: <Payment />,
         },
         {
-          path: "checkoutresult",
+          path: "checkout",
           element: <CheckoutResult />,
         },
         {

@@ -40,6 +40,13 @@ function CheckoutDetail(props) {
     setTotal(countTotal)
     setTax(countTax)
 
+    const data = {
+      charge: countTotal,
+      tax: countTax,
+      Total: countTotal+ countTax,
+    }
+
+    props.onChange(data)
   },[dateSelected])
 
   return (

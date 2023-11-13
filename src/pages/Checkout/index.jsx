@@ -26,6 +26,11 @@ function paymentReducer(state, action){
         ...state,
         bookingDetail: action.param,
       };
+    case "setChargeDetail":
+      return {
+        ...state,
+        chargeDetail: action.param,
+      };
     default:
       return state;
   }
@@ -46,6 +51,7 @@ function Checkout(props) {
       dateSelected:state?.selectedDate,
       peopleCount:1,
     },
+    chargeDetail:null
   })
 
   const setCheckoutDetailHandler = (param) => {
@@ -56,9 +62,11 @@ function Checkout(props) {
     dispatch({ type: `setBookingDetail`, param });
   };
 
-  // GA
+  const setChargeHandler = (param) => {
+    dispatch({ type: `setChargeDetail`, param });
+  };
+
   useEffect(()=>{
-    // window.GaTracePageHandler(pathname,'checkout detail')
     if(!user?.isLogin){
       navigate(`/login`);
     }
@@ -68,7 +76,33 @@ function Checkout(props) {
     console.log('checkoutState',checkoutState)
   },[checkoutState])
 
+  // use http hook
+  const {
+    sendRequest: fetchCheckoutApi,
+    status,
+    data: CheckoutRes,
+  } = useHttp(fetchSubmitHandler);
 
+  async function fetchSubmitHandler() {
+    const {productDetailData, bookingDetail, chargeDetail} = checkoutState
+    const data = {
+      workspaceId:  productDetailData?.workspace_id,
+      bookingDetail, 
+      chargeDetail,
+    }
+
+    const response = await fetchRequest(`/api/checkout`, `POST`, data);
+    return response;
+  }
+
+  useEffect(()=>{
+    console.log('CheckoutRes',CheckoutRes)
+    if(CheckoutRes?.data?.url){
+      window.location.href = CheckoutRes?.data?.url
+    }
+  },[CheckoutRes])
+
+  // back to previous
   const backToPreviousHandler= ()=>{
     if(state?.fromPage){
       const pathnames = state?.fromPage.split('/').filter((x) => x);
@@ -98,7 +132,7 @@ function Checkout(props) {
         </div>
 
         <div className="checkout-container-right">
-          <CheckoutDetail checkoutState={checkoutState} />
+          <CheckoutDetail checkoutState={checkoutState} onChange={setChargeHandler} />
 
           {/* Cancellation policy */}
           <div className='policyWrap'>
@@ -116,7 +150,7 @@ function Checkout(props) {
           <div className='checkoutSubmitWrap'>
 
             <CustomButton
-              // onClick={setToggleDeskMenuHandler}
+              onClick={fetchCheckoutApi}
               // onClick={fetchLogout}
               className={`checkoutSubmitWrap-submitBtn buttons`}
               disabled={false}
