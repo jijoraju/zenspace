@@ -10,6 +10,7 @@ const Home = lazy(() => import('./Home'));
 const ProductList = lazy(() => import('./Product'));
 const ProductDetail = lazy(() => import('./ProductDetail'));
 const Payment = lazy(() => import('./Checkout'));
+const CheckoutResult = lazy(() => import('./SuccessPage'));
 const Favorite = lazy(() => import('./Favorite'));
 const Solution = lazy(() => import('./Solution'));
 const ErrorPage = lazy(() => import('./ErrorPage'));
@@ -52,6 +53,10 @@ function Root() {
         {
           path: "payment",
           element: <Payment />,
+        },
+        {
+          path: "checkoutresult",
+          element: <CheckoutResult />,
         },
         {
           path: "solutions",

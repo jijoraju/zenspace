@@ -138,6 +138,7 @@ function MainContent({productDetailData}) {
             type={workspace_type}
             cssStyle={`datePicker`}
             setDateRangeHandler={setDateRangeHandler}
+            disabled={true}
           />
         </div>
         

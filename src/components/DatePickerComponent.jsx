@@ -45,6 +45,7 @@ function DatePicker(props) {
     onBlur: startDateBlurHandler,
     min: nowDate,
     className: `${props.cssStyle}-item`,
+    disabled: props.disabled,
   };
 
   // end date custom input hook
@@ -68,6 +69,7 @@ function DatePicker(props) {
     min: enteredStartDate ? minDateEnd : nextDate,
     max: maxDateEnd,
     className: `${props.cssStyle}-item`,
+    disabled: props.disabled,
   };
 
   // default start date and end date

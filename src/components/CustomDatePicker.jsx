@@ -41,6 +41,7 @@ const CustomDatePicker = React.forwardRef((props, ref) => {
         onBlur={props.onBlur}
         min={localDateFormat(props.min)}
         max={props?.max && localDateFormat(props?.max)}
+        disabled={props?.disabled || false}
       />
     </div>
   );
