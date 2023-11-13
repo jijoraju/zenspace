@@ -17,9 +17,9 @@ ReactGA.initialize([
     // gaOptions: {...}, // optional
     // gtagOptions: {...}, // optional
   },
-  {
-    trackingId: GA_KEY,
-  },
+  // {
+  //   trackingId: GA_KEY,
+  // },
 ]);
 
 window.GaTracePageHandler = (location,title) =>{

@@ -41,7 +41,8 @@ function MainContent({productDetailData}) {
 
     // 取得間隔的天數
     const days = duration.asDays();
-    setGap(days+1)
+    const type = workspace_type == "ONE_DAY" ? 0 : 1
+    setGap(days+type)
 
   },[dateData])
 

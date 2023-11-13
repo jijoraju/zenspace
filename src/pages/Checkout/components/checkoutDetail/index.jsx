@@ -27,10 +27,12 @@ function CheckoutDetail(props) {
     const duration = moment.duration(endDate.diff(startDate));
 
     // 取得間隔的天數
-    const days = workspace_type == 'ONE_DAY' ? 0 : duration.asDays();
+    const days = duration.asDays();
     const countTotal = price_per_day * days
     const countTax = countTotal * 0.13
-    setGap(days+1)
+    const type = workspace_type == "ONE_DAY" ? 0 : 1
+
+    setGap(days+type)
     setTotal(countTotal)
     setTax(countTax)
 
