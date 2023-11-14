@@ -19,7 +19,7 @@ function RootLayout() {
   useEffect(()=>{
     const { pathname } = location
     const page = pathname.split('/')
-    console.log('page',page.join('/'))
+    // console.log('page',page.join('/'))
     window.GaTracePageHandler(pathname,page.join('/'))
   },[])
 

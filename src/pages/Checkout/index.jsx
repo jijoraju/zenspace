@@ -84,7 +84,7 @@ function Checkout(props) {
     if (!user?.isLogin) {
       navigate(`/login`);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     function changeSubmitBtnStatus() {
@@ -138,13 +138,11 @@ function Checkout(props) {
       domain,
     };
 
-    // console.log("payment info", data);
     const response = await fetchRequest(`/api/checkout`, `POST`, data);
     return response;
   }
 
   useEffect(() => {
-    // console.log('CheckoutRes',CheckoutRes)
     if (CheckoutRes?.data?.url) {
       window.location.href = CheckoutRes?.data?.url;
     }
