@@ -41,9 +41,9 @@ function CheckoutDetail(props) {
     setTax(countTax)
 
     const data = {
-      charge: countTotal,
-      tax: countTax,
-      Total: countTotal+ countTax,
+      charge: parseFloat(countTotal),
+      tax: parseFloat(countTax),
+      Total: parseFloat(countTotal+ countTax),
     }
 
     props.onChange(data)

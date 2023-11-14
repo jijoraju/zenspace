@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, useRef, useState } from 'react'
 import { useNavigate, useLocation, } from "react-router-dom";
 import { useSelector, } from "react-redux";
 
@@ -31,6 +31,11 @@ function paymentReducer(state, action){
         ...state,
         chargeDetail: action.param,
       };
+    case "setDisclaimer":
+      return {
+        ...state,
+        disclaimer: action.param,
+      };
     default:
       return state;
   }
@@ -40,6 +45,7 @@ function Checkout(props) {
   const location = useLocation();
   const navigate = useNavigate()
   const user = useSelector((state)=>state.user)
+  const disclaimerInput = useRef(null)
 
   const { pathname , state} = location
 
@@ -51,8 +57,11 @@ function Checkout(props) {
       dateSelected:state?.selectedDate,
       peopleCount:1,
     },
-    chargeDetail:null
+    chargeDetail:null,
+    disclaimer: false,
   })
+
+  const [isDisableSubmit,setIsDisableSubmit] = useState(true)
 
   const setCheckoutDetailHandler = (param) => {
     dispatch({ type: `setCheckout`, param });
@@ -66,6 +75,10 @@ function Checkout(props) {
     dispatch({ type: `setChargeDetail`, param });
   };
 
+  const setDisclaimerHandler = (param) => {
+    dispatch({ type: `setDisclaimer`, param:param.target?.checked });
+  };
+
   useEffect(()=>{
     if(!user?.isLogin){
       navigate(`/login`);
@@ -73,7 +86,21 @@ function Checkout(props) {
   },[])
 
   useEffect(()=>{
-    console.log('checkoutState',checkoutState)
+    
+    function changeSubmitBtnStatus(){
+      const {productDetailData, bookingDetail, chargeDetail, disclaimer} = checkoutState
+      const {workspace_id,workspace_type } = productDetailData
+      const {dateSelected, peopleCount } = bookingDetail
+
+
+      if(workspace_id && workspace_type && dateSelected && peopleCount && disclaimer){
+        setIsDisableSubmit(false)
+      }else{
+        setIsDisableSubmit(true)
+      }
+    }
+
+    changeSubmitBtnStatus();
   },[checkoutState])
 
   // use http hook
@@ -85,18 +112,30 @@ function Checkout(props) {
 
   async function fetchSubmitHandler() {
     const {productDetailData, bookingDetail, chargeDetail} = checkoutState
+    const {workspace_id,workspace_type } = productDetailData
+    const {dateSelected, peopleCount } = bookingDetail
     const data = {
-      workspaceId:  productDetailData?.workspace_id,
-      bookingDetail, 
+      workspace: {
+        id: workspace_id,
+        type: workspace_type,
+      },
+      bookingDetail:{
+        dateSelected:{
+          start: dateSelected?.start,
+          end: workspace_type == "MULTIPLE_DAYS" ?  dateSelected?.end :''
+        },
+        peopleCount
+      }, 
       chargeDetail,
     }
 
+    // console.log('payment info',data)
     const response = await fetchRequest(`/api/checkout`, `POST`, data);
     return response;
   }
 
   useEffect(()=>{
-    console.log('CheckoutRes',CheckoutRes)
+    // console.log('CheckoutRes',CheckoutRes)
     if(CheckoutRes?.data?.url){
       window.location.href = CheckoutRes?.data?.url
     }
@@ -128,7 +167,9 @@ function Checkout(props) {
           <BookingDetail checkoutState={checkoutState} onChange={setBookingDetailHandler} />
 
           {/* payment methods */}
-          <PaymentMethods onChange={setCheckoutDetailHandler} />
+          {/* <PaymentMethods onChange={setCheckoutDetailHandler} /> */}
+          {/* checkout Detail */}
+          {/* <CheckoutDetail checkoutState={checkoutState} onChange={setChargeHandler} /> */}
         </div>
 
         <div className="checkout-container-right">
@@ -140,8 +181,8 @@ function Checkout(props) {
             <p className='refundable'>This booking is non-refundable. <span>Learn more</span></p>
 
             <div className='policyCheckBox'>
-              <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" defaultChecked />
-              <label htmlFor="vehicle1">Please check to acknowledge our Privacy & <a href="#">Terms Policy</a></label>
+              <input ref={disclaimerInput} type="checkbox" id="disclaimer" name="disclaimer" value="Disclaimer" defaultChecked={checkoutState?.disclaimer} onChange={setDisclaimerHandler} />
+              <label htmlFor="disclaimer">Please check to acknowledge our Privacy & <a href="#">Terms Policy</a></label>
             </div>
           </div>
 
@@ -150,18 +191,17 @@ function Checkout(props) {
           <div className='checkoutSubmitWrap'>
 
             <CustomButton
-              onClick={fetchCheckoutApi}
-              // onClick={fetchLogout}
-              className={`checkoutSubmitWrap-submitBtn buttons`}
-              disabled={false}
-            >Confirm and pay</CustomButton>
-
-
-            <CustomButton
               onClick={backToPreviousHandler}
               className={`checkoutSubmitWrap-cancelBtn buttons`}
               disabled={false}
             >Cancel</CustomButton>
+
+            <CustomButton
+              onClick={fetchCheckoutApi}
+              // onClick={fetchLogout}
+              className={`checkoutSubmitWrap-submitBtn buttons ${isDisableSubmit? 'disable' :''}`}
+              disabled={isDisableSubmit}
+            >Confirm and pay</CustomButton>
           </div>
         </div>
       </div>

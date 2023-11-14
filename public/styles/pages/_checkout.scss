@@ -10,8 +10,13 @@
     padding: 2rem 0;
   }
 
+  @include respond($bp-small) {
+    padding: 2rem 2rem 1rem;
+  }
+
   &-container {
     display: flex;
+    flex-direction: column;
     // justify-content: space-around;
     // align-items: center;
 
@@ -32,7 +37,7 @@
     }
 
     &-left {
-      width: 55%;
+      width: 100%; // 55%
       margin-right: 3rem;
 
       &-bookingDetail {
@@ -57,7 +62,11 @@
 
             &:last-child {
               padding: 1rem 0;
-              width: 50%;
+              width: 30%; // 50%
+              @include respond($bp-small) {
+                width: 100%; // 50%
+                padding-top: 2rem;
+              }
             }
 
             & h2 {
@@ -84,120 +93,118 @@
         @include border-style(0.1rem, solid, $color-primary);
         padding: 2.5rem;
 
-        & .paymentForm{
-          width:100%;
+        & .paymentForm {
+          width: 100%;
           display: flex;
           flex-wrap: wrap;
           flex-direction: row;
           align-items: center;
-          
 
-          @include respond($bp-medium){
+          @include respond($bp-medium) {
             width: 90%;
           }
 
-          &-inputBox{
+          &-inputBox {
             display: flex;
             flex-direction: column;
             justify-content: center;
             width: 70%;
             margin: 2rem 0;
 
-            &:nth-child(4){
+            &:nth-child(4) {
               width: 25%;
               margin-left: 1.5rem;
             }
 
-            &:last-child{
+            &:last-child {
               width: 100%;
               // margin-left: 1.5rem;
             }
 
-            @include respond($bp-medium){
+            @include respond($bp-medium) {
               margin: 1.5rem auto;
             }
 
-            @include respond($bp-small){
+            @include respond($bp-small) {
               margin: 1rem auto;
             }
 
-            & label{
+            & label {
               font-size: 2rem;
-              color:$color-gray;
+              color: $color-gray;
 
-              @include respond($bp-medium){
+              @include respond($bp-medium) {
                 font-size: 1.8rem;
               }
-              @include respond($bp-small){
+              @include respond($bp-small) {
                 font-size: 1.4rem;
               }
             }
 
-            & input{
+            & input {
               padding: 1.2rem;
               // border-width: 0;
               // background-color: $color-light-blue;
               @include border-style(0.1rem, solid, $color-gray-light1);
               border-radius: 5px;
               font-size: 2rem;
-              
-              &::placeholder{
+
+              &::placeholder {
                 color: $color-gray-light1;
               }
 
-              &.nameInput{
+              &.nameInput {
                 width: 100%;
               }
 
-              &:focus{
-                outline-color: $color-secondary; 
+              &:focus {
+                outline-color: $color-secondary;
               }
 
-              @include respond($bp-medium){
+              @include respond($bp-medium) {
                 padding: 0.8rem;
                 font-size: 2rem;
                 @include border-style(0.1rem, solid, $color-primary);
-                border-radius: .5rem;
+                border-radius: 0.5rem;
               }
 
-              @include respond($bp-small){
+              @include respond($bp-small) {
                 padding: 0.8rem;
                 font-size: 1.4rem;
                 @include border-style(0.1rem, solid, $color-primary);
               }
             }
 
-            & .error-text{
-              color:$color-red;
+            & .error-text {
+              color: $color-red;
               font-size: 1.4rem;
               line-height: 2rem;
               height: 1.2rem;
 
-              @include respond($bp-small){
+              @include respond($bp-small) {
                 font-size: 1.2rem;
               }
             }
           }
 
-
-          & .exp-Container{
+          & .exp-Container {
             width: 25%;
 
-            & p.title{
+            & p.title {
               font-size: 2rem;
               color: $color-gray;
               padding-left: 1.5rem;
             }
 
-            & p.exp-err{
+            & p.exp-err {
               color: $color-red;
               font-size: 1.4rem;
               line-height: 2rem;
               height: 1.2rem;
-               padding-left: 1.5rem;
+              padding-left: 1.5rem;
             }
 
-            & .exp-wrapper{
+            & .exp-wrapper {
               position: relative;
               // border: 1px solid #aaa;
               display: flex;
@@ -208,12 +215,12 @@
               font-size: 2rem;
               padding: 1.5rem;
               @include border-style(1px, solid, $color-gray-light1);
-              border-radius: .3rem;
+              border-radius: 0.3rem;
               margin-left: 1.5rem;
               // margin-bottom: 1rem;
 
-              &:after{
-                content: '/';
+              &:after {
+                content: "/";
                 position: absolute;
                 left: 50%;
                 top: 20%;
@@ -221,7 +228,7 @@
                 color: #aaa;
               }
 
-              & input{
+              & input {
                 font-family: monospace;
                 border: 0;
                 width: 3rem;
@@ -229,31 +236,28 @@
                 appearance: none;
                 font-size: 1.8rem;
 
-                &::placeholder{
+                &::placeholder {
                   color: $color-gray-light1;
                 }
               }
             }
-
           }
-
         }
 
-        & .disclaimerWrap{
+        & .disclaimerWrap {
           display: flex;
           flex-direction: row;
           align-items: center;
 
-          &-disclaimer{
+          &-disclaimer {
             font-size: 1vw;
-            color:$color-primary;
+            color: $color-primary;
             padding-left: 1rem;
           }
         }
-
       }
 
-      & .iconsWrap{
+      & .iconsWrap {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -265,39 +269,39 @@
       }
     }
 
-    &-right{
-      width: 45%;
+    &-right {
+      width: 100%; // 45%
 
-      &-Info{
+      &-Info {
         display: flex;
         flex-direction: column;
         padding: 4rem 2.5rem;
 
-        &-Detail{
+        &-Detail {
           display: flex;
           flex-direction: row;
           align-items: center;
 
-          & .imageWrap-img{
+          & .imageWrap-img {
             width: 17rem;
             height: 13.6rem;
             display: block;
           }
 
-          & .product-info{
+          & .product-info {
             padding-left: 2rem;
 
-            & h1{
+            & h1 {
               font-size: 2rem;
             }
-            
-            & .PrivatePass{
+
+            & .PrivatePass {
               font-size: 1.6rem;
               color: $color-primary;
               line-height: 2.5rem;
             }
 
-            & .address{
+            & .address {
               font-size: 1.8rem;
               color: $color-gray;
               line-height: 2.5rem;
@@ -305,18 +309,17 @@
           }
         }
 
-
-        & .daysInfoWrap{
+        & .daysInfoWrap {
           padding: 2rem 0;
           margin: 4rem 0;
           border-top: 0.1rem solid $color-gray;
           border-bottom: 0.1rem solid $color-gray;
 
-          & h2{
+          & h2 {
             font-size: 2.2rem;
           }
 
-          & p{
+          & p {
             text-align: end;
             color: $color-gray;
             font-size: 2rem;
@@ -324,23 +327,22 @@
           }
         }
 
-
-        & .priceWrap{
-          & h2{
+        & .priceWrap {
+          & h2 {
             font-size: 2.2rem;
           }
 
-          & .rowWrap{
-            padding: .5rem 0;
+          & .rowWrap {
+            padding: 0.5rem 0;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
 
-            p{
+            p {
               font-size: 1.8rem;
 
-              &.totalChange{
+              &.totalChange {
                 font-size: 2.8rem;
                 font-weight: bold;
                 color: $color-primary;
@@ -348,81 +350,85 @@
             }
           }
 
-          & .Disclaimer{
+          & .Disclaimer {
             text-align: end;
             color: $color-gray-light1;
             font-size: 1.8rem;
           }
         }
-
       }
 
-
-      & .policyWrap{
-
-        & h1{
+      & .policyWrap {
+        & h1 {
           font-size: 2.8rem;
         }
 
-        & .refundable{
+        & .refundable {
           font-size: 1.8rem;
           color: $color-gray;
           line-height: 3rem;
           padding-top: 2rem;
 
-          & span{
+          & span {
             color: $color-primary;
             font-weight: bold;
           }
         }
 
-        & .policyCheckBox{
-
+        & .policyCheckBox {
           display: flex;
           align-items: center;
 
-          & input[type=checkbox]{
+          & input[type="checkbox"] {
             width: 2rem;
             height: 2rem;
           }
 
-          & label{
+          & label {
             padding-left: 1rem;
             font-size: 2rem;
 
-            & a{
+            & a {
               color: $color-secondary;
             }
           }
         }
-
       }
 
-      & .checkoutSubmitWrap{
+      & .checkoutSubmitWrap {
         padding: 2.7rem 0;
+        display: flex;
+        justify-content: end;
 
-        &-submitBtn{
-          @include button-style($color-white,$color-primary);
-        }
-
-        &-cancelBtn{
-          @include button-style($color-primary,$color-white);
-          border: 0.1rem solid $color-primary;
+        &-submitBtn {
+          @include button-style($color-white, $color-primary);
           margin-left: 2rem;
+
+          &.disable {
+            background-color: $color-gray;
+          }
         }
 
-        & .buttons{
+        &-cancelBtn {
+          @include button-style($color-primary, $color-white);
+          border: 0.1rem solid $color-primary;
+        }
+
+        & .buttons {
           padding: 1.3rem 3rem;
           width: 23rem;
           cursor: pointer;
           // font-weight: bold;
           font-size: 2rem;
+          transition: 0.3s;
+
+          @include respond($bp-small) {
+            font-size: 1.6rem;
+            width: 50%;
+            padding: 1.3rem 2rem;
+          }
         }
-
-
       }
-
-
     }
   }
 }

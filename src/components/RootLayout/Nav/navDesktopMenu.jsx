@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useSelector,} from "react-redux";
 import {AccountCircleOutlined,PowerSettingsNew, AssignmentIndOutlined, FavoriteBorderOutlined} from "@mui/icons-material";
 import { NavLink, useNavigate, Link } from "react-router-dom";
@@ -10,8 +10,6 @@ function NavDesktopMenu(props) {
   const navigate = useNavigate()
   const user = useSelector((state)=>state.user)
   const {fetchLogout} = props
-
-  if(!user) return
 
   const goToPage = (page)=>{
     props.toggleMenu()

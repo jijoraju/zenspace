@@ -11,7 +11,7 @@ import { getUserInfo, LoginHandler } from "@Reducer/user/user-action";
 function RootLayout() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const invisibleContact = ["/contact", `/login`, `/register`,`/profile`].includes(
+  const invisibleContact = ["/contact", `/login`, `/register`,`/profile`,'/payment','/checkout'].includes(
     location.pathname
   );
 

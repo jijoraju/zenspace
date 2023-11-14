@@ -26,6 +26,12 @@ function MainHeader() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
+  useEffect(()=>{
+    if(!user?.isLogin) {
+      navigate('/')
+    }
+  },[user?.isLogin])
+
   // desktop nav
   const renderDesktopNav = navList.map((item, index) => {
     return item.name == "Logo" ? (
