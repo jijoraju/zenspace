@@ -38,6 +38,8 @@ function CheckoutDetail(props) {
     // calculate tax
     const countTax = (countDaysTotal) * 0.13
     
+    const Total = countDaysTotal + countTax
+
     setGap(resultDays)
     setTotal(countDaysTotal)
     setTax(countTax)
@@ -50,10 +52,10 @@ function CheckoutDetail(props) {
       },
       charge: parseFloat(countDaysTotal),
       tax: parseFloat(countTax),
-      Total: parseFloat(total+ countTax),
+      Total: parseFloat(Total),
     }
 
-    // console.log('data',data)
+    console.log('data11',data)
     props.onChange(data)
   },[bookingDetail])
 

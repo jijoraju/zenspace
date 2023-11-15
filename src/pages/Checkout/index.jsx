@@ -119,9 +119,11 @@ function Checkout(props) {
 
   async function fetchSubmitHandler() {
     const { productDetailData, bookingDetail, chargeDetail } = checkoutState;
+
     const { workspace_id, workspace_type } = productDetailData;
     const { dateSelected, peopleCount } = bookingDetail;
     const {charge, tax, Total} = chargeDetail
+    console.log('chargeDetail',chargeDetail)
     const domain = window.location.href.split("/payment")[0];
 
     const data = {
@@ -144,7 +146,7 @@ function Checkout(props) {
       domain,
     };
 
-    console.log('data',data)
+    // console.log('data',data)
     const response = await fetchRequest(`/api/checkout`, `POST`, data);
     return response;
   }
