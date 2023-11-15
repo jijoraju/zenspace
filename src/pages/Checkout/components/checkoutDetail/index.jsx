@@ -10,14 +10,16 @@ import Image from "@components/Images";
 
 // validation
 import { getMoneyFormat } from '$LIB/validation';
+import { DataArrayTwoTone } from "@mui/icons-material";
 
 function CheckoutDetail(props) {
   const { productDetailData, bookingDetail } = props?.checkoutState;
 
-  const { dateSelected } = bookingDetail
+  const { dateSelected, peopleCount } = bookingDetail
   const { name, workspaceAddress, price_per_day, workspace_type, photos } = productDetailData;
 
   const [ gap, setGap] = useState(1);
+  const [ headCount, setHeadCount] = useState(peopleCount || 1);
   const [ total, setTotal] = useState(price_per_day||0);
   const [ Tax, setTax] = useState(price_per_day * 0.13||0);
 
@@ -32,21 +34,42 @@ function CheckoutDetail(props) {
     const days = duration.asDays();
     const type = workspace_type == "ONE_DAY" ? 0 : 1
     const resultDays = days + type
-    const countTotal = price_per_day * resultDays
-    const countTax = countTotal * 0.13
+    const countDaysTotal = price_per_day * resultDays
+
+    // 計算人頭價格
+    const headCountPrice = peopleCount * 100
+
+    const total = countDaysTotal + headCountPrice
+
+    // calculate tax
+    const countTax = (total) * 0.13
     
     setGap(resultDays)
-    setTotal(countTotal)
+    setTotal(total)
     setTax(countTax)
+    setHeadCount(headCountPrice)
 
     const data = {
-      charge: parseFloat(countTotal),
+      headCount:{
+        charge: parseFloat(headCountPrice),
+        count: peopleCount,
+        price: 100,
+      },
+      workspace:{
+        charge: parseFloat(countDaysTotal),
+        days: gap,
+        price:price_per_day,
+      },
+      // headCountCharge: parseFloat(headCountPrice),
+      // daysCharge: parseFloat(countDaysTotal),
       tax: parseFloat(countTax),
-      Total: parseFloat(countTotal+ countTax),
+      Total: parseFloat(total+ countTax),
     }
 
+    console.log('data',data)
+    console.log('data',JSON.stringify(data))
     props.onChange(data)
-  },[dateSelected])
+  },[bookingDetail])
 
   return (
     <div className="checkout-container-section checkout-container-right-Info">
@@ -72,8 +95,8 @@ function CheckoutDetail(props) {
       {/* Items */}
       <div className="daysInfoWrap">
         <h2>Items</h2>
-        <p>Selected days <CloseRoundedIcon /> {gap}</p>
-        <p>Person <CloseRoundedIcon /> {bookingDetail?.peopleCount}</p>
+        <p>Selected days <CloseRoundedIcon /> {gap} <CloseRoundedIcon /> {price_per_day}</p>
+        <p>Person <CloseRoundedIcon /> {bookingDetail?.peopleCount} <CloseRoundedIcon /> 100</p>
       </div>
 
       {/* Price */}
