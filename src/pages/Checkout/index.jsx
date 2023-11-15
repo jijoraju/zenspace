@@ -153,11 +153,16 @@ function Checkout(props) {
   const backToPreviousHandler = () => {
     if (state?.fromPage) {
       const pathnames = state?.fromPage.split("/").filter((x) => x);
-
+      const {productDetailData, bookingDetail} = checkoutState
       const data = {
-        detailData: checkoutState?.productDetailData,
+        detailData: productDetailData,
+        productFilter:{
+          headcounts:bookingDetail?.headcounts,
+          datePeriod: bookingDetail?.dateSelected,
+        }
       };
 
+      console.log('')
       navigate(`/${pathnames[0]}/${pathnames[1]}`, {
         replace: true,
         state: data,
