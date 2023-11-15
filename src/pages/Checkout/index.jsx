@@ -121,6 +121,7 @@ function Checkout(props) {
     const { productDetailData, bookingDetail, chargeDetail } = checkoutState;
     const { workspace_id, workspace_type } = productDetailData;
     const { dateSelected, peopleCount } = bookingDetail;
+    const {charge, tax, Total} = chargeDetail
     const domain = window.location.href.split("/payment")[0];
 
     const data = {
@@ -135,10 +136,15 @@ function Checkout(props) {
         },
         peopleCount,
       },
-      chargeDetail,
+      chargeDetail:{
+        charge, 
+        tax, 
+        Total,
+      },
       domain,
     };
 
+    console.log('data',data)
     const response = await fetchRequest(`/api/checkout`, `POST`, data);
     return response;
   }

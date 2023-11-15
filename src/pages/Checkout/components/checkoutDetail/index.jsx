@@ -44,11 +44,11 @@ function CheckoutDetail(props) {
 
     const data = {
       workspace:{
-        charge: parseFloat(countDaysTotal),
         days: gap,
         price:price_per_day,
         headCount:peopleCount,
       },
+      charge: parseFloat(countDaysTotal),
       tax: parseFloat(countTax),
       Total: parseFloat(total+ countTax),
     }
