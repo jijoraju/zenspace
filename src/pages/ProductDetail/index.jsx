@@ -17,7 +17,7 @@ import useHttp from "@hook/use-http";
 import { fetchProductDetailHandler } from "@Reducer/workspace/wk-action";
 
 
-function ProductDetail() {
+function ProductDetail(props) {
   const location = useLocation();
   const navigate = useNavigate()
 
@@ -30,11 +30,6 @@ function ProductDetail() {
     status,
     data: productDetailData,
   } = useHttp(fetchProductDetailHandler);
-
-  // GA
-  // useEffect(()=>{
-  //   window.GaTracePageHandler(location.pathname,'product detail')
-  // },[])
 
   // fetch api
   useEffect(()=>{
@@ -74,7 +69,7 @@ function ProductDetail() {
       <Banner bannerData={photos} />
 
       {/* detail */}
-      <MainContent productDetailData={productDetailData} />
+      <MainContent productDetailData={productDetailData} productFilter={state?.productFilter} />
 
       {/* map */}
       <MapComponent mapData={workspaceAddress} description={description} />

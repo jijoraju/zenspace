@@ -141,7 +141,7 @@
     // checkBox
     & .checkBox{
       width: 55rem;
-      height: 52.4rem;
+      // height: 52.4rem;
       @include border-style(0.1rem,solid, $color-primary);
       padding: 3rem 3rem;
       display: flex;
@@ -346,6 +346,8 @@
       font-size: 1.8rem;
       line-height: 3rem;
       color:$color-primary;
+      display: flex;
+      align-items: center;
 
       &:last-child{
         font-weight: bold;

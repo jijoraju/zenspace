@@ -19,10 +19,12 @@ import DatePicker from "@components/DatePickerComponent";
 import { checkBoxDes, facilities} from '@Data/detail'
 
 
-function MainContent({productDetailData}) {
+function MainContent({productDetailData,productFilter}) {
   const location = useLocation();
   const navigate = useNavigate()
   const user = useSelector((state)=>state.user)
+
+  const {pathname, state} = location
   
   const {name, no_of_spaces, workspaceAddress, description,amenities,avgRating, price_per_day, reviews, workspace_type, workspace_id} = productDetailData?.data
 
@@ -34,6 +36,8 @@ function MainContent({productDetailData}) {
   };
 
   useEffect(()=>{
+    console.log('state',state)
+
     const startDate = moment(dateData?.start)
     const endDate = moment(dateData?.end)
 
@@ -48,13 +52,12 @@ function MainContent({productDetailData}) {
   },[dateData])
 
   const submitPay = ()=>{
-    const {pathname, state} = location
-
     const data = {
       // detailData: state?.detailData,
       fromPage: pathname,
       selectedDate: dateData,
       productDetailData: productDetailData?.data,
+      headcount: state?.productFilter?.headcounts || 1,
     }
 
     if(!user?.isLogin){
@@ -139,12 +142,18 @@ function MainContent({productDetailData}) {
             cssStyle={`datePicker`}
             setDateRangeHandler={setDateRangeHandler}
             disabled={true}
+            initialVal={state?.productFilter?.datePeriod}
           />
         </div>
         
         <div className="priceGapArea">
           <p>CA$ {price_per_day} <CloseRoundedIcon /> {gap} days</p>
           <p>CA$ {price_per_day * gap}</p>
+        </div>
+
+        <div className="priceGapArea">
+          <p>Person</p>
+          <p><CloseRoundedIcon />{productFilter?.headcounts || 1}</p>
         </div>
 
         {/*  */}

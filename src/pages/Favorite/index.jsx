@@ -193,6 +193,7 @@ function ProductList() {
         workSpaceResult={workSpaceList}
         setWorkSpaceList={setWorkSpaceList}
         loadingStatus={false}
+        productPageState={productPageState}
       />
 
     </div>

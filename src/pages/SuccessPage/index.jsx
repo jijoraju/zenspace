@@ -41,10 +41,10 @@ const SuccessPage = () => {
 
   useEffect(() => {
 
-    console.log('queryParams',queryParams)
-    console.log('sessionId',sessionId)
-    console.log('result',result)
-    console.log('location',location)
+    // console.log('queryParams',queryParams)
+    // console.log('sessionId',sessionId)
+    // console.log('result',result)
+    // console.log('location',location)
 
     // if(sessionId && result == 'success'){
       fetchCheckoutApi(sessionId);

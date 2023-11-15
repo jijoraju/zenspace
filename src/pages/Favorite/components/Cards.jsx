@@ -9,7 +9,7 @@ import CardContainer from "@components/Card/CardContainer";
 import CardSkeleton from "@components/Card/CardSkeleton";
 
 function Cards(props) {
-  const { workSpaceResult, loadingStatus, setWorkSpaceList } = props;
+  const { workSpaceResult, loadingStatus, setWorkSpaceList,productPageState } = props;
 
   if (!workSpaceResult?.length && !loadingStatus) {
     return <NotFound />;
@@ -23,6 +23,7 @@ function Cards(props) {
         img3: `home/solutions/Gallery_Workplace.jpg`,
         fullInfo: item,
         setWorkSpaceList,
+        productPageState,
       };
 
       return <Card key={index} {...cardProps} />;

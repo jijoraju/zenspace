@@ -208,7 +208,7 @@ function ProductList() {
       <Cards
         workSpaceResult={workSpaceList}
         loadingStatus={status == "pending"}
-        // productPageState={productPageState}
+        productPageState={productPageState}
       />
 
     {

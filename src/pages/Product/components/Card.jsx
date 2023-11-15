@@ -12,7 +12,7 @@ import Button from "@components/Button";
 function Card(props) {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-  const { imgDefault, img2, img3, fullInfo } = props;
+  const { imgDefault, img2, img3, fullInfo, productPageState } = props;
 
   const {
     description,
@@ -89,10 +89,12 @@ function Card(props) {
   };
 
   const goToDetail = () => {
-
     const data =  {
       detailData: fullInfo,
-      // productPageState,
+      productFilter: {
+        headcounts:productPageState?.headcounts,
+        datePeriod: productPageState?.dateSelected,
+      },
     }
 
     navigate(`${spaceName?.replaceAll(' ','-')}`,{state:data});

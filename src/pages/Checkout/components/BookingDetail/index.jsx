@@ -1,4 +1,5 @@
 import React, {useState, useEffect,useReducer} from 'react'
+import { useNavigate, useLocation } from "react-router-dom";
 
 // components
 import DatePicker from "@components/DatePickerComponent";
@@ -28,6 +29,7 @@ function detailReducer(state,action){
 }
 
 function BookingDetail(props) {
+  const location = useLocation();
   // props
   const {productDetailData, bookingDetail} = props.checkoutState
   const { workspace_type, no_of_spaces } = productDetailData
@@ -35,10 +37,11 @@ function BookingDetail(props) {
   // state
   const [dateEdited, setDateEdited] = useState(false)
   const [peopleEdited, setPeopleEdited] = useState(false)
-  
+  const { state } = location;
+
   const [ detailState , dispatch] = useReducer(detailReducer,{
     dateSelected: bookingDetail?.dateSelected,
-    peopleCount: 1,
+    peopleCount: state?.headcount || 1,
   })
 
   const setDateRangeHandler = (param) => {
@@ -47,7 +50,6 @@ function BookingDetail(props) {
   const setHeadCountHandler = (param) => {
     dispatch({ type: `setHeadCount`, param });
   };
-
 
   useEffect(()=>{
     const {dateSelected, peopleCount} = detailState

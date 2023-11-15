@@ -25,6 +25,11 @@ function DatePicker(props) {
   const [minDateEnd, setMinDateEnd] = useState(nextDate.clone());
   const [maxDateEnd, setMaxDateEnd] = useState(sevenDays);
 
+  useEffect(()=>{
+    console.log('props?.initialVal',props?.initialVal )
+    console.log('nowDate',nowDate )
+  },[])
+
   // start date custom input hook
   const {
     value: enteredStartDate,
@@ -74,7 +79,7 @@ function DatePicker(props) {
 
   // default start date and end date
   useEffect(() => {
-    defaultStartDate(localDateFormat(moment(props?.initialDate?.start).tz("America/Toronto") || nowDate));
+    defaultStartDate(localDateFormat(nowDate));
     defaultEndDate(localDateFormat(moment(props?.initialDate?.end).tz("America/Toronto") || minDateEnd));
   }, []);
 
