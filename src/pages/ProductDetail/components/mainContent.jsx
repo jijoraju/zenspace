@@ -18,6 +18,8 @@ import DatePicker from "@components/DatePickerComponent";
 // data
 import { checkBoxDes, facilities} from '@Data/detail'
 
+// validation
+import { getMoneyFormat } from '$LIB/validation';
 
 function MainContent({productDetailData,productFilter}) {
   const location = useLocation();
@@ -36,8 +38,6 @@ function MainContent({productDetailData,productFilter}) {
   };
 
   useEffect(()=>{
-    console.log('state',state)
-
     const startDate = moment(dateData?.start)
     const endDate = moment(dateData?.end)
 
@@ -122,7 +122,7 @@ function MainContent({productDetailData,productFilter}) {
         {/* price info */}
         <div className='checkBox-priceInfo'>
           <div className='priceDay'>
-            <h1>CA$ {price_per_day}</h1>
+            <h1>CA$ {getMoneyFormat(price_per_day)}</h1>
             <p>/Daily</p>
           </div>
 
@@ -147,8 +147,8 @@ function MainContent({productDetailData,productFilter}) {
         </div>
         
         <div className="priceGapArea">
-          <p>CA$ {price_per_day} <CloseRoundedIcon /> {gap} days</p>
-          <p>CA$ {price_per_day * gap}</p>
+          <p>CA$ {getMoneyFormat(price_per_day)} <CloseRoundedIcon /> {gap} days</p>
+          <p>CA$ {getMoneyFormat(price_per_day * gap)}</p>
         </div>
 
         <div className="priceGapArea">
