@@ -1,4 +1,5 @@
 import { toastPromise, closeToast } from "@components/Toast";
+import { useReducer } from "react";
 
 const domain = API_DOMAIN;
 const second = 30000;
@@ -9,7 +10,7 @@ window.fetchRequest = fetchRequestHandler;
 
 export default function fetchRequestHandler(url, method, param) {
   let header;
-  const user = JSON.parse(localStorage.getItem("userInfo"));
+  const user = JSON.parse(sessionStorage.getItem("userInfo"));
 
   if (user) {
     header = {
