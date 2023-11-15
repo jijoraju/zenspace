@@ -81,7 +81,9 @@ const SuccessPage = () => {
                 img3={`payment/success/success.png`}
               />
             }
-            <h1>You have { result == 'success' ? `successfully` : `canceled`} topped up your card</h1>
+            <h1>
+              { result == 'success' ? `your booking is confirmed` : `Your booking has been canceled`}
+              </h1>
             {/* <p>Session ID: {sessionDetails}</p> */}
             {/* Display more details from sessionDetails as needed */}
 

@@ -55,7 +55,7 @@ function CheckoutDetail(props) {
       Total: parseFloat(Total),
     }
 
-    console.log('data11',data)
+    // console.log('data11',data)
     props.onChange(data)
   },[bookingDetail])
 
