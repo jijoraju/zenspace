@@ -152,8 +152,8 @@ function MainContent({productDetailData,productFilter}) {
         </div>
 
         <div className="priceGapArea">
-          <p>CA$ {getMoneyFormat(100)} <CloseRoundedIcon /> {state?.productFilter?.headcounts || 1}Person </p>
-          <p>CA$ <CloseRoundedIcon />{(state?.productFilter?.headcounts || 1) * 100}</p>
+          <p>Person</p>
+          <p><CloseRoundedIcon />{state?.productFilter?.headcounts || 1}</p>
         </div>
 
         {/*  */}
