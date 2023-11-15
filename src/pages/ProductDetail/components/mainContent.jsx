@@ -153,7 +153,7 @@ function MainContent({productDetailData,productFilter}) {
 
         <div className="priceGapArea">
           <p>Person</p>
-          <p><CloseRoundedIcon />{productFilter?.headcounts || 1}</p>
+          <p><CloseRoundedIcon />{state?.productFilter?.headcounts || 1}</p>
         </div>
 
         {/*  */}

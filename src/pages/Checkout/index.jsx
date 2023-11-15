@@ -157,7 +157,7 @@ function Checkout(props) {
       const data = {
         detailData: productDetailData,
         productFilter:{
-          headcounts:bookingDetail?.headcounts,
+          headcounts:bookingDetail?.peopleCount,
           datePeriod: bookingDetail?.dateSelected,
         }
       };
