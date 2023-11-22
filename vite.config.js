@@ -1,12 +1,16 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import dotenv from 'dotenv'
+import removeConsole from "vite-plugin-remove-console";
 
 dotenv.config() // load env vars from .env
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    removeConsole(),
+  ],
   resolve: {
     alias: {
       '@components': '/src/components',
