@@ -6,6 +6,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import LoadingSpinner from "@components/LoadingSpinner";
 import Image from "@components/Images";
 import CustomButton from "@components/Button";
+import BookingDetail from './components/BookingDetail';
+import PaymentDetail from './components/PaymentDetail'
+import Policy from "@components/Policy";
 
 // custom hook
 import useHttp from "@hook/use-http";
@@ -15,10 +18,11 @@ const SuccessPage = () => {
   const location = useLocation()
   const user = useSelector((state) => state.user);
 
-  const [sessionDetails, setSessionDetails] = useState(null);
+  const [confirmDetail, setConfirmDetail] = useState(null);
   const queryParams = new URLSearchParams(window.location.search);
   const sessionId = queryParams.get('session_id');
   const result = queryParams.get('result');
+  const workspaceId = queryParams.get('workspaceId');
 
   // use http hook
   const {
@@ -28,7 +32,10 @@ const SuccessPage = () => {
   } = useHttp(fetchSubmitHandler);
 
   async function fetchSubmitHandler(id) {
-    const response = await fetchRequest(`/api/test-success/${id}`, `GET`);
+    const response = await fetchRequest(
+      `/api/confirm-booking/${id}`,
+      `GET`
+    );
     return response;
   }
 
@@ -41,17 +48,12 @@ const SuccessPage = () => {
 
   useEffect(() => {
 
-    // console.log('queryParams',queryParams)
-    // console.log('sessionId',sessionId)
-    // console.log('result',result)
-    // console.log('location',location)
 
-    // if(sessionId && result == 'success'){
+    if(sessionId && result == 'success'){
       fetchCheckoutApi(sessionId);
-    // }
-    // else if(result == 'cancel'){
-    //   navigate('/')
-    // }
+    }else if(result == 'cancel'){
+      navigate(`/product/${workspaceId}`)
+    }
 
   }, [sessionId]);
 
@@ -59,37 +61,38 @@ const SuccessPage = () => {
   useEffect(() => {
     // console.log('CheckoutRes',CheckoutRes)
 
-    setSessionDetails(CheckoutRes?.id)
+    setConfirmDetail(CheckoutRes)
   }, [CheckoutRes]);
 
   const backToHome = () => {
     navigate('/', { replace:true })
   }
 
+  if(!confirmDetail) return <LoadingSpinner />
+  const { bookingReference } = confirmDetail?.data
   return (
     <div className='successContainer'>
       {
         status == 'pending' ? <LoadingSpinner />
         : <>
-            {
-              result == 'success' && 
-              <Image
-                src={`payment/success/success.png`}
-                alt={`success img`}
-                styles={`successContainer-successIcon`}
-                img2={`payment/success/success.png`}
-                img3={`payment/success/success.png`}
-              />
-            }
-            <h1>
-              { result == 'success' ? `your booking is confirmed` : `Your booking has been canceled`}
-              </h1>
-            {/* <p>Session ID: {sessionDetails}</p> */}
-            {/* Display more details from sessionDetails as needed */}
+            <h1 className='pageTitle'>
+              { result == 'success' ? `Your booking is confirmed` : `Your booking has been canceled`}
+            </h1>
+
+            <p className='bookingReference'>Booking Reference: {bookingReference}</p>
+
+            <BookingDetail detail={confirmDetail?.data} />
+            
+            <PaymentDetail detail={confirmDetail?.data} />
+
+            <Policy 
+              onChange={()=>{}} 
+              checked={()=>{}} 
+              from={`confirm`}
+            />
 
             <CustomButton
               onClick={backToHome}
-              // onClick={fetchLogout}
               className={`successContainer-backBtn`}
               disabled={false}
             >Back to home</CustomButton>

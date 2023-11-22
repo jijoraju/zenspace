@@ -1,0 +1,43 @@
+  // Policy
+  .policyWrap {
+    align-self: flex-start;
+
+    & h1 {
+      font-size: 2.8rem;
+    }
+
+    & .refundable {
+      font-size: 1.8rem;
+      color: $color-gray;
+      line-height: 3rem;
+      padding-top: 2rem;
+
+      & span {
+        color: $color-primary;
+        font-weight: bold;
+      }
+    }
+
+    & .policyCheckBox {
+      display: flex;
+      align-items: center;
+
+      & input[type="checkbox"] {
+        width: 2rem;
+        height: 2rem;
+      }
+
+      & label {
+        padding-left: 1rem;
+        font-size: 2rem;
+
+        & a {
+          color: $color-secondary;
+        }
+      }
+    }
+
+    & p{
+      font-size: 1.8rem;
+    }
+  }

@@ -7,6 +7,7 @@ import BookingDetail from "./components/BookingDetail";
 import PaymentMethods from "./components/PaymentMethods";
 import CheckoutDetail from "./components/checkoutDetail";
 import CustomButton from "@components/Button";
+import Policy from "@components/Policy";
 
 // custom hook
 import useHttp from "@hook/use-http";
@@ -206,28 +207,11 @@ function Checkout(props) {
           />
 
           {/* Cancellation policy */}
-          <div className="policyWrap">
-            <h1>Cancellation policy</h1>
-            <p className="refundable">
-              This booking is non-refundable. <span>Learn more</span>
-            </p>
-
-            <div className="policyCheckBox">
-              <input
-                ref={disclaimerInput}
-                type="checkbox"
-                id="disclaimer"
-                name="disclaimer"
-                value="Disclaimer"
-                defaultChecked={checkoutState?.disclaimer}
-                onChange={setDisclaimerHandler}
-              />
-              <label htmlFor="disclaimer">
-                Please check to acknowledge our Privacy &{" "}
-                <a href="#">Terms Policy</a>
-              </label>
-            </div>
-          </div>
+          <Policy 
+            onChange={setDisclaimerHandler} 
+            checked={checkoutState?.disclaimer} 
+            from={`checkout`}
+          />
 
           {/* Submit button */}
           <div className="checkoutSubmitWrap">

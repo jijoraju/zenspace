@@ -22,7 +22,8 @@ function ProductDetail(props) {
   const navigate = useNavigate()
 
   const {pathname, state} = location
-  const { detailData } = state
+  // const { detailData } = state
+
 
   // use http hook
   const {
@@ -33,7 +34,8 @@ function ProductDetail(props) {
 
   // fetch api
   useEffect(()=>{
-    fetchDetailApi(detailData.workspace_id)
+    const pathnames = pathname.split('/')
+    fetchDetailApi(state?.detailData?.workspace_id || pathnames[2])
   },[])
 
   if(!productDetailData)return
@@ -43,9 +45,10 @@ function ProductDetail(props) {
   const renderBreadCrumbs = pathnames.map((value, index) => {
           const last = index === pathnames.length - 1;
           const to = `/${pathnames.slice(0, index + 1).join('/')}`;
+
           return last ? (
             <span key={to} className='detailContainer-crumbs-crumb'>
-              {decodeURIComponent(detailData.name)}
+              {decodeURIComponent(state?.detailData?.name || productDetailData?.data?.name)}
             </span>
           ) : (
             <Link key={to} to={to} className='detailContainer-crumbs-crumb'>
