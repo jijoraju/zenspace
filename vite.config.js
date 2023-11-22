@@ -1,15 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import dotenv from 'dotenv'
-import removeConsole from "vite-plugin-remove-console";
 
 dotenv.config() // load env vars from .env
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
-    removeConsole(),
+    react()
   ],
   resolve: {
     alias: {
@@ -28,5 +26,9 @@ export default defineConfig({
     'MAP_API_KEY': JSON.stringify(process.env.VITE_MAP_API_KEY),
     'API_DOMAIN': JSON.stringify(process.env.VITE_API_DOMAIN),
     'GA_KEY': JSON.stringify(process.env.VITE_GA_KEY),
+  },
+  esbuild: {
+    // Remove console.log during production build
+    pure: process.env.NODE_ENV === "production" ? ["console.log"] : [],
   },
 })
