@@ -4,6 +4,10 @@
 
     & h1 {
       font-size: 2.8rem;
+
+      @include respond($bp-small){
+        font-size: 2rem;
+      }
     }
 
     & .refundable {
@@ -11,6 +15,11 @@
       color: $color-gray;
       line-height: 3rem;
       padding-top: 2rem;
+
+      @include respond($bp-small){
+        font-size: 1.4rem;
+        padding-top: 1rem;
+      }
 
       & span {
         color: $color-primary;
@@ -39,5 +48,9 @@
 
     & p{
       font-size: 1.8rem;
+
+      @include respond($bp-small){
+        font-size: 1.4rem;
+      }
     }
   }
