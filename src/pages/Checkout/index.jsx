@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import moment from 'moment';
 
 // components
 import BookingDetail from "./components/BookingDetail";
@@ -134,8 +135,8 @@ function Checkout(props) {
       },
       bookingDetail: {
         dateSelected: {
-          start: dateSelected?.start,
-          end: workspace_type == "MULTIPLE_DAYS" ? dateSelected?.end : "",
+          start: moment(dateSelected?.start).tz("America/Toronto").format(),
+          end: workspace_type == "MULTIPLE_DAYS" ? moment(dateSelected?.end).tz("America/Toronto").format(): "",
         },
         peopleCount,
       },

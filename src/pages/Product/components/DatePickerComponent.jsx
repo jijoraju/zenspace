@@ -97,8 +97,8 @@ function DatePicker(props) {
 
   useEffect(() => {
     props.setDateRangeHandler({
-      start: enteredStartDate,
-      end: enteredEndDate,
+      start: localDateFormat(enteredStartDate),
+      end: localDateFormat(enteredEndDate),
     });
   }, [enteredStartDate, enteredEndDate]);
 
