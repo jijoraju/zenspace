@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // components
@@ -7,7 +7,7 @@ import Image from "@components/Images";
 
 function Profile() {
   const user = useSelector((state) => state.user);
-  const {userInfo} = user
+  const { userInfo } = user;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,25 +17,41 @@ function Profile() {
     }
   }, []);
 
+  const map = [
+    {
+      path: "profileInfo",
+      Name: "Profile Info",
+      class: `profileNav-item`,
+    },
+    {
+      path: "transaction",
+      Name: "Transaction",
+      class: `profileNav-item`,
+    }
+  ];
   return (
     <div className="profileContainer">
       <h1>My Zenspace</h1>
-      {/* user information  */}
-      <div className="profileContainer-information">
-        {/* avatar */}
-        <div className="profileContainer-information-avatar">
-          <Image
-            src={`profile/avatar.png`}
-            alt={`Avatar`}
-            styles={`profileContainer-information-avatar-img`}
-            img2={`profile/avatar.png`}
-            img3={`profile/avatar.png`}
-          />
+
+      <div className="profileContainer-Layout">
+        <div className="profileSection profileNav">
+          {map.map((item, index) => (
+            <NavLink 
+              key={index} 
+              to={item?.path} 
+              className={({ isActive, isPending }) =>
+                isActive
+                ? `${item.class} ${item.class}-active`
+                : `${item.class}`
+              }
+              >
+              {item?.Name}
+            </NavLink>
+          ))}
         </div>
-        {/* info */}
-        <div className="profileContainer-information-info">
-          <p>{`${userInfo?.firstname} ${userInfo?.lastname}`}</p>
-          <p>{`${userInfo?.email}`}</p>
+
+        <div className="profileContainer-Layout-profileSection">
+          <Outlet />
         </div>
       </div>
     </div>

@@ -31,7 +31,7 @@ function NavDesktopMenu(props) {
 
       {/* profile */}
       <CustomButton 
-        onClick={()=>goToPage('profile')}
+        onClick={()=>goToPage('profile/profileInfo')}
         className={`nav-desktop-menu-logoutBtn`}
         disabled={false}
       >

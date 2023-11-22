@@ -17,6 +17,7 @@ const ErrorPage = lazy(() => import('./ErrorPage'));
 const Contact = lazy(() => import('./Contact'));
 const Sign = lazy(() => import('./Sign'));
 const Profile = lazy(() => import('./Profile'));
+const ProfileInfo = lazy(() => import('./Profile/ProfileIndo'));
 
 function Root() {
   const router = createBrowserRouter([
@@ -77,6 +78,10 @@ function Root() {
         {
           path: "profile",
           element: <Profile />,
+          children: [
+            { index: true, path: 'profileInfo', element: <ProfileInfo /> ,},
+            { path: 'transaction', element: <h1>hello world</h1> },
+          ],
         },
       ],
     },
