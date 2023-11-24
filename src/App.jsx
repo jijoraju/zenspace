@@ -30,7 +30,7 @@ function App() {
     ReactGA.send({ hitType: "pageview", page: location, title: title});
   }
 
-  window.GaEvent = ({category,action,label}) =>{
+  window.GaEvent = (category,action,label) =>{
     // 追踪自定義事件
     ReactGA.event({
       category: category,
