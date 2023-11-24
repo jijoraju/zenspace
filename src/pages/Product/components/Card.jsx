@@ -61,12 +61,12 @@ function Card(props) {
   }, [fullInfo]);
 
   const toggleToFavorite = () => {
-
     if(!user.isLogin){
       navigate(`/login`);
       return
     }
 
+    GaEvent('Product','Click','Add favorite')
     const findIndex = favoriteList.findIndex(
       (item) => item.workspace_id == workspace_id
     );
@@ -89,6 +89,8 @@ function Card(props) {
   };
 
   const goToDetail = () => {
+    GaEvent('Product','Click','Go to Product Detail')
+
     const data =  {
       detailData: fullInfo,
       productFilter: {

@@ -125,6 +125,7 @@ function Register() {
   // submit
   const submitHandler = (event) => {
     event.preventDefault();
+    GaEvent('Sign','submit','register')
 
     if (formIsValid) {
       const data = {

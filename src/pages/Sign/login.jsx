@@ -92,6 +92,8 @@ function Login() {
   const submitHandler = (event) => {
     event.preventDefault();
 
+    GaEvent('Sign','submit','login')
+
     if (formIsValid) {
       const data = {
         email: enteredEmail,

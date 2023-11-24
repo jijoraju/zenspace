@@ -28,15 +28,15 @@ function Solution() {
 
   // render Cooperations
   const renderCooperations = cooperationData.map((item, index) => (
-            <Image
-              key={index}
-              src={item.imgDefault}
-              alt={item.style}
-              styles={item.style}
-              img2={item.img2}
-              img3={item.img3}
-            />
-          ))
+        <Image
+          key={index}
+          src={item.imgDefault}
+          alt={item.style}
+          styles={item.style}
+          img2={item.img2}
+          img3={item.img3}
+        />
+      ))
 
   return (
     <>

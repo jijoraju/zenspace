@@ -104,6 +104,7 @@ export default React.memo(function ProductLocationInput() {
 
   // submit product then redirect to product page
   const submitProduct = () => {
+    GaEvent('search','submit','search location')
     navigate(`/product?location=${enteredProduct}`);
   };
 

@@ -52,6 +52,8 @@ function MainContent({productDetailData,productFilter}) {
   },[dateData])
 
   const submitPay = ()=>{
+    GaEvent('Product','Submit','Go to checkout')
+
     const data = {
       // detailData: state?.detailData,
       fromPage: pathname,

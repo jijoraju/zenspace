@@ -65,6 +65,7 @@ const SuccessPage = () => {
   }, [CheckoutRes]);
 
   const backToHome = () => {
+    GaEvent('Confirm','Click','Back to home')
     navigate('/', { replace:true })
   }
 

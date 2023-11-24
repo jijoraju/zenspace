@@ -159,8 +159,16 @@ function Checkout(props) {
     }
   }, [CheckoutRes]);
 
+  // submit checkout
+  const submitForm = ()=>{
+    GaEvent('Checkout','Submit','Submit to pay')
+    fetchCheckoutApi()
+  }
+
   // back to previous
   const backToPreviousHandler = () => {
+    GaEvent('Checkout','Click','Back to previous page')
+
     if (state?.fromPage) {
       const pathnames = state?.fromPage.split("/").filter((x) => x);
       const { productDetailData, bookingDetail } = checkoutState;
@@ -172,7 +180,6 @@ function Checkout(props) {
         },
       };
 
-      console.log("");
       navigate(`/${pathnames[0]}/${pathnames[1]}`, {
         replace: true,
         state: data,
@@ -225,7 +232,7 @@ function Checkout(props) {
             </CustomButton>
 
             <CustomButton
-              onClick={fetchCheckoutApi}
+              onClick={submitForm}
               // onClick={fetchLogout}
               className={`checkoutSubmitWrap-submitBtn buttons ${
                 isDisableSubmit ? "disable" : ""
