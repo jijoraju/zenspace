@@ -1,15 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const workSpaceSlice = createSlice({
-  name: 'workSpace',
+  name: "workSpace",
   initialState: {
     location: [],
   },
   reducers: {
-    addLocation(state,action) {
+    addLocation(state, action) {
       state.location = action.payload?.location;
     },
-
   },
 });
 

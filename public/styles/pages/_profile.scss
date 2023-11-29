@@ -17,7 +17,8 @@
     & .profileNav{
       display: flex;
       flex-direction: column;
-      width: 20%;
+      width: 15%;
+      margin-right: 5%;
 
       &-item{
         font-size: 2rem;
@@ -26,14 +27,16 @@
         line-height: 3rem;
         display: block;
         padding: 1.5rem 0;
-
+        
         &-active{
           font-weight: bold;
+          border-right: 0.1rem solid $color-gray;
         }
       }
     }
 
     &-profileSection{
+      position: relative;
 
       &:nth-child(2){
         width:100%;
@@ -68,6 +71,103 @@
 
           & p:last-child {
             font-size: 2rem;
+          }
+        }
+      }
+
+      & .transactionContainer{
+        
+
+        &-typeWrap{
+          @include flexCenter();
+
+          & .typeItem{
+            flex:1;
+            padding: 2rem 3rem;
+            text-align: center;
+            background-color: $color-gray;
+            color: $color-white;
+            cursor: pointer;
+            font-size: 1.6rem;
+            transition: 0.3s;
+
+            &-active{
+              background-color: $color-primary;
+            }
+          }
+        }
+
+        // render transaction record
+        & .recordWrap{
+          // padding: 1.5rem 0;
+
+          &-item{
+            padding: 2rem 0;
+            @include flexCenter();
+            justify-content: space-around;
+            border-bottom: 1px solid $color-gray;
+            cursor: pointer;
+
+            &-subItem{
+              width: 100%;
+
+              &:first-child{
+                align-self: flex-start;
+              }
+
+              &:last-child{
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: flex-end;
+              }
+
+              & .flexRow{
+                display: flex;
+                flex-direction: row;
+                padding: .3rem 0;
+
+                & p{
+                  font-size: 1.6rem;
+
+                  &.bookingReference{
+                    font-weight: bold;
+                  }
+                }
+
+                & p:nth-child(2){
+                  padding-left: 1rem;
+                }
+
+                & .CONFIRMED{
+                  color: $color-primary;
+                  font-weight: bold;
+                }
+
+                & .CANCELLED{
+                  color: $color-red;
+                  font-weight: bold;
+                }
+
+                & .PENDING{
+                  color: $color-orange;
+                  font-weight: bold;
+                }
+              }
+
+            }
+
+          }
+        }
+
+
+        & .paginationWrap{
+          width:100%;
+          padding: 3rem 0;
+          @include flexCenter();
+
+          & .MuiPaginationItem-page{
+            font-size:  1.6rem !important;
           }
         }
       }
