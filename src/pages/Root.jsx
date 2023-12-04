@@ -10,7 +10,7 @@ const Home = lazy(() => import('./Home'));
 const ProductList = lazy(() => import('./Product'));
 const ProductDetail = lazy(() => import('./ProductDetail'));
 const Payment = lazy(() => import('./Checkout'));
-const CheckoutResult = lazy(() => import('./SuccessPage/confirmDetail'));
+const CheckoutResult = lazy(() => import('./DetailPage/confirmDetail'));
 const Favorite = lazy(() => import('./Favorite'));
 const Solution = lazy(() => import('./Solution'));
 const ErrorPage = lazy(() => import('./ErrorPage'));
@@ -19,7 +19,7 @@ const Sign = lazy(() => import('./Sign'));
 const Profile = lazy(() => import('./Profile'));
 const ProfileInfo = lazy(() => import('./Profile/ProfileInfo'));
 const Transaction = lazy(() => import('./Profile/Transaction'));
-const TransactionDetail = lazy(() => import('./SuccessPage/transactionDetail'));
+const TransactionDetail = lazy(() => import('./DetailPage/transactionDetail'));
 
 function Root() {
   const router = createBrowserRouter([

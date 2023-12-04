@@ -3,7 +3,7 @@
   flex-direction: column;
   @include whSize(100%,auto);
   max-width: $maxWight;
-  padding: 5rem 8rem;
+  padding: 3rem 8rem 0;
   margin: 0 auto;
 
   @include respond($bp-small) {
@@ -238,7 +238,7 @@
 
     &-backBtn{
       @include button-style($color-white,$color-primary);
-      margin: 5rem 0;
+      margin: 0 0 5rem 0 ;
       @include whSize(28rem,5rem);
       font-size: 1.8rem;
       margin-left: 2rem;

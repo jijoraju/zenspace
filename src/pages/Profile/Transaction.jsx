@@ -73,7 +73,6 @@ function Transaction() {
       if (data) {
         navigate(`${bookingReference}`, { state: data });
       }
-      // console.log('data',data)
     }
   }, [transactionDetailData]);
 
