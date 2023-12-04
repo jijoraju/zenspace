@@ -60,3 +60,19 @@ body {
     font-size: 1.2rem !important;
   }
 }
+
+
+ .CONFIRMED{
+  color: $color-primary;
+  font-weight: bold;
+}
+
+ .CANCELLED{
+  color: $color-red;
+  font-weight: bold;
+}
+
+ .PENDING{
+  color: $color-orange;
+  font-weight: bold;
+}

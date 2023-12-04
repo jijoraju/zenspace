@@ -10,7 +10,7 @@ const Home = lazy(() => import('./Home'));
 const ProductList = lazy(() => import('./Product'));
 const ProductDetail = lazy(() => import('./ProductDetail'));
 const Payment = lazy(() => import('./Checkout'));
-const CheckoutResult = lazy(() => import('./SuccessPage'));
+const CheckoutResult = lazy(() => import('./SuccessPage/confirmDetail'));
 const Favorite = lazy(() => import('./Favorite'));
 const Solution = lazy(() => import('./Solution'));
 const ErrorPage = lazy(() => import('./ErrorPage'));
@@ -19,6 +19,7 @@ const Sign = lazy(() => import('./Sign'));
 const Profile = lazy(() => import('./Profile'));
 const ProfileInfo = lazy(() => import('./Profile/ProfileInfo'));
 const Transaction = lazy(() => import('./Profile/Transaction'));
+const TransactionDetail = lazy(() => import('./SuccessPage/transactionDetail'));
 
 function Root() {
   const router = createBrowserRouter([
@@ -31,10 +32,6 @@ function Root() {
           index: true,
           path: "/",
           element: <Home />,
-          // loader: postsLoader,
-          // children: [
-          //   { path: '/:postId', element: <PostDetails />, loader: postDetailsLoader }
-          // ],
         },
         {
           path: "product",
@@ -82,6 +79,7 @@ function Root() {
           children: [
             { index: true, path: 'profileInfo', element: <ProfileInfo /> ,},
             { path: 'transaction', element: <Transaction /> },
+            { path: 'transaction/:reference', element: <TransactionDetail /> },
           ],
         },
       ],

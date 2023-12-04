@@ -57,7 +57,7 @@
     }
 
     &-contentContainer {
-      padding: 2rem 3rem 0rem 0;
+      padding: 2rem 0rem 0rem 0;
       display: flex;
       flex-direction: column;
 
@@ -116,6 +116,8 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      width:100%;
+      padding-bottom: 3rem;
 
       & .imageWrap-img {
         width: 17rem;
@@ -125,6 +127,7 @@
 
       & .product-info {
         padding-left: 2rem;
+        width:100%;
 
         & h1 {
           font-size: 2rem;
@@ -143,15 +146,20 @@
             font-size: 1.4rem;
           }
         }
+
+        & .status{
+          text-align: right;
+          font-size: 1.8rem;
+          font-weight: bold;
+          padding-top: 2rem;
+        }
       }
     }
 
     & .daysInfoWrap {
       padding: 2rem 0;
-      margin: 4rem 0;
       border-top: 0.1rem solid $color-gray;
-      border-bottom: 0.1rem solid $color-gray;
-
+      
       & h2 {
         font-size: 2.2rem;
 
@@ -173,6 +181,9 @@
     }
 
     & .priceWrap {
+      border-top: 0.1rem solid $color-gray;
+      padding: 2rem 0;
+
       & h2 {
         font-size: 2.2rem;
       }
@@ -214,16 +225,36 @@
 
   }
 
-  &-backBtn{
-    @include button-style($color-white,$color-primary);
-    margin: 5rem 0;
-    @include whSize(28rem,5rem);
-    font-size: 1.8rem;
-    align-self: flex-end;
-
+  &-btnsWrap{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
 
     @include respond($bp-small){
-      align-self: center;
+      flex-direction: column;
     }
+
+    &-backBtn{
+      @include button-style($color-white,$color-primary);
+      margin: 5rem 0;
+      @include whSize(28rem,5rem);
+      font-size: 1.8rem;
+      margin-left: 2rem;
+
+      &:first-child{
+        background-color: $color-white;
+        @include border-style(0.1rem, solid, $color-primary); 
+        color: $color-primary;
+      }
+
+      @include respond($bp-small){
+        align-self: center;
+      }
+    }
+
   }
+
+
 }

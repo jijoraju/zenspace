@@ -12,10 +12,10 @@ function Profile() {
 
   useEffect(() => {
     if (!user?.isLogin) {
-      navigate(`/login`);
+      navigate(`/login`,{replace:true})
       return;
     }
-  }, []);
+  }, [user]);
 
   return (
       <div className="profileContainer-Layout-profileSection-information">

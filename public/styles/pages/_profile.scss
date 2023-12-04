@@ -138,21 +138,6 @@
                 & p:nth-child(2){
                   padding-left: 1rem;
                 }
-
-                & .CONFIRMED{
-                  color: $color-primary;
-                  font-weight: bold;
-                }
-
-                & .CANCELLED{
-                  color: $color-red;
-                  font-weight: bold;
-                }
-
-                & .PENDING{
-                  color: $color-orange;
-                  font-weight: bold;
-                }
               }
 
             }

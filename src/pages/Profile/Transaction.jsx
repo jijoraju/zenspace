@@ -1,55 +1,36 @@
-import React , {useState, useEffect} from 'react'
+import React, { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 // components
 import LoadingSpinner from "@components/LoadingSpinner";
-import {localDateFormat,} from "@components/CustomDatePicker";
+import { localDateFormat } from "@components/CustomDatePicker";
 import NotFound from "@components/NotFound";
 
 // MUI
-import Pagination from '@mui/material/Pagination';
+import Pagination from "@mui/material/Pagination";
 
 // custom hook
 import useHttp from "@hook/use-http";
 
 // reducer
-import {getTransactions} from '@Reducer/transaction/ta-action'
+import {
+  getTransactions,
+  getTransactionDetail,
+} from "@Reducer/transaction/ta-action";
 
-const Type = [
-  {
-    id: 'upcoming',
-    name: 'Upcoming',
-  },
-  {
-    id: 'past',
-    name: 'Past',
-  }
-]
-
-const statusStyle = {
-  CONFIRMED:{
-    color: `#0b2e72`,
-    cssName: `CONFIRMED`,
-  },
-  PENDING:{
-    color: `#ff7e0d`,
-    cssName: `PENDING`,
-  },
-  CANCELLED:{
-    color: `#ff0d0d`,
-    cssName: `CANCELLED`,
-  },
-}
+import { statusStyle, Type } from "@Data/paymentStatus";
 
 function Transaction() {
-  const [currentType, setCurrentType] = useState(Type[0].id)
-  const [transactionList, setTransactionList] = useState([])
+  const navigate = useNavigate();
+  const [currentType, setCurrentType] = useState(Type[0].id);
+  const [transactionList, setTransactionList] = useState([]);
   const [pagination, setPagination] = useState({
     currentIndex: 1,
     itemsPerPage: 6,
     totalLength: 0,
   });
 
-    // use http hook
+  // get transaction api
   const {
     sendRequest: fetchTransactionsApi,
     status,
@@ -57,22 +38,48 @@ function Transaction() {
   } = useHttp(getTransactions);
 
   // fetch api
-  useEffect(()=>{
+  useEffect(() => {
     fetchTransactionsApi();
-  },[])
+  }, []);
 
   // after fetch api and store data to state
-  useEffect(()=>{
-    if(transactionsResult?.data){
-      handlePageChange(null, pagination?.currentIndex)
-    }else{
-      setTransactionList([])
+  useEffect(() => {
+    if (transactionsResult?.data) {
+      handlePageChange(null, pagination?.currentIndex);
+    } else {
+      setTransactionList([]);
     }
-  },[transactionsResult,currentType])
+  }, [transactionsResult, currentType]);
 
+  // get transaction detail api
+  const {
+    sendRequest: fetchTransactionDetailApi,
+    status: transactionDetailStatus,
+    data: transactionDetailData,
+  } = useHttp(getTransactionDetail);
 
+  const goToDetail = useCallback(
+    (reference) => {
+      fetchTransactionDetailApi(reference);
+    },
+    [fetchTransactionDetailApi]
+  );
+
+  useEffect(() => {
+    if (transactionDetailData?.data) {
+      const { data } = transactionDetailData;
+      const { bookingReference } = data;
+
+      if (data) {
+        navigate(`${bookingReference}`, { state: data });
+      }
+      // console.log('data',data)
+    }
+  }, [transactionDetailData]);
+
+  // pagination change
   const handlePageChange = (event, value) => {
-    const currentRecord = transactionsResult?.data[currentType]
+    const currentRecord = transactionsResult?.data[currentType];
 
     // 计算当前页的起始索引和结束索引
     const startIndex = (value - 1) * pagination?.itemsPerPage;
@@ -85,77 +92,88 @@ function Transaction() {
     setPagination({
       ...pagination,
       currentIndex: value,
-      totalLength: Math.ceil(currentRecord.length / pagination?.itemsPerPage)
+      totalLength: Math.ceil(currentRecord.length / pagination?.itemsPerPage),
     });
 
-    console.log('currentPageData',currentPageData)
-    setTransactionList(currentPageData)
+    setTransactionList(currentPageData);
   };
 
+  const renderType = Type.map((item, index) => (
+    <p
+      key={index}
+      onClick={() => setCurrentType(item.id)}
+      className={`typeItem ${currentType == item.id ? `typeItem-active` : ""}`}
+    >
+      {item?.name}
+    </p>
+  ));
 
-  const renderType = Type.map((item,index)=><p 
-    key={index} 
-    onClick={()=>setCurrentType(item.id)}
-    className={`typeItem ${currentType == item.id?`typeItem-active`:''}`}
-    >{item?.name}</p>)
-
-  if(status == 'pending') return <LoadingSpinner />
+  if (status == "pending") return <LoadingSpinner />;
   return (
-    <div className='transactionContainer'>
-      <div className='transactionContainer-typeWrap'>{renderType}</div>
+    <div className="transactionContainer">
+      <div className="transactionContainer-typeWrap">{renderType}</div>
 
-      <div className='recordWrap'>
-        {// render transaction list
-        transactionList?.length ? 
-        transactionList.map((item,index)=>(
-          <div key={index} className='recordWrap-item' onClick={()=>{}}>
-            <div className='recordWrap-item-subItem'>
-              {/* start date */}
-              <dir className='flexRow'>
-                <p>Start Date:</p>
-                <p>{localDateFormat(item.startDate)}</p>
-              </dir>
+      <div className="recordWrap">
+        {
+          // render transaction list
+          transactionList?.length ? (
+            transactionList.map((item, index) => (
+              <div
+                key={index}
+                className="recordWrap-item"
+                onClick={goToDetail.bind(this, item.bookingReference)}
+              >
+                <div className="recordWrap-item-subItem">
+                  {/* start date */}
+                  <dir className="flexRow">
+                    <p>Start Date:</p>
+                    <p>{localDateFormat(item.startDate)}</p>
+                  </dir>
 
-              { // end date 
-                item?.endDate?(
-                <dir className='flexRow'>
-                  <p>End Date:</p>
-                  <p>{localDateFormat(item.endDate)}</p>
+                  {
+                    // end date
+                    item?.endDate ? (
+                      <dir className="flexRow">
+                        <p>End Date:</p>
+                        <p>{localDateFormat(item.endDate)}</p>
+                      </dir>
+                    ) : null
+                  }
+                </div>
+
+                <dir className="recordWrap-item-subItem">
+                  <dir className="flexRow">
+                    <p>Booking Reference:</p>
+                    <p className="bookingReference">{item.bookingReference}</p>
+                  </dir>
+
+                  <dir className="flexRow">
+                    <p>Status:</p>
+                    <p className={statusStyle[item.status]?.cssName}>
+                      {item.status}
+                    </p>
+                  </dir>
                 </dir>
-                ):null
-              }
-            </div>
-
-            <dir className='recordWrap-item-subItem'>
-              <dir className='flexRow'>
-                <p>Booking Reference:</p>
-                <p className='bookingReference'>{item.bookingReference}</p>
-              </dir>
-
-              <dir className='flexRow'>
-                <p>Status:</p>
-                <p className={statusStyle[item.status]?.cssName}>{item.status}</p>
-              </dir>
-            </dir>
-          </div>
-        )): <NotFound />}
+              </div>
+            ))
+          ) : (
+            <NotFound />
+          )
+        }
       </div>
 
-      {
-        transactionList?.length ?(
-          <div className='paginationWrap'>
-            <Pagination 
-              size="large"
-              count={pagination?.totalLength} 
-              page={pagination?.currentIndex} 
-              onChange={handlePageChange} 
-            />
-          </div>
-        ):null
-      }
-
+      {transactionList?.length ? (
+        <div className="paginationWrap">
+          <Pagination
+            size="large"
+            count={pagination?.totalLength}
+            page={pagination?.currentIndex}
+            onChange={handlePageChange}
+          />
+        </div>
+      ) : null}
     </div>
-  )
+  );
 }
 
-export default React.memo(Transaction)
+export default React.memo(Transaction);

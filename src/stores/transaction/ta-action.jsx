@@ -6,18 +6,10 @@ export async function getTransactions() {
   return response;
 }
 
+// fetch get Transactions detail api
+export async function getTransactionDetail(reference) {
+  const response = await fetchRequest(`/api/booking-summary/${reference}`, `GET`);
+  return response;
+}
+
 // ---------------------------
-
-// store location to localStorage
-export const storeLocation = (data) => {
-  return async (dispatch) => {
-    const locationList = data?.data;
-    localStorage.setItem("locationList", JSON.stringify(locationList));
-
-    dispatch(
-      taActions.addLocation({
-        location: locationList || [],
-      })
-    );
-  };
-};

@@ -98,7 +98,7 @@ function CheckoutDetail(props) {
 
         <div className="rowWrap">
           <p>Tax</p>
-          <p>CA$ {getMoneyFormat(Tax)}</p>
+          <p>CA$ {getMoneyFormat(Tax.toFixed(2))}</p>
         </div>
 
         <div className="rowWrap">

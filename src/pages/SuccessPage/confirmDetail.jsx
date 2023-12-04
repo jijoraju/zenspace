@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Suspense } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector, } from "react-redux";
+import { useNavigate, } from "react-router-dom";
 
 // components
 import LoadingSpinner from "@components/LoadingSpinner";
@@ -9,13 +9,13 @@ import CustomButton from "@components/Button";
 import BookingDetail from './components/BookingDetail';
 import PaymentDetail from './components/PaymentDetail'
 import Policy from "@components/Policy";
+import DetailLayout from './layout'
 
 // custom hook
 import useHttp from "@hook/use-http";
 
-const SuccessPage = () => {
+const DetailPage = () => {
   const navigate = useNavigate()
-  const location = useLocation()
   const user = useSelector((state) => state.user);
 
   const [confirmDetail, setConfirmDetail] = useState(null);
@@ -40,27 +40,14 @@ const SuccessPage = () => {
   }
 
   useEffect(() => {
-    console.log('user',user)
-    // if (!user?.isLogin) {
-    //   navigate(`/login`);
-    // }
-  }, [user]);
-
-  useEffect(() => {
-
-
     if(sessionId && result == 'success'){
       fetchCheckoutApi(sessionId);
     }else if(result == 'cancel'){
       navigate(`/product/${workspaceId}`)
     }
-
   }, [sessionId]);
 
-
   useEffect(() => {
-    // console.log('CheckoutRes',CheckoutRes)
-
     setConfirmDetail(CheckoutRes)
   }, [CheckoutRes]);
 
@@ -69,8 +56,12 @@ const SuccessPage = () => {
     navigate('/', { replace:true })
   }
 
+  const backToTransaction = () => {
+    GaEvent('Confirm','Click','Back to home')
+    navigate('/profile/transaction', { replace:true })
+  }
+
   if(!confirmDetail) return <LoadingSpinner />
-  const { bookingReference } = confirmDetail?.data
   return (
     <div className='successContainer'>
       {
@@ -80,27 +71,24 @@ const SuccessPage = () => {
               { result == 'success' ? `Your booking is confirmed` : `Your booking has been canceled`}
             </h1>
 
-            <p className='bookingReference'>Booking Reference: {bookingReference}</p>
-
-            <BookingDetail detail={confirmDetail?.data} />
-            
-            <PaymentDetail detail={confirmDetail?.data} />
-
-            <Policy 
-              onChange={()=>{}} 
-              checked={()=>{}} 
-              from={`confirm`}
-            />
-
-            <CustomButton
-              onClick={backToHome}
-              className={`successContainer-backBtn`}
-              disabled={false}
-            >Back to home</CustomButton>
+            <DetailLayout confirmDetail={confirmDetail?.data} />
+            <div className='successContainer-btnsWrap'>
+              <CustomButton
+                onClick={backToHome}
+                className={`successContainer-btnsWrap-backBtn`}
+                disabled={false}
+              >Back to home</CustomButton>
+              
+              <CustomButton
+                onClick={backToTransaction}
+                className={`successContainer-btnsWrap-backBtn`}
+                disabled={false}
+              >Go to transactions record</CustomButton>
+            </div>
           </>
       }
     </div>
   );
 };
 
-export default SuccessPage;
+export default DetailPage;
