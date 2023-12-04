@@ -1,45 +1,69 @@
 .profileContainer {
   max-width: 144rem;
   margin: 0 auto;
-  padding: 8rem 8rem;
+  padding: 8rem 8rem 0rem 8rem;
+
+  @include respond($bp-small) {
+    padding: 2rem 2rem 1rem;
+  }
 
   & h1 {
     font-size: 3.6rem;
     color: $color-primary;
   }
 
-  &-Layout{
+  &-Layout {
     display: flex;
     flex-direction: row;
-    width:100%;
+    width: 100%;
     padding: 3rem 0;
 
-    & .profileNav{
+    @include respond($bp-medium) {
+      flex-direction: column;
+    }
+
+    & .profileNav {
       display: flex;
       flex-direction: column;
       width: 15%;
       margin-right: 5%;
 
-      &-item{
+      @include respond($bp-medium) {
+        flex-direction: row;
+        width: 100%;
+      }
+
+      &-item {
         font-size: 2rem;
         text-decoration: none;
         color: $color-primary;
         line-height: 3rem;
         display: block;
         padding: 1.5rem 0;
-        
-        &-active{
+        width: 100%;
+        text-align: center;
+
+        &-active {
           font-weight: bold;
           border-right: 0.1rem solid $color-gray;
+
+          @include respond($bp-medium) {
+            border-right: none;
+            border-bottom: 0.1rem solid $color-gray;
+            padding: 1rem 0;
+            margin: 1rem 0;
+          }
         }
       }
     }
 
-    &-profileSection{
+    &-profileSection {
       position: relative;
 
-      &:nth-child(2){
-        width:100%;
+      &:nth-child(2) {
+        width: 100%;
+        min-height: 40vh;
+        height: auto;
       }
 
       &-information {
@@ -48,12 +72,17 @@
         justify-content: flex-start;
         border-bottom: 1px solid #dfdcfc;
 
+        @include respond($bp-small) {
+          flex-direction: column;
+          align-items: center;
+        }
+        
         &-avatar {
           width: 30rem;
           height: auto;
 
-          &-img{
-            width:100%;
+          &-img {
+            width: 100%;
             height: 100%;
           }
         }
@@ -75,14 +104,12 @@
         }
       }
 
-      & .transactionContainer{
-        
-
-        &-typeWrap{
+      & .transactionContainer {
+        &-typeWrap {
           @include flexCenter();
 
-          & .typeItem{
-            flex:1;
+          & .typeItem {
+            flex: 1;
             padding: 2rem 3rem;
             text-align: center;
             background-color: $color-gray;
@@ -91,73 +118,75 @@
             font-size: 1.6rem;
             transition: 0.3s;
 
-            &-active{
+            &-active {
               background-color: $color-primary;
             }
           }
         }
 
         // render transaction record
-        & .recordWrap{
+        & .recordWrap {
+          min-height: 51vh;
+          height: auto;
           // padding: 1.5rem 0;
 
-          &-item{
+          &-item {
             padding: 2rem 0;
             @include flexCenter();
             justify-content: space-around;
             border-bottom: 1px solid $color-gray;
             cursor: pointer;
 
-            &-subItem{
+            @include respond($bp-small) {
+              flex-direction: column;
+              align-items: flex-start;
+            }
+
+            &-subItem {
               width: 100%;
 
-              &:first-child{
+              &:first-child {
                 align-self: flex-start;
               }
 
-              &:last-child{
+              &:last-child {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
                 align-items: flex-end;
               }
 
-              & .flexRow{
+              & .flexRow {
                 display: flex;
                 flex-direction: row;
-                padding: .3rem 0;
+                padding: 0.3rem 0;
 
-                & p{
+                & p {
                   font-size: 1.6rem;
 
-                  &.bookingReference{
+                  &.bookingReference {
                     font-weight: bold;
                   }
                 }
 
-                & p:nth-child(2){
+                & p:nth-child(2) {
                   padding-left: 1rem;
                 }
               }
-
             }
-
           }
         }
 
-
-        & .paginationWrap{
-          width:100%;
+        & .paginationWrap {
+          width: 100%;
           padding: 3rem 0;
           @include flexCenter();
 
-          & .MuiPaginationItem-page{
-            font-size:  1.6rem !important;
+          & .MuiPaginationItem-page {
+            font-size: 1.6rem !important;
           }
         }
       }
     }
-
   }
-
 }
