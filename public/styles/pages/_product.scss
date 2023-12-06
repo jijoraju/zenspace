@@ -236,14 +236,14 @@
             &-img {
               width: 100%;
               position: absolute;
-              top: -100%;
+              top: -30%;
               left: 0;
               transition: .3s;
               transform: translateY(15%);
 
-              &:hover{
-                transform: scale(1.05);
-              }
+              // &:hover{
+              //   transform: scale(0.95);
+              // }
             }
           }
 

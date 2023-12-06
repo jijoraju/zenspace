@@ -16,10 +16,12 @@ function Cards(props) {
   }
 
   const renderCards = workSpaceResult.map((item, index) => {
+    console.log("item,",item)
+    const photo = item?.photos[0];
       const cardProps = {
-        imgDefault: `home/solutions/Gallery_Workplace.jpg`,
-        img2: `home/solutions/Gallery_Workplace.jpg`,
-        img3: `home/solutions/Gallery_Workplace.jpg`,
+        imgDefault: photo || `home/solutions/Gallery_Workplace.jpg`,
+        img2: photo ||`home/solutions/Gallery_Workplace.jpg`,
+        img3:photo || `home/solutions/Gallery_Workplace.jpg`,
         fullInfo: item,
         productPageState,
       };
