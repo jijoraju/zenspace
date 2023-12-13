@@ -29,7 +29,11 @@ import { getWorkSpaceHandler } from "@Reducer/workspace/wk-action";
 function reducer(state, action) {
   switch (action.type) {
     case "setLocation":
-      return { ...state, location: action.param };
+      return { 
+        ...state, 
+        location: action.param,
+        pageIndex: 1,
+      };
     case "setDate":
       return {
         ...state,
@@ -45,6 +49,7 @@ function reducer(state, action) {
         dateSelected: {
           ...state.dateSelected,
           workspace_type: action.param,
+          pageIndex: 1,
         },
       };
     case "setHeadCount":
