@@ -49,8 +49,10 @@ export default React.memo(function Home() {
         <div className="solutions-container-description">
           <h1>Meet your workplace needs, we have the solution.</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit volutpat
-            gravida malesuada quam commodo id integer nam.
+            Meet your workplace needs with our solution - a robust and intuitive workplace booking application.
+          </p>
+          <p>
+            It simplifies the process of reserving resources, ensuring optimal utilization and promoting a seamless work environment.
           </p>
         </div>
       </div>

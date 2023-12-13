@@ -37,8 +37,7 @@ function Contact() {
           <h1>Contact us</h1>
           <h2>Create your account today and get started for free!</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit dolor semper
-            at ac tempus enim.
+Create your account today and get started! Experience the ease of managing your workplace with our booking application.
           </p>
         </div>
       </div>

@@ -70,10 +70,7 @@ function Solution() {
         <div className="solution-feedbacks-descriptionWrap">
           <div className="solution-feedbacks-descriptionWrap-block">
             <h1>What our clients say</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipiscing elit semper
-              dalar elementum tempus hac tellus libero
-            </p>
+            <p>Certainly! Here's for our clients feedbacks what they experienced</p>
           </div>
           {/*  */}
           <div className="solution-feedbacks-descriptionWrap-block">

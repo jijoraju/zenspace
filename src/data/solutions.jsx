@@ -79,21 +79,21 @@ export const cardsData = [
   {
     rating: 5,
     description:
-      "Lorem ipsum dolor sit amet conse ctetur adipiscing lectus a nunc mauris scelerisque sed egestas pharetraol quis pharetra arcu pharetra blandit.",
+      "The workplace booking app has streamlined our office scheduling. It's intuitive and has reduced conflicts. Great job!!",
     name: "John Carter",
-    occupation: `Web Designer`,
+    occupation: `HR Manager`,
   },
   {
     rating: 5,
     description:
-      "Lorem ipsum dolor sit amet conse ctetur adipiscing lectus a nunc mauris scelerisque sed egestas pharetraol quis pharetra arcu pharetra blandit.",
+      "The app's real-time availability updates have made my job so much easier. Managing workspace resources has never been smoother.",
     name: "Sophie Moore",
     occupation: `Head of Marketing`,
   },
-    {
+  {
     rating: 5,
     description:
-      "Lorem ipsum dolor sit amet conse ctetur adipiscing lectus a nunc mauris scelerisque sed egestas pharetraol quis pharetra arcu pharetra blandit.",
+      "Love the seamless integration with calendar apps! Booking meeting rooms and desks is a breeze, and my team appreciates the efficiency.",
     name: "Matt Cannon",
     occupation: `Lead Developer`,
   },
