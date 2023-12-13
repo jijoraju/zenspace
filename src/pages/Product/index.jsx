@@ -212,7 +212,7 @@ function ProductList() {
       />
 
     {
-      workSpaceList.length && (
+      workSpaceList.length ? (
               <div className="productContainer-paginationContainer">
             <Pagination
               count={workSpaceResult?.meta?.totalPages || 1}
@@ -221,7 +221,7 @@ function ProductList() {
               size="large"
             />
           </div>
-      )
+      ):null
     }
 
       {/* <Outlet /> */}
