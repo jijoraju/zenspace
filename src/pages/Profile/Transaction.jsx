@@ -79,19 +79,21 @@ function Transaction() {
   // pagination change
   const handlePageChange = (event, value) => {
     const currentRecord = transactionsResult?.data[currentType];
-
+    const sortRecord = currentRecord.sort((a, b) => {
+      return new Date(b.startDate) - new Date(a.startDate);
+    })
     // 计算当前页的起始索引和结束索引
     const startIndex = (value - 1) * pagination?.itemsPerPage;
     const endIndex = startIndex + pagination?.itemsPerPage;
 
     // 提取当前页的数据范围
-    const currentPageData = currentRecord.slice(startIndex, endIndex);
+    const currentPageData = sortRecord.slice(startIndex, endIndex);
 
     // 处理页码更改逻辑
     setPagination({
       ...pagination,
       currentIndex: value,
-      totalLength: Math.ceil(currentRecord.length / pagination?.itemsPerPage),
+      totalLength: Math.ceil(sortRecord.length / pagination?.itemsPerPage),
     });
 
     setTransactionList(currentPageData);
